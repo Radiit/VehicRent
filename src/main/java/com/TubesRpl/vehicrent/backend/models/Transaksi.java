@@ -18,11 +18,11 @@ public class Transaksi {
     private int ID_Transaksi;
 
     @ManyToOne
-    @JoinColumn(name = "NIK_User")
+    @JoinColumn(name = "NIK_Regent")
     private Regent regent;
 
     @ManyToOne
-    @JoinColumn(name = "NIK_User")
+    @JoinColumn(name = "NIK_Client")
     private Client client;
 
     @ManyToOne
