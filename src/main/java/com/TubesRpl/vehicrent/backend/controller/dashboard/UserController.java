@@ -1,4 +1,4 @@
-package com.TubesRpl.vehicrent.backend.controller;
+package com.TubesRpl.vehicrent.backend.controller.dashboard;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -19,7 +19,7 @@ import com.TubesRpl.vehicrent.backend.services.BaseServices;
 import ch.qos.logback.core.model.Model;
 
 @Controller
-@RequestMapping("/user")
+@RequestMapping("dashboard/user")
 public class UserController {
     @Autowired
     private BaseServices<User> display;

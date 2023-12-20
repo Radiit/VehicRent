@@ -1,4 +1,4 @@
-package com.TubesRpl.vehicrent.backend.controller;
+package com.TubesRpl.vehicrent.backend.controller.dashboard;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -16,7 +16,7 @@ import com.TubesRpl.vehicrent.backend.services.RoleServices;
 
 
 @Controller
-@RequestMapping("/regent")
+@RequestMapping("dashboard/regent")
 public class RegentController {
     @Autowired
     private RoleServices<RegentRequest> regentServices;
