@@ -1,8 +1,8 @@
-package com.TubesRpl.vehicrent.backend.controller;
+package com.TubesRpl.vehicrent.backend.controller.dashboard;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Conditional;
-import org.springframework.data.repository.query.Param;
+// import org.springframework.context.annotation.Conditional;
+// import org.springframework.data.repository.query.Param;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -23,7 +23,7 @@ import com.TubesRpl.vehicrent.backend.services.BaseServices;
 import com.TubesRpl.vehicrent.backend.services.KendaraanServices;
 
 @Controller
-@RequestMapping("/kendaraan")
+@RequestMapping("dashboard/kendaraan")
 public class KendaraanController {
     @Autowired
     private BaseServices<KendaraanRequest> display;
