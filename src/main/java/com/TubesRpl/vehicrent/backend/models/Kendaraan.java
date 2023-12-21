@@ -2,7 +2,6 @@ package com.TubesRpl.vehicrent.backend.models;
 
 import java.util.List;
 
-import com.TubesRpl.vehicrent.backend.payloads.requests.ImageKendaraanRequest;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
@@ -63,12 +62,12 @@ public class Kendaraan {
     @Column
     private String Status_Kendaraan;
 
+    
     @Column
     private String Status_ValidasiKendaraan;
     
    // @JsonIgnore
-    @OneToMany(mappedBy = "ID_ImageKendaraan", cascade = CascadeType.ALL)
-    @JsonBackReference
+    @OneToMany(mappedBy = "kendaraan", cascade = CascadeType.ALL)
     private List<ImageKendaraan> imageKendaraan;
 
     public Kendaraan(int iD_Kendaraan, Regent regent, String jenis_Kendaraan, String nopol_Kendaraan,

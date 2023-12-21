@@ -14,16 +14,21 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
 import com.TubesRpl.vehicrent.backend.models.Kendaraan;
 import com.TubesRpl.vehicrent.backend.payloads.requests.KendaraanRequest;
 import com.TubesRpl.vehicrent.backend.payloads.response.Response;
 import com.TubesRpl.vehicrent.backend.services.BaseServices;
+import com.TubesRpl.vehicrent.backend.services.KendaraanServices;
 
 @Controller
 @RequestMapping("/kendaraan")
 public class KendaraanController {
     @Autowired
-    private BaseServices<KendaraanRequest> display; 
+    private BaseServices<KendaraanRequest> display;
+    @Autowired
+    private KendaraanServices kendaraanServices;
 
     @RequestMapping("/display")
     public ResponseEntity<?> index() {
@@ -63,5 +68,11 @@ public class KendaraanController {
         } else {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
         }
+    }
+
+    @GetMapping("/search")
+    public ResponseEntity<?> SearchKendaraan(@RequestParam("keyword") String keyword) {
+        Response response = kendaraanServices.search(keyword);
+        return ResponseEntity.status(200).body(response);
     }
 }

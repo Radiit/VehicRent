@@ -2,6 +2,7 @@ package com.TubesRpl.vehicrent.backend.models;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.CascadeType;
@@ -29,10 +30,10 @@ public class Regent {
 
     @Column
     private String Norek_Regent;
-
+    
     @Column(name = "listKendaraan")
-    @OneToMany(mappedBy = "regent", cascade = CascadeType.ALL)
     @JsonIgnore
+    @OneToMany(mappedBy = "regent", cascade = CascadeType.ALL)
     private List<Kendaraan> listKendaraan;
 
     public Regent(Integer ID_Regent, User user, String norek_Regent, List<Kendaraan> listKendaraan) {

@@ -3,6 +3,7 @@ package com.TubesRpl.vehicrent.backend.models;
 import org.hibernate.annotations.ManyToAny;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.annotation.Generated;
 import jakarta.persistence.Column;
@@ -23,8 +24,8 @@ public class ImageKendaraan {
     private Integer ID_ImageKendaraan;
 
     @ManyToOne
-    @JsonBackReference
     @JoinColumn(name = "ID_Kendaraan", referencedColumnName = "ID_Kendaraan")
+    @JsonIgnore
     private Kendaraan kendaraan;
 
     @Column(name = "image")

@@ -68,6 +68,10 @@ public class KendaraanServices implements BaseServices<KendaraanRequest>{
                 System.out.println("Maksimal Waktu Peminjaman: " + kendaraan.getMaksimalWaktu_Peminjaman());
                 System.out.println("Status Kendaraan: " + kendaraan.getStatus_Kendaraan());;
                 System.out.println("Status Validasi Kendaraan: " + kendaraan.getStatus_ValidasiKendaraan());   
+                List<ImageKendaraan> listImageKendaraan = kendaraan.getImageKendaraan();
+                for (ImageKendaraan imageKendaraan : listImageKendaraan) {
+                    System.out.println("Image Kendaraan: " + imageKendaraan.getImage());
+                }
                 return new Response(HttpStatus.OK.value(), "Success", kendaraan);
             }else{
                 return new Response(HttpStatus.NOT_FOUND.value(), "Kendaraan not found", null);
@@ -167,6 +171,17 @@ public class KendaraanServices implements BaseServices<KendaraanRequest>{
         }
     }
     
-
+    public Response search(String keyword){
+        try{
+            List<Kendaraan> kendaraan = kendaraanRepository.searchKendaraan(keyword);
+            if(kendaraan != null){
+                return new Response(HttpStatus.OK.value(), "Success", kendaraan);
+            }else{
+                return new Response(HttpStatus.NOT_FOUND.value(), "Kendaraan not found", null);
+            }
+        }catch(Exception e){
+            return new Response(HttpStatus.BAD_REQUEST.value(), "Failed", null);
+        }
+    }
     
 }
