@@ -1,5 +1,6 @@
 package com.TubesRpl.vehicrent.backend.services;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -69,34 +70,26 @@ public class TransaksiServices implements BaseServices<TransaksiRequest>{
     public Response Create(TransaksiRequest request){
         try{
             Transaksi transaksi = new Transaksi();
-            System.out.println(request.getID_Client());
-            System.out.println(request.getID_Regent());
-            System.out.println(request.getID_Kendaraan());
             Client client = clientRepository.findById(request.getID_Client()).orElse(null);
             if (client == null) {
                 return new Response(HttpStatus.NOT_FOUND.value(), "Client not found", request);
             }
-            System.out.println("2");
             Regent regent = regentRepository.findById(request.getID_Regent()).orElse(null);
             if (regent == null) {
                 return new Response(HttpStatus.NOT_FOUND.value(), "Regent not found", request);
             }
-            System.out.println("3");
             Kendaraan kendaraan = kendaraanRepository.findById(request.getID_Kendaraan()).orElse(null);
             if (kendaraan == null) {
                 return new Response(HttpStatus.NOT_FOUND.value(), "Kendaraan not found", request);
             }
-            transaksi.setWaktu_Pemesanan(request.getWaktu_Pemesanan());
+            transaksi.setWaktu_Pemesanan(LocalDateTime.now());
             transaksi.setHargatotal_Pemesanan(request.getHargatotal_Pemesanan());
             transaksi.setStatus_Pemesanan(request.getStatus_Pemesanan());
             transaksi.setVirtualAccountNumber(request.getVirtualAccountNumber());
-            System.out.println("4");
             transaksi.setClient(client);
             transaksi.setRegent(regent);
             transaksi.setKendaraan(kendaraan);
-            System.out.println("5");
             transaksiRepository.save(transaksi);
-            System.out.println("6");
             return new Response(HttpStatus.OK.value(), "Success", transaksi);
         }catch (Exception e){
             return new Response(HttpStatus.BAD_REQUEST.value(), "Failed", request);
@@ -111,7 +104,7 @@ public class TransaksiServices implements BaseServices<TransaksiRequest>{
                 transaksi.setClient(transaksi.getClient());
                 transaksi.setRegent(transaksi.getRegent());
                 transaksi.setKendaraan(transaksi.getKendaraan());
-                transaksi.setWaktu_Pemesanan(request.getWaktu_Pemesanan());
+                transaksi.setWaktu_Pemesanan(LocalDateTime.now());
                 transaksi.setHargatotal_Pemesanan(request.getHargatotal_Pemesanan());
                 transaksi.setStatus_Pemesanan(request.getStatus_Pemesanan());
                 transaksi.setVirtualAccountNumber(request.getVirtualAccountNumber());

@@ -8,7 +8,7 @@ public class DBConfig {
     private static final String DB_DRIVER = "com.mysql.cj.jdbc.Driver";
     private static final String DB_URL = "jdc:mysql://localhost:3306/tubesrpl";
     private static final String DB_USERNAME = "root";
-    private static final String DB_PASSWORD = "daffaadit123";
+    private static final String DB_PASSWORD = "";
     
     public static Connection getConnection() throws SQLException{
         Connection connection = null;

@@ -1,5 +1,7 @@
 package com.TubesRpl.vehicrent.backend.models;
 
+import java.time.LocalDateTime;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -30,7 +32,7 @@ public class Transaksi {
     private Kendaraan kendaraan;
 
     @Column
-    private int Waktu_Pemesanan;
+    private LocalDateTime Waktu_Pemesanan;
 
     @Column
     private double Hargatotal_Pemesanan;
@@ -41,7 +43,7 @@ public class Transaksi {
     @Column
     private String virtualAccountNumber;
 
-    public Transaksi(int iD_Transaksi, Regent regent, Client client, Kendaraan kendaraan, int waktu_Pemesanan,
+    public Transaksi(int iD_Transaksi, Regent regent, Client client, Kendaraan kendaraan, LocalDateTime waktu_Pemesanan,
             double hargatotal_Pemesanan, String status_Pemesanan, String virtualAccountNumber) {
         ID_Transaksi = iD_Transaksi;
         this.regent = regent;
@@ -88,11 +90,11 @@ public class Transaksi {
         this.kendaraan = kendaraan;
     }
 
-    public int getWaktu_Pemesanan() {
+    public LocalDateTime getWaktu_Pemesanan() {
         return Waktu_Pemesanan;
     }
 
-    public void setWaktu_Pemesanan(int waktu_Pemesanan) {
+    public void setWaktu_Pemesanan(LocalDateTime waktu_Pemesanan) {
         Waktu_Pemesanan = waktu_Pemesanan;
     }
 

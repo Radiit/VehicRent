@@ -1,81 +1,33 @@
-package com.TubesRpl.vehicrent.backend.models;
+package com.TubesRpl.vehicrent.backend.payloads.requests;
 
 import java.util.List;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.TubesRpl.vehicrent.backend.models.ImageKendaraan;
 
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.Table;
+import io.micrometer.common.lang.Nullable;
 
-@Entity
-@Table(name = "Kendaraan")
-public class Kendaraan {
-    
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int ID_Kendaraan;
-
-    @ManyToOne
-    @JoinColumn(name = "ID_Regent")
-    private Regent regent;
-
-    @Column
+public class KendaraanRequest {
+    private Integer ID_Regent;
     private String jenis_Kendaraan;
-
-    @Column
     private String Nopol_Kendaraan;
-
-    @Column
     private String Merk_Kendaraan;
-
-    @Column
     private int Tahun_Kendaraan;
-
-    @Column
     private String Warna_Kendaraan;
-
-    @Column
     private String NoSTNK_Kendaraan;
-
-    @Column
     private String Kapasitas_Kendaraan;
-
-    @Column
     private String NoMesin_Kendaraan;
-
-    @Column
     private int HargaSewa_Kendaraan;
-
-    @Column
     private int MaksimalWaktu_Peminjaman;
-
-    @Column
     private String Status_Kendaraan;
-
-    
-    @Column
     private String Status_ValidasiKendaraan;
-    
-   // @JsonIgnore
-    @OneToMany(mappedBy = "kendaraan", cascade = CascadeType.ALL)
-    private List<ImageKendaraan> imageKendaraan;
+    @Nullable private List<ImageKendaraanRequest> imageKendaraan;
 
-    public Kendaraan(int iD_Kendaraan, Regent regent, String jenis_Kendaraan, String nopol_Kendaraan,
-            String merk_Kendaraan, int tahun_Kendaraan, String warna_Kendaraan, String noSTNK_Kendaraan,
-            String kapasitas_Kendaraan, String noMesin_Kendaraan, int hargaSewa_Kendaraan, int maksimalWaktu_Peminjaman,
-            String status_Kendaraan, String status_ValidasiKendaraan, List<ImageKendaraan> imageKendaraan) {
-        ID_Kendaraan = iD_Kendaraan;
-        this.regent = regent;
+    //contructor
+    public KendaraanRequest(Integer ID_Regent, String jenis_Kendaraan, String nopol_Kendaraan, String merk_Kendaraan,
+            int tahun_Kendaraan, String warna_Kendaraan, String noSTNK_Kendaraan, String kapasitas_Kendaraan,
+            String noMesin_Kendaraan, int hargaSewa_Kendaraan, int maksimalWaktu_Peminjaman, String status_Kendaraan,
+            String status_ValidasiKendaraan, List<ImageKendaraanRequest> imageKendaraan) {
+        this.ID_Regent = ID_Regent;
         this.jenis_Kendaraan = jenis_Kendaraan;
         Nopol_Kendaraan = nopol_Kendaraan;
         Merk_Kendaraan = merk_Kendaraan;
@@ -91,20 +43,16 @@ public class Kendaraan {
         this.imageKendaraan = imageKendaraan;
     }
 
-    public int getID_Kendaraan() {
-        return ID_Kendaraan;
+    public KendaraanRequest() {
     }
 
-    public void setID_Kendaraan(int iD_Kendaraan) {
-        ID_Kendaraan = iD_Kendaraan;
+    //getter setter
+    public Integer getID_Regent() {
+        return ID_Regent;
     }
 
-    public Regent getRegent() {
-        return regent;
-    }
-
-    public void setRegent(Regent regent) {
-        this.regent = regent;
+    public void setID_Regent(Integer ID_Regent) {
+        this.ID_Regent = ID_Regent;
     }
 
     public String getJenis_Kendaraan() {
@@ -203,15 +151,11 @@ public class Kendaraan {
         Status_ValidasiKendaraan = status_ValidasiKendaraan;
     }
 
-    public Kendaraan() {
-    }
-    
-    //setter getter for imageKendaraan
-    public List<ImageKendaraan> getImageKendaraan() {
+    public List<ImageKendaraanRequest> getImageKendaraan() {
         return imageKendaraan;
     }
 
-    public void setImageKendaraan(List<ImageKendaraan> imageKendaraan) {
+    public void setImageKendaraan(List<ImageKendaraanRequest> imageKendaraan) {
         this.imageKendaraan = imageKendaraan;
     }
     
