@@ -21,13 +21,165 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,700;1,500&display=swap"
         rel="stylesheet" />
 
-    <title>Hello, world!</title>
+    <title>LoginPage</title>
+    <style>
+        html,
+        body {
+        overflow: hidden;
+        }
+
+        * {
+        font-family: "Poppins", sans-serif;
+        }
+        .login {
+        height: 100vh;
+        }
+        .login-left{
+        margin-top: -88px;
+        transform: scale(0.75);
+        }
+        .header h1 {
+        /* width: 486px; */
+
+        flex-shrink: 0;
+        color: #000;
+        font-size: 40px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: normal;
+        margin-bottom: 28px;
+        margin-top: 30px;
+        /*
+        margin-left: 20px;
+        margin-right: 20px; */
+        }
+        .header p {
+        /* width: 512px; */
+
+        flex-shrink: 0;
+        color: #000;
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: normal;
+        opacity: 0.6;
+        margin-bottom: 28px; /* 
+        margin-top: 24px; */
+        }
+        .login-form label {
+        color: #000;
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+        margin-top: 20px;
+        }
+        .login-form input {
+        color: #000;
+        font-family: Poppins;
+        font-size: 12px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+        opacity: 0.4;
+        width: 592px;
+        height: 40px;
+        flex-shrink: 0;
+        border-radius: 16px;
+        border: 1px solid rgba(0, 0, 0, 0.3);
+        background: #fff;
+        }
+        .login-form a {
+        flex-shrink: 0;
+        color: #616161;
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+        margin-top: 10px;
+        display: block;
+        }
+        .login-form .masuk {
+        width: 600px;
+        height: 48px;
+        flex-shrink: 0;
+        border-radius: 16px;
+        border: 1px solid rgba(0, 0, 0, 0.3);
+        background: #a0bc71;
+        color: #fff;
+        margin-top: 24px;
+        }
+        .login-form .masukgoogle {
+        width: 600px;
+        height: 48px;
+        flex-shrink: 0;
+        border-radius: 16px;
+        border: 1px solid rgba(0, 0, 0, 0.3);
+        background: #fff;
+        }
+        .login-form span {
+        color: #000;
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+        width: 309px;
+        height: 29px;
+        flex-shrink: 0;
+        margin-top: 10px;
+        display: block;
+        }
+        .login-form span a {
+        color: #616161;
+        font-family: Poppins;
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+        margin-top: 10px;
+        display: block;
+        }
+
+        .login-gambar {
+        background-image: url("${pageContext.request.contextPath}/resources/img/img-login.png");
+        background-position: left center;
+        background-size: cover;
+        }
+
+        .login-wrapper {
+        padding-left: 100px;
+        margin-left: 0px;
+        }
+
+        .login-desc-wrapper {
+        width: 70%;
+        }
+
+        .divider {
+        /* font-size: 30px; */
+        display: flex;
+        align-items: center;
+        margin-top: 20px;
+        color: rgba(0, 0, 0, 0.4);
+        }
+
+        .divider::before,
+        .divider::after {
+        flex: 1;
+        content: "";
+        padding: 1.25px;
+        background-color: black;
+        opacity: 0.1;
+        margin: 5px;
+        }
+    </style>
+
 </head>
 
 <body>
     <section class="login d-flex">
         <div class="login-left w-50 h-100">
-            <img src="${pageContext.request.contextPath}/img/img_logo.png" alt="Welcome Image" width="200" style="margin-left: -120px;"  />
+            <img src="${pageContext.request.contextPath}/resources/img/img_logo.png" alt="Welcome Image" width="200" style="margin-left: -120px;"  />
             <div class="row h-100">
                 <div class="col-12 d-flex flex-column align-items-center justify-content-center">
                     <div class="header d-flex flex-column align-items-center">
@@ -36,7 +188,7 @@
                     </div>
                     <div class="login-form">
                         <button class="masukgoogle">
-                            <img src="${pageContext.request.contextPath}/img/img_google.png" alt="" />
+                            <img src="${pageContext.request.contextPath}/resources/img/img_google.png" alt="" />
                             Masuk menggunakan google
                         </button>
 
@@ -58,7 +210,7 @@
                             <button class="masuk">Masuk</button>
                         </div>
                         <div style="margin-top: 10px; margin-bottom: 100px;">
-                            <span class="d-inline">Belum mempunyai akun? <a href="${pageContext.request.contextPath}/register"
+                            <span class="d-inline">Belum mempunyai akun? <a href="${pageContext.request.contextPath}/register-form"
                                     class="signup d-inline text-decoration-none">Buat akun</a></span>
                         </div>
                     </div>
