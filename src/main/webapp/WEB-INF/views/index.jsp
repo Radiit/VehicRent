@@ -12,6 +12,12 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous" />
 
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+        crossorigin="anonymous"></script>
+
+
     <!--My Style-->
     <link rel="stylesheet" href="${pageContext.request.contextPath}/style.css" />
 
@@ -174,6 +180,30 @@
         }
     </style>
 
+     <script>
+        function validateForm() {
+            var email = document.getElementById("email").value;
+            var password = document.getElementById("katasandi").value;
+
+            if (email === "" || password === "") {
+                // Display error modal
+                document.getElementById("errorModal").style.display = "flex";
+                return false;
+            } else if (!validateEmail(email)) {
+                // Display email format error modal
+                document.getElementById("errorModal").style.display = "flex";
+                return false;
+            }
+
+            return true;
+        }
+
+        function validateEmail(email) {
+            // A simple email validation function
+            var emailRegex = /\S+@\S+\.\S+/;
+            return emailRegex.test(email);
+        }
+    </script>
 </head>
 
 <body>
@@ -195,23 +225,25 @@
                         <div class="divider">atau</div>
 
                         <div class="login-form">
-                            <label for="email" class="form-label">Email</label>
-                            <input type="email" class="form-control" id="email" placeholder="Masukkan Email Anda" />
+                            <form action="${pageContext.request.contextPath}/login" method="post" onsubmit="return validateForm()">
+                                <label for="email" class="form-label">Email</label>
+                                <input type="email" class="form-control" id="email" name="email" placeholder="Masukkan Email Anda" />
 
-                            <label for="katasandi" class="form-label">Kata Sandi</label>
-                            <input type="password" class="form-control" id="katasandi"
-                                placeholder="Masukkan Kata Sandi Anda" />
-                        </div>
-                        <div>
-                            <a href="" class="text-decoration-none">Lupa Kata Sandi</a>
-                        </div>
+                                <label for="katasandi" class="form-label">Kata Sandi</label>
+                                <input type="password" class="form-control" id="katasandi" name="katasandi" placeholder="Masukkan Kata Sandi Anda" />
 
-                        <div>
-                            <button class="masuk">Masuk</button>
-                        </div>
-                        <div style="margin-top: 10px; margin-bottom: 100px;">
-                            <span class="d-inline">Belum mempunyai akun? <a href="${pageContext.request.contextPath}/register-form"
-                                    class="signup d-inline text-decoration-none">Buat akun</a></span>
+                                <div>
+                                    <a href="" class="text-decoration-none">Lupa Kata Sandi</a>
+                                </div>
+
+                                <div>
+                                    <button type="submit" class="masuk">Masuk</button>
+                                </div>
+                            </form>
+                            <div style="margin-top: 10px; margin-bottom: 100px;">
+                                <span class="d-inline">Belum mempunyai akun? <a href="${pageContext.request.contextPath}/register-form"
+                                        class="signup d-inline text-decoration-none">Buat akun</a></span>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -228,6 +260,24 @@
                 </div>
             </div>
         </div>
+
+
+        <!-- Error Modal -->
+        <div id="errorModal" class="error-modal" class="modal fade" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+            aria-labelledby="errorModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content d-flex justify-content-center align-items-center">
+                    <div class="modal-body text-center">
+                        <img src="${pageContext.request.contextPath}/resources/img/img_error.png" alt="Error Image" width="100" />
+                        <p>Mohon lengkapi formulir dengan benar.</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button onclick="document.getElementById('errorModal').style.display='none'" type="close-button" class="btn btn-secondary" data-bs-dismiss="modal">Complete Data</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </section>
 
 

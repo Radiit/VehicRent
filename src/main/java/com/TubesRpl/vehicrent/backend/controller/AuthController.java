@@ -17,7 +17,7 @@ public class AuthController {
             if (session.getAttribute("user") != null) {
                 return "index";
             } else {
-                return "login";
+                return "register-form";
             }
         } catch (Exception e) {
             return "error-page";
@@ -36,7 +36,7 @@ public class AuthController {
         } else {
             // Tampilkan pesan error jika login gagal
             model.addAttribute("error", "Invalid credentials");
-            return "login"; // Kembali ke halaman login
+            return "index"; // Kembali ke halaman login
         }
     }
 

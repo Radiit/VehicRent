@@ -479,7 +479,7 @@
 
                         <div style="margin-top: 10px; margin-bottom: 100px;">
                             <span class="d-inline">Sudah mempunyai akun? <a
-                                    href="${pageContext.request.contextPath}/login"
+                                    href="${pageContext.request.contextPath}/index"
                                     class="signup d-inline text-decoration-none">Masuk</a></span>
                         </div>
                     </div>
