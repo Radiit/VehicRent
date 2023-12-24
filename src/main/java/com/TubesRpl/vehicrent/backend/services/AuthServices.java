@@ -18,9 +18,9 @@ public class AuthServices {
         User user = userRepository.findByEmail(email);
 
         if (user != null && user.getPassword().equals(password)) {
-            return new Response(HttpStatus.OK, "Login berhasil", user);
+            return new Response(HttpStatus.OK.value(), "Login berhasil", user);
         } else {
-            return new Response(HttpStatus.BAD_REQUEST, "Email atau password salah", null);
+            return new Response(HttpStatus.BAD_REQUEST.value(), "Email atau password salah", null);
         }
     }
 }
