@@ -36,8 +36,9 @@
         height: 100vh;
       }
       .login-left {
-        margin-top: -88px;
-        transform: scale(0.75);
+        /*margin-top: -80px;*/
+        /*margin-left : 50px;*/
+        transform: scale(1.0);
       }
       .header h1 {
         /* width: 486px; */
@@ -188,6 +189,10 @@
       .animate-in {
         animation: animate-in 300ms ease 1 forwards;
       }
+      .logo{
+        margin-left:12px;
+        transform: scale(0.75)
+      }
     </style>
 
     <script>
@@ -222,7 +227,9 @@
   <body>
     <section class="login d-flex">
       <div class="login-left w-50 h-100">
-        <img src="${pageContext.request.contextPath}/resources/img/img_logo.png" alt="Welcome Image" width="200" style="margin-left: -120px" />
+        <div class="logo">
+          <img src="${pageContext.request.contextPath}/resources/img/img_logo.png" alt="Welcome Image" width="200" style="margin-left: -120px" />
+        </div>
         <div class="row h-100">
           <div class="col-12 d-flex flex-column align-items-center justify-content-center">
             <div class="header d-flex flex-column align-items-center">

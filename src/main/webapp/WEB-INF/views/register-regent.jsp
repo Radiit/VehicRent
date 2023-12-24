@@ -427,36 +427,6 @@
                             <img id="frame1" src="" class="img-fluid" />
                         </div>
                     </div>
-                    <div class="cardPeran cardClient align-items-center" style="width: 26rem;">
-                        <div class="card-body-peran card-body-js">
-                            <h5 class="card-title"
-                                style="font-size: 20px; font-style: normal; font-weight: 600; line-height: normal;">
-                                Foto SIM</h5>
-                            <p class="card-text">Foto SIM anda sejajar dengan tempat yang sudah disediakan</p>
-                        </div>
-                        <div class="mb-5">
-                            <input class="form-control" type="file" id="formFile2"
-                                onchange="preview(event, 'frame2', 'imageContainer2')">
-                        </div>
-                        <div id="imageContainer2" class="image-container">
-                            <img id="frame2" src="" class="img-fluid" />
-                        </div>
-                    </div>
-                    <div class="cardPeran cardClient align-items-center" style="width: 26rem;">
-                        <div class="card-body-peran card-body-js">
-                            <h5 class="card-title"
-                                style="font-size: 20px; font-style: normal; font-weight: 600; line-height: normal;">
-                                Foto STNK</h5>
-                            <p class="card-text">Foto STNK anda dengan tempat yang sudah disediakan</p>
-                        </div>
-                        <div class="mb-5">
-                            <input class="form-control" type="file" id="formFile3"
-                                onchange="preview(event, 'frame3', 'imageContainer3')">
-                        </div>
-                        <div id="imageContainer3" class="image-container">
-                            <img id="frame3" src="" class="img-fluid" />
-                        </div>
-                    </div>
                 </div>
                 <a href="${pageContext.request.contextPath}/register-status"
                     class="button-pilih align-items-center justify-content-center">Selanjutnya</a>
