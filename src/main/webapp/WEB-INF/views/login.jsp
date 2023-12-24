@@ -242,7 +242,7 @@
                   <label for="email" class="form-label">Email</label>
                   <input type="email" class="form-control" id="email" name="email" placeholder="Masukkan Email Anda" />
 
-                  <label for=password" class="form-label">Kata Sandi</label>
+                  <label for="password" class="form-label">Kata Sandi</label>
                   <input type="password" class="form-control" id=password" name="password" placeholder="Masukkan Kata Sandi Anda" />
 
                   <div>
