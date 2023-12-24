@@ -1,5 +1,6 @@
 package com.TubesRpl.vehicrent.backend.models;
 
+import java.sql.Date;
 import java.time.LocalDateTime;
 
 import jakarta.persistence.Column;
@@ -32,38 +33,79 @@ public class Transaksi {
     private Kendaraan kendaraan;
 
     @Column
-    private LocalDateTime Waktu_Pemesanan;
+    private String orderName;
 
     @Column
-    private double Hargatotal_Pemesanan;
+    private String phoneNumber;
 
     @Column
-    private String Status_Pemesanan;
+    private String pickUpAddress;
 
     @Column
-    private String virtualAccountNumber;
+    private String dropOffAddress;
 
-    public Transaksi(int iD_Transaksi, Regent regent, Client client, Kendaraan kendaraan, LocalDateTime waktu_Pemesanan,
-            double hargatotal_Pemesanan, String status_Pemesanan, String virtualAccountNumber) {
-        ID_Transaksi = iD_Transaksi;
+    @Column
+    private String destination;
+
+    @Column
+    private Date rentDateStart;
+
+    @Column
+    private Date rentDateEnd;
+
+    @Column
+    private LocalDateTime dateTransaksi;
+
+    @Column
+    private long lamaSewa;
+
+    @Column
+    private int hargaTotal;
+
+    public Transaksi() {
+    }
+
+    public Transaksi(int ID_Transaksi, Regent regent, Client client, Kendaraan kendaraan, String orderName,
+            String phoneNumber, String pickUpAddress, String dropOffAddString, String destination, Date rentDateStart,
+            Date rentDateEnd, LocalDateTime dateTransaksi, int rentTotalDay, int hargaTotal) {
+        this.ID_Transaksi = ID_Transaksi;
         this.regent = regent;
         this.client = client;
         this.kendaraan = kendaraan;
-        Waktu_Pemesanan = waktu_Pemesanan;
-        Hargatotal_Pemesanan = hargatotal_Pemesanan;
-        Status_Pemesanan = status_Pemesanan;
-        this.virtualAccountNumber = virtualAccountNumber;
+        this.orderName = orderName;
+        this.phoneNumber = phoneNumber;
+        this.pickUpAddress = pickUpAddress;
+        this.dropOffAddress = dropOffAddString;
+        this.destination = destination;
+        this.rentDateStart = rentDateStart;
+        this.rentDateEnd = rentDateEnd;
+        this.dateTransaksi = dateTransaksi;
+        this.lamaSewa = rentTotalDay;
+        this.hargaTotal = hargaTotal;
     }
 
-    public Transaksi() {
+    public long getLamaSewa() {
+        return lamaSewa;
+    }
+
+    public void setLamaSewa(long rentTotalDay) {
+        this.lamaSewa = rentTotalDay;
+    }
+
+    public int getHargaTotal() {
+        return hargaTotal;
+    }
+
+    public void setHargaTotal(int hargaTotal) {
+        this.hargaTotal = hargaTotal;
     }
 
     public int getID_Transaksi() {
         return ID_Transaksi;
     }
 
-    public void setID_Transaksi(int iD_Transaksi) {
-        ID_Transaksi = iD_Transaksi;
+    public void setID_Transaksi(int ID_Transaksi) {
+        this.ID_Transaksi = ID_Transaksi;
     }
 
     public Regent getRegent() {
@@ -90,38 +132,67 @@ public class Transaksi {
         this.kendaraan = kendaraan;
     }
 
-    public LocalDateTime getWaktu_Pemesanan() {
-        return Waktu_Pemesanan;
+    public String getOrderName() {
+        return orderName;
     }
 
-    public void setWaktu_Pemesanan(LocalDateTime waktu_Pemesanan) {
-        Waktu_Pemesanan = waktu_Pemesanan;
+    public void setOrderName(String orderName) {
+        this.orderName = orderName;
     }
 
-    public double getHargatotal_Pemesanan() {
-        return Hargatotal_Pemesanan;
+    public String getPhoneNumber() {
+        return phoneNumber;
     }
 
-    public void setHargatotal_Pemesanan(double hargatotal_Pemesanan) {
-        Hargatotal_Pemesanan = hargatotal_Pemesanan;
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
 
-    public String getStatus_Pemesanan() {
-        return Status_Pemesanan;
+    public String getPickUpAddress() {
+        return pickUpAddress;
     }
 
-    public void setStatus_Pemesanan(String status_Pemesanan) {
-        Status_Pemesanan = status_Pemesanan;
+    public void setPickUpAddress(String pickUpAddress) {
+        this.pickUpAddress = pickUpAddress;
     }
 
-    public String getVirtualAccountNumber() {
-        return virtualAccountNumber;
+    public String getDropOffAddress() {
+        return dropOffAddress;
     }
 
-    public void setVirtualAccountNumber(String virtualAccountNumber) {
-        this.virtualAccountNumber = virtualAccountNumber;
+    public void setDropOffAddress(String dropOffAddString) {
+        this.dropOffAddress = dropOffAddString;
     }
 
-    
-    
+    public String getDestination() {
+        return destination;
+    }
+
+    public void setDestination(String destination) {
+        this.destination = destination;
+    }
+
+    public Date getRentDateStart() {
+        return rentDateStart;
+    }
+
+    public void setRentDateStart(Date rentDateStart) {
+        this.rentDateStart = rentDateStart;
+    }
+
+    public Date getRentDateEnd() {
+        return rentDateEnd;
+    }
+
+    public void setRentDateEnd(Date rentDateEnd) {
+        this.rentDateEnd = rentDateEnd;
+    }
+
+    public LocalDateTime getDateTransaksi() {
+        return dateTransaksi;
+    }
+
+    public void setDateTransaksi(LocalDateTime dateTransaksi) {
+        this.dateTransaksi = dateTransaksi;
+    }
 }

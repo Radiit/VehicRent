@@ -77,6 +77,8 @@ public class UserServices implements BaseServices<User> {
                 user.setEmail_User(model.getEmail_User());
                 user.setUsername(model.getUsername());
                 user.setPassword(model.getPassword());
+                user.setKtp(model.getKtp());
+                user.setFoto(model.getFoto());
                 userRepository.save(user);
                 return new Response(HttpStatus.OK.value(), "Success", user);
             } else {

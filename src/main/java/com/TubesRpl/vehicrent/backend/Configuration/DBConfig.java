@@ -12,20 +12,20 @@ public class DBConfig {
     
     public static Connection getConnection() throws SQLException{
         Connection connection = null;
-        try{
+        try {
             Class.forName(DB_DRIVER);
             connection = DriverManager.getConnection(DB_URL, DB_USERNAME, DB_PASSWORD);
-        }catch(ClassNotFoundException | SQLException e){
+        } catch (ClassNotFoundException | SQLException e) {
             e.printStackTrace();
         }
         return connection;
     }
 
-    public static void closeConnection(Connection connection) throws SQLException{
-        if(connection != null){
-            try{
+    public static void closeConnection(Connection connection) throws SQLException {
+        if (connection != null) {
+            try {
                 connection.close();
-            }catch(SQLException e){
+            } catch (SQLException e) {
                 e.printStackTrace();
             }
         }

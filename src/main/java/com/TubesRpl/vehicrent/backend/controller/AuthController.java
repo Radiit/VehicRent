@@ -22,18 +22,18 @@ public class AuthController {
         this.userRepository = userRepository;
     }
 
-    @RequestMapping("/login")
-    public String showLoginPage(Model model, HttpSession session) {
-        try {
-            if (session.getAttribute("user") != null) {
-                return "login";
-            } else {
-                return "register-form";
-            }
-        } catch (Exception e) {
-            return "error-page";
-        }
-    }
+    // @RequestMapping("/login")
+    // public String showLoginPage(Model model, HttpSession session) {
+    //     try {
+    //         if (session.getAttribute("user") != null) {
+    //             return "login";
+    //         } else {
+    //             return "register-form";
+    //         }
+    //     } catch (Exception e) {
+    //         return "error-page";
+    //     }
+    // }
 
     @PostMapping("/login")
     public String login(@RequestParam("email") String Email_User,
@@ -44,7 +44,7 @@ public class AuthController {
 
         if (user != null && user.getPassword().equals(Password)) {
             session.setAttribute("user", user);
-            return "redirect:/login";
+            return "redirect:/home";
         } else {
             model.addAttribute("error", "Invalid credentials");
             return "login"; // Kembali ke halaman login
