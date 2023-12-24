@@ -1,5 +1,7 @@
 package com.TubesRpl.vehicrent.backend.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -27,10 +29,26 @@ public class User {
     private String Email_User;
 
     @Column
+    @JsonIgnore
     private String Username;
 
     @Column
+    @JsonIgnore
     private String Password;
+
+    @Column
+    private String ktp;
+
+    @Column
+    private String foto;
+
+    public String getKtp() {
+        return ktp;
+    }
+
+    public void setKtp(String ktp) {
+        this.ktp = ktp;
+    }
 
     public Integer getNIK_User() {
         return NIK_User;
@@ -96,8 +114,16 @@ public class User {
         Password = password;
     }
 
+    public String getFoto() {
+        return foto;
+    }
+
+    public void setFoto(String foto) {
+        this.foto = foto;
+    }
+
     public User(Integer nIK_User, String role_User, String nama_User, String jenisKelamin_User, Integer umur_User,
-            String email_User, String username, String password) {
+            String email_User, String username, String password, String ktp, String foto) {
         NIK_User = nIK_User;
         Role_User = role_User;
         Nama_User = nama_User;
@@ -106,10 +132,10 @@ public class User {
         Email_User = email_User;
         Username = username;
         Password = password;
+        this.ktp = ktp;
+        this.foto = foto;
     }
 
     public User() {
     }
-
-    //regist, login & logout
 }

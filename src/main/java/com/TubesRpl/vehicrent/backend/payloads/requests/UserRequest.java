@@ -10,6 +10,24 @@ public class UserRequest {
     private String Email_User;
     private String Username;
     private String Password;
+    private String ktp;
+    private String foto;
+
+    public String getFoto() {
+        return foto;
+    }
+
+    public void setFoto(String foto) {
+        this.foto = foto;
+    }
+
+    public String getKtp() {
+        return ktp;
+    }
+
+    public void setKtp(String ktp) {
+        this.ktp = ktp;
+    }
 
     public Integer getNIK_User() {
         return NIK_User;
