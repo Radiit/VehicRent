@@ -1,13 +1,12 @@
 package com.TubesRpl.vehicrent.backend.payloads.response;
 
-import org.springframework.http.HttpStatus;
 
 public class Response {
     private int status;
     private String message;
     private Object data;
 
-    public Response(HttpStatus ok, String message, Object data) {
+    public Response(int ok, String message, Object data) {
         this.status = ok;
         this.message = message;
         this.data = data;

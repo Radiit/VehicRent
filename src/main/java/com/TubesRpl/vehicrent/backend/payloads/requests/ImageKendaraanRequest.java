@@ -2,7 +2,7 @@ package com.TubesRpl.vehicrent.backend.payloads.requests;
 
 public class ImageKendaraanRequest {
     private Integer ID_ImageKendaraan;
-    private String ImageKendaraan;
+    private String dirImage;
 
     public ImageKendaraanRequest() {
         this.ID_ImageKendaraan = 0;
@@ -10,7 +10,7 @@ public class ImageKendaraanRequest {
 
     public ImageKendaraanRequest(Integer ID_ImageKendaraan, String imageKendaraan) {
         this.ID_ImageKendaraan = ID_ImageKendaraan;
-        ImageKendaraan = imageKendaraan;
+        dirImage = imageKendaraan;
     }
 
     public Integer getID_ImageKendaraan() {
@@ -22,11 +22,11 @@ public class ImageKendaraanRequest {
     }
 
     public String getImageKendaraan() {
-        return ImageKendaraan;
+        return dirImage;
     }
 
-    public void setImageKendaraan(String imageKendaraan) {
-        ImageKendaraan = imageKendaraan;
+    public void setImageKendaraan(String dirImage) {
+        this.dirImage = dirImage;
     }
 
 }
