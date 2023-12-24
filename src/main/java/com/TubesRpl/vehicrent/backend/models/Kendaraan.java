@@ -2,10 +2,6 @@ package com.TubesRpl.vehicrent.backend.models;
 
 import java.util.List;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -15,6 +11,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -62,9 +59,11 @@ public class Kendaraan {
     @Column
     private String Status_Kendaraan;
 
-    
     @Column
-    private String Status_ValidasiKendaraan;
+    private String stnk;
+
+    @Column
+    private Boolean Status_ValidasiKendaraan;
     
    // @JsonIgnore
     @OneToMany(mappedBy = "kendaraan", cascade = CascadeType.ALL)
@@ -73,7 +72,7 @@ public class Kendaraan {
     public Kendaraan(int iD_Kendaraan, Regent regent, String jenis_Kendaraan, String nopol_Kendaraan,
             String merk_Kendaraan, int tahun_Kendaraan, String warna_Kendaraan, String noSTNK_Kendaraan,
             String kapasitas_Kendaraan, String noMesin_Kendaraan, int hargaSewa_Kendaraan, int maksimalWaktu_Peminjaman,
-            String status_Kendaraan, String status_ValidasiKendaraan, List<ImageKendaraan> imageKendaraan) {
+            String status_Kendaraan, boolean status_ValidasiKendaraan, List<ImageKendaraan> imageKendaraan, String stnk) {
         ID_Kendaraan = iD_Kendaraan;
         this.regent = regent;
         this.jenis_Kendaraan = jenis_Kendaraan;
@@ -89,6 +88,15 @@ public class Kendaraan {
         Status_Kendaraan = status_Kendaraan;
         Status_ValidasiKendaraan = status_ValidasiKendaraan;
         this.imageKendaraan = imageKendaraan;
+        this.stnk = stnk;
+    }
+
+    public String getStnk() {
+        return stnk;
+    }
+
+    public void setStnk(String stnk) {
+        this.stnk = stnk;
     }
 
     public int getID_Kendaraan() {
@@ -195,11 +203,11 @@ public class Kendaraan {
         Status_Kendaraan = status_Kendaraan;
     }
 
-    public String getStatus_ValidasiKendaraan() {
+    public boolean getStatus_ValidasiKendaraan() {
         return Status_ValidasiKendaraan;
     }
 
-    public void setStatus_ValidasiKendaraan(String status_ValidasiKendaraan) {
+    public void setStatus_ValidasiKendaraan(boolean status_ValidasiKendaraan) {
         Status_ValidasiKendaraan = status_ValidasiKendaraan;
     }
 
