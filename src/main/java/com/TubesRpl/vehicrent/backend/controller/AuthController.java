@@ -26,8 +26,8 @@ public class AuthController {
 
     @PostMapping("/login")
     public String login(@RequestParam("email") String email,
-                        @RequestParam("password") String password,
-                        Model model, HttpSession session) {
+            @RequestParam("password") String password,
+            Model model, HttpSession session) {
         // Lakukan validasi login dan penanganan sesuai kebutuhan
         // Contoh sederhana:
         if (email.equals("example@email.com") && password.equals("password123")) {
@@ -54,6 +54,71 @@ public class AuthController {
                 return "index";
             } else {
                 return "register";
+            }
+        } catch (Exception e) {
+            return "error-page";
+        }
+    }
+
+    @RequestMapping("/home")
+    public String showHome(Model model, HttpSession session) {
+        try {
+            if (session.getAttribute("user") != null) {
+                return "index"; // Change to "index" or the appropriate page if the user is logged in
+            } else {
+                return "home";
+            }
+        } catch (Exception e) {
+            return "error-page";
+        }
+    }
+
+    @GetMapping("/shop")
+    public String showShop(Model model, HttpSession session) {
+        try {
+            if (session.getAttribute("user") != null) {
+                return "login"; // Change to "login" or the appropriate page if the user is logged in
+            } else {
+                return "shop";
+            }
+        } catch (Exception e) {
+            return "error-page";
+        }
+    }
+
+    @GetMapping("/history")
+    public String showHistory(Model model, HttpSession session) {
+        try {
+            if (session.getAttribute("user") != null) {
+                return "login"; // Change to "login" or the appropriate page if the user is logged in
+            } else {
+                return "history";
+            }
+        } catch (Exception e) {
+            return "error-page";
+        }
+    }
+
+    @GetMapping("/sproduct")
+    public String showSproduct(Model model, HttpSession session) {
+        try {
+            if (session.getAttribute("user") != null) {
+                return "login"; // Change to "login" or the appropriate page if the user is logged in
+            } else {
+                return "sproduct";
+            }
+        } catch (Exception e) {
+            return "error-page";
+        }
+    }
+
+    @GetMapping("/konfirmasi")
+    public String showKonfirmasi(Model model, HttpSession session) {
+        try {
+            if (session.getAttribute("user") != null) {
+                return "login"; // Change to "login" or the appropriate page if the user is logged in
+            } else {
+                return "konfirmasi";
             }
         } catch (Exception e) {
             return "error-page";
