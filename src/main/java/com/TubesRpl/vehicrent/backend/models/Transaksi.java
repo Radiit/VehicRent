@@ -62,12 +62,15 @@ public class Transaksi {
     @Column
     private int hargaTotal;
 
+    @Column
+    private String status;
+
     public Transaksi() {
     }
 
     public Transaksi(int ID_Transaksi, Regent regent, Client client, Kendaraan kendaraan, String orderName,
             String phoneNumber, String pickUpAddress, String dropOffAddString, String destination, Date rentDateStart,
-            Date rentDateEnd, LocalDateTime dateTransaksi, int rentTotalDay, int hargaTotal) {
+            Date rentDateEnd, LocalDateTime dateTransaksi, int rentTotalDay, int hargaTotal, String status) {
         this.ID_Transaksi = ID_Transaksi;
         this.regent = regent;
         this.client = client;
@@ -82,6 +85,15 @@ public class Transaksi {
         this.dateTransaksi = dateTransaksi;
         this.lamaSewa = rentTotalDay;
         this.hargaTotal = hargaTotal;
+        this.status = status;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status){
+        this.status = status;
     }
 
     public long getLamaSewa() {

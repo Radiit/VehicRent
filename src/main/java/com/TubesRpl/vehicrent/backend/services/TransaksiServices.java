@@ -77,6 +77,7 @@ public class TransaksiServices implements BaseServices<TransaksiRequest> {
             transaksi.setRentDateStart(request.getRentDateStart());
             transaksi.setRentDateEnd(request.getRentDateEnd());
             transaksi.setDateTransaksi(LocalDateTime.now());
+            transaksi.setStatus(request.getStatus());
 
             // hitung total hari kendaraan disewa
             LocalDate startLocalDate = request.getRentDateStart().toLocalDate();
@@ -89,6 +90,7 @@ public class TransaksiServices implements BaseServices<TransaksiRequest> {
             long hargaTemp = kendaraan.getHargaSewa_Kendaraan() * lamaSewa;
             int totalPajak = (int) (hargaTemp * pajak);
             transaksi.setHargaTotal((int) (hargaTemp + totalPajak));
+
             transaksiRepository.save(transaksi);
             return new Response(HttpStatus.OK.value(), "Success", transaksi);
         } catch (Exception e) {
@@ -124,6 +126,8 @@ public class TransaksiServices implements BaseServices<TransaksiRequest> {
                 transaksi.setRentDateStart(request.getRentDateStart());
                 transaksi.setRentDateEnd(request.getRentDateEnd());
                 transaksi.setDateTransaksi(LocalDateTime.now());
+                transaksi.setStatus(request.getStatus());
+
                 // hitung total hari kendaraan disewa
                 LocalDate startLocalDate = request.getRentDateStart().toLocalDate();
                 LocalDate endLocalDate = request.getRentDateEnd().toLocalDate();
@@ -135,6 +139,7 @@ public class TransaksiServices implements BaseServices<TransaksiRequest> {
                 long hargaTemp = kendaraan.getHargaSewa_Kendaraan() * lamaSewa;
                 int totalPajak = (int) (hargaTemp * pajak);
                 transaksi.setHargaTotal((int) (hargaTemp + totalPajak));
+
                 transaksiRepository.save(transaksi);
                 return new Response(HttpStatus.OK.value(), "Success", transaksi);
             } else {
