@@ -33,4 +33,7 @@ public interface KendaraanRepository extends JpaRepository<Kendaraan, Integer> {
     List<Kendaraan> findByHiddenFalseAndJenisKendaraan(String jenisKendaraan);
     
     Optional<Kendaraan> findByHiddenFalseAndIdKendaraan(Integer idKendaraan);
+
+    @Query("SELECT k FROM Kendaraan k WHERE k.hidden = false AND k.valid = 'Valid' ORDER BY k.totalOrdered DESC")
+    List<Kendaraan> findAllSortedByTotalOrderedAndValid();
 }

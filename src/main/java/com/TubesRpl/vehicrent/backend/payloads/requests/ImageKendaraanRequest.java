@@ -10,7 +10,7 @@ public class ImageKendaraanRequest {
 
     public ImageKendaraanRequest(Integer ID_ImageKendaraan, String image) {
         this.ID_ImageKendaraan = ID_ImageKendaraan;
-        image = image;
+        this.image = image;
     }
 
     public Integer getID_ImageKendaraan() {
