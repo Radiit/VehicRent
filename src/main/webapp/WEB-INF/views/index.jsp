@@ -36,8 +36,6 @@
         height: 100vh;
       }
       .login-left {
-        /*margin-top: -80px;*/
-        /*margin-left : 50px;*/
         transform: scale(1.0);
       }
       .header h1 {
@@ -189,6 +187,7 @@
       .animate-in {
         animation: animate-in 300ms ease 1 forwards;
       }
+      
       .logo{
         margin-left:12px;
         transform: scale(0.75)
