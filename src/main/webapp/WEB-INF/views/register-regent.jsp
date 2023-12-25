@@ -41,7 +41,6 @@
         }
 
         .header h1 {
-        /* width: 486px; */
 
         flex-shrink: 0;
         color: #000;
@@ -51,14 +50,9 @@
         line-height: normal;
         margin-bottom: 16px;
         margin-top: 16px;
-        /*
-        margin-left: 20px;
-        margin-right: 20px; */
         }
 
         .header p {
-        /* width: 512px; */
-
         flex-shrink: 0;
         color: #000;
         font-size: 16px;
@@ -216,7 +210,6 @@
         }
 
         .divider {
-        /* font-size: 30px; */
         display: flex;
         align-items: center;
         margin-top: 20px;
@@ -236,7 +229,6 @@
         .navigasi {
         margin-bottom: 24px;
         box-shadow: 1px 4px 5px 0px rgba(0, 0, 0, 0.05);
-        /* border: 2px solid red; */
         }
 
         .card-text {
@@ -251,15 +243,12 @@
         }
 
         .konfirmasi {
-        /* height: 100vh; */
         padding-top: 1rem;
         padding-bottom: 2rem;
         }
 
         .konfirmasiPage {
         width: 100%;
-        /* margin-top: -100px; */
-        /* transform: scale(0.75); */
         }
 
         .konfirmasiPage .title .title-text {
@@ -327,13 +316,7 @@
         font-size: 12px;
         padding-top: 12px;
         padding-bottom: 12px;
-        /* padding-left: 150px;
-        padding-right: 150px; */
-        /*border: 1px solid rgba(0, 0, 0, 0.15);*/
         border-radius: 12px;
-        /* margin-left: 50px; */
-        /*box-shadow: -3px 5px 5px 0px rgba(0, 0, 0, 0.15);*/
-        /* height: 100px; */
         flex-shrink: 0;
         border: 1px solid rgba(0, 0, 0, 0.3);
         box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.15);
@@ -396,13 +379,11 @@
                     <div class="card w-100 inactive">
                         <div class="card-body-navigasi card-body-js  text-center">
                             <h5 class="card-title">Verifikasi Data</h5>
-                            <!-- Isi untuk verifikasi data di sini -->
                         </div>
                     </div>
                     <div class="card w-100 inactive">
                         <div class="card-body-navigasi card-body-js text-center">
                             <h5 class="card-title">Status</h5>
-                            <!-- Isi untuk status di sini -->
                         </div>
                     </div>
                 </div>
@@ -425,36 +406,6 @@
                         </div>
                         <div id="imageContainer1" class="image-container">
                             <img id="frame1" src="" class="img-fluid" />
-                        </div>
-                    </div>
-                    <div class="cardPeran cardClient align-items-center" style="width: 26rem;">
-                        <div class="card-body-peran card-body-js">
-                            <h5 class="card-title"
-                                style="font-size: 20px; font-style: normal; font-weight: 600; line-height: normal;">
-                                Foto SIM</h5>
-                            <p class="card-text">Foto SIM anda sejajar dengan tempat yang sudah disediakan</p>
-                        </div>
-                        <div class="mb-5">
-                            <input class="form-control" type="file" id="formFile2"
-                                onchange="preview(event, 'frame2', 'imageContainer2')">
-                        </div>
-                        <div id="imageContainer2" class="image-container">
-                            <img id="frame2" src="" class="img-fluid" />
-                        </div>
-                    </div>
-                    <div class="cardPeran cardClient align-items-center" style="width: 26rem;">
-                        <div class="card-body-peran card-body-js">
-                            <h5 class="card-title"
-                                style="font-size: 20px; font-style: normal; font-weight: 600; line-height: normal;">
-                                Foto STNK</h5>
-                            <p class="card-text">Foto STNK anda dengan tempat yang sudah disediakan</p>
-                        </div>
-                        <div class="mb-5">
-                            <input class="form-control" type="file" id="formFile3"
-                                onchange="preview(event, 'frame3', 'imageContainer3')">
-                        </div>
-                        <div id="imageContainer3" class="image-container">
-                            <img id="frame3" src="" class="img-fluid" />
                         </div>
                     </div>
                 </div>

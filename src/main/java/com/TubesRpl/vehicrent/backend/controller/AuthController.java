@@ -22,18 +22,18 @@ public class AuthController {
         this.userRepository = userRepository;
     }
 
-    // @RequestMapping("/login")
-    // public String showLoginPage(Model model, HttpSession session) {
-    //     try {
-    //         if (session.getAttribute("user") != null) {
-    //             return "login";
-    //         } else {
-    //             return "register-form";
-    //         }
-    //     } catch (Exception e) {
-    //         return "error-page";
-    //     }
-    // }
+    @RequestMapping("/login")
+    public String showLoginPage(Model model, HttpSession session) {
+        try {
+            if (session.getAttribute("user") != null) {
+                return "redirect:/home";
+            } else {
+                return "/login";
+            }
+        } catch (Exception e) {
+            return "error-page";
+        }
+    }
 
     @PostMapping("/login")
     public String login(@RequestParam("email") String Email_User,
