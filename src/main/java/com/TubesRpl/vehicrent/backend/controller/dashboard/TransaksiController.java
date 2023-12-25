@@ -10,16 +10,18 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.TubesRpl.vehicrent.backend.payloads.requests.TransaksiRequest;
 import com.TubesRpl.vehicrent.backend.payloads.response.Response;
 import com.TubesRpl.vehicrent.backend.services.BaseServices;
+import com.TubesRpl.vehicrent.backend.services.TransaksiServices;
 
 @Controller
 @RequestMapping("dashboard/transaksi")
 public class TransaksiController {
     @Autowired
-    private BaseServices<TransaksiRequest> transaksiServices;
+    private TransaksiServices transaksiServices;
     
     @RequestMapping("/display")
     public ResponseEntity<?> index(){
@@ -59,5 +61,11 @@ public class TransaksiController {
         }else{
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
         }
+    }
+
+    @PostMapping("/status/{id}")
+    public ResponseEntity<?> UpdateStatus(@PathVariable Integer id, @RequestParam String status){
+        Response response = transaksiServices.UpdateStatus(id, status);
+        return ResponseEntity.status(200).body(response);
     }
 }
