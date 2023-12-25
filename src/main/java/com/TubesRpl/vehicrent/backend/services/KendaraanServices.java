@@ -167,4 +167,17 @@ public class KendaraanServices implements BaseServices<KendaraanRequest> {
         }
     }
 
+    public Response DisplayByJenis(String jenis) {
+        try {
+            List<Kendaraan> kendaraan = kendaraanRepository.findByHiddenFalseAndJenisKendaraan(jenis);
+            if (kendaraan != null) {
+                return new Response(HttpStatus.OK.value(), "Success", kendaraan);
+            } else {
+                return new Response(HttpStatus.NOT_FOUND.value(), "Kendaraan not found", null);
+            }
+        } catch (Exception e) {
+            return new Response(HttpStatus.BAD_REQUEST.value(), "Failed", null);
+        }
+    }
+
 }

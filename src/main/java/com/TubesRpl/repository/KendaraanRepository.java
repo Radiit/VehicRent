@@ -30,7 +30,7 @@ public interface KendaraanRepository extends JpaRepository<Kendaraan, Integer> {
 
     List<Kendaraan> findAllByHiddenFalseAndValid(String valid);
 
-    List<Kendaraan> findAllByJenisKendaraan(String jenisKendaraan);
+    List<Kendaraan> findByHiddenFalseAndJenisKendaraan(String jenisKendaraan);
     
     Optional<Kendaraan> findByHiddenFalseAndIdKendaraan(Integer idKendaraan);
 }
