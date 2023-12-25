@@ -23,9 +23,9 @@ public class HomePageController {
         try {
             if (session.getAttribute("user") != null) {
                 User user = (User) session.getAttribute("user");
-                if (user.getRole_User().equals("Regent") || user.getRole_User().equals("Client")) {
+                if (user.getRole_user().equals("Regent") || user.getRole_user().equals("Client")) {
                     return "home"; 
-                } else if (user.getRole_User().equals("Staff")) {
+                } else if (user.getRole_user().equals("Staff")) {
                     return "redirect:/dashboard/staff";
                 }
             }
@@ -41,9 +41,9 @@ public class HomePageController {
         try {
             if (session.getAttribute("user") != null) {
                 User user = (User) session.getAttribute("user");
-                if (user.getRole_User().equals("Regent") || user.getRole_User().equals("Client")) {
+                if (user.getRole_user().equals("Regent") || user.getRole_user().equals("Client")) {
                     return "home"; 
-                } else if (user.getRole_User().equals("Staff")) {
+                } else if (user.getRole_user().equals("Staff")) {
                     return "redirect:/dashboard/staff";
                 }
             }else if(session.getAttribute("user") == null){
@@ -61,9 +61,9 @@ public class HomePageController {
         try {
             if (session.getAttribute("user") != null) {
                 User user = (User) session.getAttribute("user");
-                if (user.getRole_User().equals("Regent") || user.getRole_User().equals("Client")) {
+                if (user.getRole_user().equals("Regent") || user.getRole_user().equals("Client")) {
                     return "shop"; 
-                } else if (user.getRole_User().equals("Staff")) {
+                } else if (user.getRole_user().equals("Staff")) {
                     return "redirect:/dashboard/staff";
                 }
             }
