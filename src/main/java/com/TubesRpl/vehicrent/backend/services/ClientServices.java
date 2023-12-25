@@ -26,45 +26,46 @@ public class ClientServices implements RoleServices<ClientRequest>{
     
     @Override
     public Response DisplayAllData(){
-        List<Client> allClient = new ArrayList<>();
-        clientRepository.findAll().forEach(allClient::add);
-        for (Client client : allClient){
-            System.out.println("ID Client: " + client.getID_Client());
-            System.out.println("NIK User: " + client.getUser());
+        List<Client> allClient = clientRepository.findAllByHiddenFalse();
+        if (allClient.isEmpty()){
+            return new Response(HttpStatus.NOT_FOUND.value(), "No Client Found", null);
         }
+        System.out.println("Display all client data");
         return new Response(HttpStatus.OK.value(), "Success", allClient);
     }
 
     @Override
     public Response Create(ClientRequest request){
         try{
-            User user = userrepository.findById(request.getNIK_User()).orElse(null);
+            User user = userrepository.findByHiddenFalseAndNik(request.getNik()).orElse(null);
             if (user == null){
-                return new Response(HttpStatus.NOT_FOUND.value(), "User not found", request);
+                return new Response(HttpStatus.NOT_FOUND.value(), "User not exist", null);
             }
             Client client = new Client();
             client.setUser(user);
-            client.setNoSIM(request.getNo_SIM());
+            client.setSim(request.getSim());
             Rekomendasi rekomendasi = new Rekomendasi();
             rekomendasiServices.Create(rekomendasi);
             client.setRekomendasi(rekomendasi);
+            client.setHidden(false);
             clientRepository.save(client);
-            return new Response(HttpStatus.OK.value(), "Success", request);
+            System.out.println("Create new client with id: " + client.getIdClient());
+            return new Response(HttpStatus.OK.value(), "Success", client);
         }catch(Exception e){
-            return new Response(HttpStatus.BAD_REQUEST.value(), "Failed", request);
+            return new Response(HttpStatus.BAD_REQUEST.value(), "Failed", null);
         }
     }
 
     @Override
     public Response Update(Integer id, ClientRequest request){
         try{
-            Client client = clientRepository.findById(id).orElse(null);
+            Client client = clientRepository.findByHiddenFalseAndIdClient(id).orElse(null);
             if (client != null){
                 client.setUser(client.getUser());
-                client.setNoSIM(request.getNo_SIM());
-                System.out.println(request.getNo_SIM());
-                client.setRekomendasi(client.getRekomendasi());
+                client.setSim(request.getSim());
+                client.setHidden(false);
                 clientRepository.save(client);
+                System.out.println("Update client with id: " + client.getIdClient());
                 return new Response(HttpStatus.OK.value(), "Success", client);
             }else{
                 return new Response(HttpStatus.NOT_FOUND.value(), "Client not found", null);
@@ -79,8 +80,10 @@ public class ClientServices implements RoleServices<ClientRequest>{
         try{
             Client client = clientRepository.findById(id).orElse(null);
             if (client != null){
-                clientRepository.deleteById(id);
-                return new Response(HttpStatus.OK.value(), "Success", client);
+                client.setHidden(true);
+                clientRepository.save(client);
+                System.out.println("Delete client with id: " + client.getIdClient());
+                return new Response(HttpStatus.OK.value(), "Success", null);
             }else{
                 return new Response(HttpStatus.NOT_FOUND.value(), "Client not found", null);
             }
@@ -92,12 +95,9 @@ public class ClientServices implements RoleServices<ClientRequest>{
     @Override
     public Response DisplayByID(Integer id){
         try {
-            Client client = clientRepository.findById(id).orElse(null);
+            Client client = clientRepository.findByHiddenFalseAndIdClient(id).orElse(null);
             if (client != null) {
-                System.out.println("ID Client: " + client.getID_Client());
-                System.out.println("NIK User: " + client.getUser().getNIK_User());
-                System.out.println("No SIM: " + client.getNoSIM());
-                System.out.println("ID Rekomendasi: " + client.getRekomendasi());
+                System.out.println("Display client by id : " + id);
                 return new Response(HttpStatus.OK.value(), "Success", client);
             } else {
                 return new Response(HttpStatus.NOT_FOUND.value(), "Client not found", null);
