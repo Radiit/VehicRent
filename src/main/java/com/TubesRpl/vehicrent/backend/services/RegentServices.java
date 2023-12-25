@@ -15,7 +15,7 @@ import com.TubesRpl.vehicrent.backend.payloads.requests.RegentRequest;
 import com.TubesRpl.vehicrent.backend.payloads.response.Response;
 
 @Service
-public class RegentServices implements RoleServices<RegentRequest> {
+public class RegentServices implements BaseServices<RegentRequest> {
     @Autowired
     private RegentRepository regentRepository;
 
@@ -45,7 +45,7 @@ public class RegentServices implements RoleServices<RegentRequest> {
             regent.setHidden(false);
             regent.setValid("Pending");
             regentRepository.save(regent);
-            System.out.println("Create new regent with id: " + regent.getIdRegent());
+            System.out.println("Create new regent with id: " + regent.getIdRegent() + " and NIK: " + regent.getUser().getNIK_User());
             return new Response(HttpStatus.OK.value(), "Success", regent);
         } catch (Exception e) {
             return new Response(HttpStatus.BAD_REQUEST.value(), "Failed", request);
@@ -66,7 +66,7 @@ public class RegentServices implements RoleServices<RegentRequest> {
                 regent.setHidden(false);
                 regent.setValid("Pending");
                 regentRepository.save(regent);
-                System.out.println("Update regent with id: " + regent.getIdRegent());
+                System.out.println("Update regent with id: " + regent.getIdRegent() + " and NIK: " + regent.getUser().getNIK_User());
                 return new Response(HttpStatus.OK.value(), "Success", regent);
             } else {
                 return new Response(HttpStatus.NOT_FOUND.value(), "Regent not found", request);
