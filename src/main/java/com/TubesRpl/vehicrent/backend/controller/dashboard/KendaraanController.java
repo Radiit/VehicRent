@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.TubesRpl.vehicrent.backend.models.Kendaraan;
 import com.TubesRpl.vehicrent.backend.payloads.requests.KendaraanRequest;
 import com.TubesRpl.vehicrent.backend.payloads.response.Response;
 import com.TubesRpl.vehicrent.backend.services.BaseServices;
@@ -38,7 +37,7 @@ public class KendaraanController {
 
     @GetMapping("/display/{id}")
     public ResponseEntity<?> indexByID(@PathVariable Integer id) {
-        Response kendaraanByID = display.DisplayByID(id);;
+        Response kendaraanByID = display.DisplayByID(id);
         return ResponseEntity.status(kendaraanByID.getStatus()).body(kendaraanByID);
     }
 

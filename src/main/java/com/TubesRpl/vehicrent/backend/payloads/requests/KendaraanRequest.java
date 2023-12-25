@@ -2,54 +2,143 @@ package com.TubesRpl.vehicrent.backend.payloads.requests;
 
 import java.util.List;
 
-import com.TubesRpl.vehicrent.backend.models.ImageKendaraan;
-
 import io.micrometer.common.lang.Nullable;
 
 public class KendaraanRequest {
-    private Integer ID_Regent;
-    private String jenis_Kendaraan;
-    private String Nopol_Kendaraan;
-    private String Merk_Kendaraan;
-    private int Tahun_Kendaraan;
-    private String Warna_Kendaraan;
-    private String NoSTNK_Kendaraan;
-    private String Kapasitas_Kendaraan;
-    private String NoMesin_Kendaraan;
-    private int HargaSewa_Kendaraan;
-    private int MaksimalWaktu_Peminjaman;
-    private String Status_Kendaraan;
-    private boolean Status_ValidasiKendaraan;
-    private String stnk;
+    
+    private int idRegent;
+
     @Nullable
     private List<ImageKendaraanRequest> imageKendaraan;
 
-    // contructor
-    public KendaraanRequest(Integer ID_Regent, String jenis_Kendaraan, String nopol_Kendaraan, String merk_Kendaraan,
-            int tahun_Kendaraan, String warna_Kendaraan, String noSTNK_Kendaraan, String kapasitas_Kendaraan,
-            String noMesin_Kendaraan, int hargaSewa_Kendaraan, int maksimalWaktu_Peminjaman, String status_Kendaraan,
-            boolean status_ValidasiKendaraan, List<ImageKendaraanRequest> imageKendaraan, String stnk) {
-        this.ID_Regent = ID_Regent;
-        this.jenis_Kendaraan = jenis_Kendaraan;
-        Nopol_Kendaraan = nopol_Kendaraan;
-        Merk_Kendaraan = merk_Kendaraan;
-        Tahun_Kendaraan = tahun_Kendaraan;
-        Warna_Kendaraan = warna_Kendaraan;
-        NoSTNK_Kendaraan = noSTNK_Kendaraan;
-        Kapasitas_Kendaraan = kapasitas_Kendaraan;
-        NoMesin_Kendaraan = noMesin_Kendaraan;
-        HargaSewa_Kendaraan = hargaSewa_Kendaraan;
-        MaksimalWaktu_Peminjaman = maksimalWaktu_Peminjaman;
-        Status_Kendaraan = status_Kendaraan;
-        Status_ValidasiKendaraan = status_ValidasiKendaraan;
+    private String jenisKendaraan;
+    private String merkKendaraan;
+    private String model;
+    private String nomorPlat;
+    private String warna;
+    private int tahun;
+    private String nomorMesin;
+    private String transmisi;
+    private int hargaSewa;
+    private String kondisiKendaraan;
+    private String stnk;
+
+    public KendaraanRequest(int idRegent, List<ImageKendaraanRequest> imageKendaraan, String jenisKendaraan, String merkKendaraan, String model, String nomorPlat, String warna, int tahun, String nomorMesin, String transmisi, int hargaSewa, String kondisiKendaraan, String stnk) {
+        this.idRegent = idRegent;
         this.imageKendaraan = imageKendaraan;
+        this.jenisKendaraan = jenisKendaraan;
+        this.merkKendaraan = merkKendaraan;
+        this.model = model;
+        this.nomorPlat = nomorPlat;
+        this.warna = warna;
+        this.tahun = tahun;
+        this.nomorMesin = nomorMesin;
+        this.transmisi = transmisi;
+        this.hargaSewa = hargaSewa;
+        this.kondisiKendaraan = kondisiKendaraan;
         this.stnk = stnk;
     }
 
     public KendaraanRequest() {
     }
 
-    // getter setter
+    // Setter and Getter methods
+    public int getIdRegent() {
+        return idRegent;
+    }
+
+    public void setIdRegent(int idRegent) {
+        this.idRegent = idRegent;
+    }
+
+    @Nullable
+    public List<ImageKendaraanRequest> getImageKendaraan() {
+        return imageKendaraan;
+    }
+
+    public void setImageKendaraan(@Nullable List<ImageKendaraanRequest> imageKendaraan) {
+        this.imageKendaraan = imageKendaraan;
+    }
+
+    public String getJenisKendaraan() {
+        return jenisKendaraan;
+    }
+
+    public void setJenisKendaraan(String jenisKendaraan) {
+        this.jenisKendaraan = jenisKendaraan;
+    }
+
+    public String getMerkKendaraan() {
+        return merkKendaraan;
+    }
+
+    public void setMerkKendaraan(String merkKendaraan) {
+        this.merkKendaraan = merkKendaraan;
+    }
+
+    public String getModel() {
+        return model;
+    }
+
+    public void setModel(String model) {
+        this.model = model;
+    }
+
+    public String getNomorPlat() {
+        return nomorPlat;
+    }
+
+    public void setNomorPlat(String nomorPlat) {
+        this.nomorPlat = nomorPlat;
+    }
+
+    public String getWarna() {
+        return warna;
+    }
+
+    public void setWarna(String warna) {
+        this.warna = warna;
+    }
+
+    public int getTahun() {
+        return tahun;
+    }
+
+    public void setTahun(int tahun) {
+        this.tahun = tahun;
+    }
+
+    public String getNomorMesin() {
+        return nomorMesin;
+    }
+
+    public void setNomorMesin(String nomorMesin) {
+        this.nomorMesin = nomorMesin;
+    }
+
+    public String getTransmisi() {
+        return transmisi;
+    }
+
+    public void setTransmisi(String transmisi) {
+        this.transmisi = transmisi;
+    }
+
+    public int getHargaSewa() {
+        return hargaSewa;
+    }
+
+    public void setHargaSewa(int hargaSewa) {
+        this.hargaSewa = hargaSewa;
+    }
+
+    public String getKondisiKendaraan() {
+        return kondisiKendaraan;
+    }
+
+    public void setKondisiKendaraan(String kondisiKendaraan) {
+        this.kondisiKendaraan = kondisiKendaraan;
+    }
 
     public String getStnk() {
         return stnk;
@@ -58,117 +147,4 @@ public class KendaraanRequest {
     public void setStnk(String stnk) {
         this.stnk = stnk;
     }
-
-    public Integer getID_Regent() {
-        return ID_Regent;
-    }
-
-    public void setID_Regent(Integer ID_Regent) {
-        this.ID_Regent = ID_Regent;
-    }
-
-    public String getJenis_Kendaraan() {
-        return jenis_Kendaraan;
-    }
-
-    public void setJenis_Kendaraan(String jenis_Kendaraan) {
-        this.jenis_Kendaraan = jenis_Kendaraan;
-    }
-
-    public String getNopol_Kendaraan() {
-        return Nopol_Kendaraan;
-    }
-
-    public void setNopol_Kendaraan(String nopol_Kendaraan) {
-        Nopol_Kendaraan = nopol_Kendaraan;
-    }
-
-    public String getMerk_Kendaraan() {
-        return Merk_Kendaraan;
-    }
-
-    public void setMerk_Kendaraan(String merk_Kendaraan) {
-        Merk_Kendaraan = merk_Kendaraan;
-    }
-
-    public int getTahun_Kendaraan() {
-        return Tahun_Kendaraan;
-    }
-
-    public void setTahun_Kendaraan(int tahun_Kendaraan) {
-        Tahun_Kendaraan = tahun_Kendaraan;
-    }
-
-    public String getWarna_Kendaraan() {
-        return Warna_Kendaraan;
-    }
-
-    public void setWarna_Kendaraan(String warna_Kendaraan) {
-        Warna_Kendaraan = warna_Kendaraan;
-    }
-
-    public String getNoSTNK_Kendaraan() {
-        return NoSTNK_Kendaraan;
-    }
-
-    public void setNoSTNK_Kendaraan(String noSTNK_Kendaraan) {
-        NoSTNK_Kendaraan = noSTNK_Kendaraan;
-    }
-
-    public String getKapasitas_Kendaraan() {
-        return Kapasitas_Kendaraan;
-    }
-
-    public void setKapasitas_Kendaraan(String kapasitas_Kendaraan) {
-        Kapasitas_Kendaraan = kapasitas_Kendaraan;
-    }
-
-    public String getNoMesin_Kendaraan() {
-        return NoMesin_Kendaraan;
-    }
-
-    public void setNoMesin_Kendaraan(String noMesin_Kendaraan) {
-        NoMesin_Kendaraan = noMesin_Kendaraan;
-    }
-
-    public int getHargaSewa_Kendaraan() {
-        return HargaSewa_Kendaraan;
-    }
-
-    public void setHargaSewa_Kendaraan(int hargaSewa_Kendaraan) {
-        HargaSewa_Kendaraan = hargaSewa_Kendaraan;
-    }
-
-    public int getMaksimalWaktu_Peminjaman() {
-        return MaksimalWaktu_Peminjaman;
-    }
-
-    public void setMaksimalWaktu_Peminjaman(int maksimalWaktu_Peminjaman) {
-        MaksimalWaktu_Peminjaman = maksimalWaktu_Peminjaman;
-    }
-
-    public String getStatus_Kendaraan() {
-        return Status_Kendaraan;
-    }
-
-    public void setStatus_Kendaraan(String status_Kendaraan) {
-        Status_Kendaraan = status_Kendaraan;
-    }
-
-    public boolean getStatus_ValidasiKendaraan() {
-        return Status_ValidasiKendaraan;
-    }
-
-    public void setStatus_ValidasiKendaraan(boolean status_ValidasiKendaraan) {
-        Status_ValidasiKendaraan = status_ValidasiKendaraan;
-    }
-
-    public List<ImageKendaraanRequest> getImageKendaraan() {
-        return imageKendaraan;
-    }
-
-    public void setImageKendaraan(List<ImageKendaraanRequest> imageKendaraan) {
-        this.imageKendaraan = imageKendaraan;
-    }
-
 }

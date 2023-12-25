@@ -14,12 +14,9 @@ public class TransaksiRequest {
     private String destination;
     private Date rentDateStart;
     private Date rentDateEnd;
-    private String status;
-
 
     public TransaksiRequest(int ID_Kendaraan, int ID_Regent, int ID_Client, String orderName, String phoneNumber,
-            String pickUpAddress, String dropOffAddString, String destination, Date rentDateStart, Date rentDateEnd,
-            String status) {
+            String pickUpAddress, String dropOffAddString, String destination, Date rentDateStart, Date rentDateEnd) {
         this.ID_Kendaraan = ID_Kendaraan;
         this.ID_Regent = ID_Regent;
         this.ID_Client = ID_Client;
@@ -30,18 +27,9 @@ public class TransaksiRequest {
         this.destination = destination;
         this.rentDateStart = rentDateStart;
         this.rentDateEnd = rentDateEnd;
-        this.status = status;
     }
 
     public TransaksiRequest() {
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
     }
 
     public int getID_Kendaraan() {
