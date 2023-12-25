@@ -6,14 +6,12 @@ public class RatingRequest {
     private String komentar;
     private int idClient;
     private int idKendaraan;
-    private boolean valid;
 
-    public RatingRequest(int rating, String komentar, int idClient, int idKendaraan, boolean valid) {
+    public RatingRequest(int rating, String komentar, int idClient, int idKendaraan) {
         this.rating = rating;
         this.komentar = komentar;
         this.idClient = idClient;
         this.idKendaraan = idKendaraan;
-        this.valid = valid;
     }
 
     public RatingRequest() {
@@ -51,11 +49,4 @@ public class RatingRequest {
         this.idKendaraan = idKendaraan;
     }
 
-    public boolean isValid() {
-        return valid;
-    }
-
-    public void setValid(boolean valid) {
-        this.valid = valid;
-    }
 }
