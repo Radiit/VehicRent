@@ -28,7 +28,9 @@ public interface KendaraanRepository extends JpaRepository<Kendaraan, Integer> {
            "LOWER(k.valid) LIKE LOWER(concat('%', :keyword, '%'))")
     List<Kendaraan> searchByKeyword(@Param("keyword") String keyword);
 
-    List<Kendaraan> findAllByHiddenFalse();
+    List<Kendaraan> findAllByHiddenFalseAndValid(String valid);
+
+    List<Kendaraan> findAllByJenisKendaraan(String jenisKendaraan);
     
     Optional<Kendaraan> findByHiddenFalseAndIdKendaraan(Integer idKendaraan);
 }

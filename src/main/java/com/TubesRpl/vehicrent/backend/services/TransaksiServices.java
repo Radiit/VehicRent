@@ -164,4 +164,12 @@ public class TransaksiServices implements BaseServices<TransaksiRequest> {
         }
     }
 
+    public Response UpdateStatus(Integer id, String Status){
+        try {
+            Transaksi 
+        } catch (Exception e) {
+            // TODO: handle exception
+        }
+    }
+
 }

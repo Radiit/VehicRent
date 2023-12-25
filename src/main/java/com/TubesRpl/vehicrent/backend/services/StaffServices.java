@@ -6,8 +6,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
+import com.TubesRpl.repository.ClientRepository;
+import com.TubesRpl.repository.KendaraanRepository;
+import com.TubesRpl.repository.RegentRepository;
 import com.TubesRpl.repository.StaffRepository;
 import com.TubesRpl.repository.UserRepository;
+import com.TubesRpl.vehicrent.backend.models.Client;
+import com.TubesRpl.vehicrent.backend.models.Kendaraan;
+import com.TubesRpl.vehicrent.backend.models.Regent;
 import com.TubesRpl.vehicrent.backend.models.Staff;
 import com.TubesRpl.vehicrent.backend.models.User;
 import com.TubesRpl.vehicrent.backend.payloads.requests.StaffRequest;
@@ -21,6 +27,15 @@ public class StaffServices implements BaseServices<StaffRequest> {
 
     @Autowired
     private UserRepository userrepository;
+
+    @Autowired
+    private ClientRepository clientRepository;
+
+    @Autowired
+    private RegentRepository regentRepository;
+
+    @Autowired
+    private KendaraanRepository kendaraanRepository;
 
     @Override
     public Response DisplayAllData() {
@@ -103,4 +118,69 @@ public class StaffServices implements BaseServices<StaffRequest> {
             return new Response(HttpStatus.BAD_REQUEST.value(), "Failed", null);
         }
     }
+
+    public Response validasiUser(Integer id, boolean valid) {
+        try {
+            User user = userrepository.findByHiddenFalseAndNik(id).orElse(null);
+            if (user != null) {
+                user.setValid(valid ? "Valid" : "TidakValid");
+                userrepository.save(user);
+                System.out.println("Validasi user by id : " + id);
+                return new Response(HttpStatus.OK.value(), "Success", user);
+            } else {
+                return new Response(HttpStatus.NOT_FOUND.value(), "User not found", null);
+            }
+        } catch (Exception e) {
+            return new Response(HttpStatus.BAD_REQUEST.value(), "Failed", null);
+        }
+    }
+
+    public Response validasiClient(Integer id, boolean valid) {
+        try {
+            Client client = clientRepository.findByHiddenFalseAndIdClient(id).orElse(null);
+            if (client != null) {
+                client.setValid(valid ? "Valid" : "TidakValid");
+                clientRepository.save(client);
+                System.out.println("Validasi client by id : " + id);
+                return new Response(HttpStatus.OK.value(), "Success", client);
+            } else {
+                return new Response(HttpStatus.NOT_FOUND.value(), "Client not found", null);
+            }
+        } catch (Exception e) {
+            return new Response(HttpStatus.BAD_REQUEST.value(), "Failed", null);
+        }
+    }
+
+    public Response validasiRegent(Integer id, boolean valid) {
+        try {
+            Regent regent = regentRepository.findByHiddenFalseAndIdRegent(id).orElse(null);
+            if (regent != null) {
+                regent.setValid(valid ? "Valid" : "TidakValid");
+                regentRepository.save(regent);
+                System.out.println("Validasi regent by id : " + id);
+                return new Response(HttpStatus.OK.value(), "Success", regent);
+            } else {
+                return new Response(HttpStatus.NOT_FOUND.value(), "Regent not found", null);
+            }
+        } catch (Exception e) {
+            return new Response(HttpStatus.BAD_REQUEST.value(), "Failed", null);
+        }
+    }
+
+    public Response validasiKendaraan(Integer id, boolean valid) {
+        try {
+            Kendaraan kendaraan = kendaraanRepository.findByHiddenFalseAndIdKendaraan(id).orElse(null);
+            if (kendaraan != null) {
+                kendaraan.setValid(valid ? "Valid" : "TidakValid");
+                kendaraanRepository.save(kendaraan);
+                System.out.println("Validasi kendaraan by id : " + id);
+                return new Response(HttpStatus.OK.value(), "Success", kendaraan);
+            } else {
+                return new Response(HttpStatus.NOT_FOUND.value(), "Kendaraan not found", null);
+            }
+        } catch (Exception e) {
+            return new Response(HttpStatus.BAD_REQUEST.value(), "Failed", null);
+        }
+    }
+
 }

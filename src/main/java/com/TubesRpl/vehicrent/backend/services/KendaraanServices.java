@@ -28,7 +28,7 @@ public class KendaraanServices implements BaseServices<KendaraanRequest> {
 
     @Override
     public Response DisplayAllData() {
-        List<Kendaraan> allKendaraan = kendaraanRepository.findAllByHiddenFalse();
+        List<Kendaraan> allKendaraan = kendaraanRepository.findAllByHiddenFalseAndValid("Valid");
         if (allKendaraan.isEmpty()) {
             return new Response(HttpStatus.NOT_FOUND.value(), "Kendaraan not found", null);
         }
