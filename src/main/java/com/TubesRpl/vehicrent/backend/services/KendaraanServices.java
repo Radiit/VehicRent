@@ -11,6 +11,8 @@ import com.TubesRpl.repository.KendaraanRepository;
 import com.TubesRpl.repository.RegentRepository;
 import com.TubesRpl.vehicrent.backend.models.ImageKendaraan;
 import com.TubesRpl.vehicrent.backend.models.Kendaraan;
+import com.TubesRpl.vehicrent.backend.models.Rating;
+import com.TubesRpl.vehicrent.backend.models.Regent;
 import com.TubesRpl.vehicrent.backend.payloads.requests.ImageKendaraanRequest;
 import com.TubesRpl.vehicrent.backend.payloads.requests.KendaraanRequest;
 import com.TubesRpl.vehicrent.backend.payloads.response.Response;
@@ -26,24 +28,11 @@ public class KendaraanServices implements BaseServices<KendaraanRequest> {
 
     @Override
     public Response DisplayAllData() {
-
-        List<Kendaraan> allKendaraan = kendaraanRepository.findByHiddenFalse();
-        for (Kendaraan kendaraan : allKendaraan) {
-            System.out.println("Kendaraan ID: " + kendaraan.getID_Kendaraan());
-            System.out.println("Rental Agent: " + kendaraan.getRegent());
-            System.out.println("Jenis Kendaraan: " + kendaraan.getJenis_Kendaraan());
-            System.out.println("No Plat: " + kendaraan.getNopol_Kendaraan());
-            System.out.println("Merk Kendaraan: " + kendaraan.getMerk_Kendaraan());
-            System.out.println("Tahun Kendaraan: " + kendaraan.getTahun_Kendaraan());
-            System.out.println("Warna Kendaraan: " + kendaraan.getWarna_Kendaraan());
-            System.out.println("STNK Kendaraan: " + kendaraan.getNoSTNK_Kendaraan());
-            System.out.println("Kapasitas Penumpang: " + kendaraan.getKapasitas_Kendaraan());
-            System.out.println("No Mesin: " + kendaraan.getNoMesin_Kendaraan());
-            System.out.println("Harga Sewa: " + kendaraan.getHargaSewa_Kendaraan());
-            System.out.println("Maksimal Waktu Peminjaman: " + kendaraan.getMaksimalWaktu_Peminjaman());
-            System.out.println("Status Kendaraan: " + kendaraan.getStatus_Kendaraan());
-            System.out.println("Status Validasi Kendaraan: " + kendaraan.getStatus_ValidasiKendaraan());
+        List<Kendaraan> allKendaraan = kendaraanRepository.findAllByHiddenFalse();
+        if (allKendaraan.isEmpty()) {
+            return new Response(HttpStatus.NOT_FOUND.value(), "Kendaraan not found", null);
         }
+        System.out.println("Display All Kendaraan Data");
         return new Response(HttpStatus.OK.value(), "Success", allKendaraan);
 
     }
@@ -51,27 +40,9 @@ public class KendaraanServices implements BaseServices<KendaraanRequest> {
     @Override
     public Response DisplayByID(Integer id) {
         try {
-            Kendaraan kendaraan = kendaraanRepository.findById(id).orElse(null);
+            Kendaraan kendaraan = kendaraanRepository.findByHiddenFalseAndIdKendaraan(id).orElse(null);
             if (kendaraan != null) {
-                System.out.println("Kendaraan ID: " + kendaraan.getID_Kendaraan());
-                System.out.println("Rental Agent: " + kendaraan.getRegent());
-                System.out.println("Jenis Kendaraan: " + kendaraan.getJenis_Kendaraan());
-                System.out.println("No Plat: " + kendaraan.getNopol_Kendaraan());
-                System.out.println("Merk Kendaraan: " + kendaraan.getMerk_Kendaraan());
-                System.out.println("Tahun Kendaraan: " + kendaraan.getTahun_Kendaraan());
-                System.out.println("Warna Kendaraan: " + kendaraan.getWarna_Kendaraan());
-                System.out.println("STNK Kendaraan: " + kendaraan.getNoSTNK_Kendaraan());
-                System.out.println("Kapasitas Penumpang: " + kendaraan.getKapasitas_Kendaraan());
-                System.out.println("No Mesin: " + kendaraan.getNoMesin_Kendaraan());
-                System.out.println("Harga Sewa: " + kendaraan.getHargaSewa_Kendaraan());
-                System.out.println("Maksimal Waktu Peminjaman: " + kendaraan.getMaksimalWaktu_Peminjaman());
-                System.out.println("Status Kendaraan: " + kendaraan.getStatus_Kendaraan());
-                ;
-                System.out.println("Status Validasi Kendaraan: " + kendaraan.getStatus_ValidasiKendaraan());
-                List<ImageKendaraan> listImageKendaraan = kendaraan.getImageKendaraan();
-                for (ImageKendaraan imageKendaraan : listImageKendaraan) {
-                    System.out.println("Image Kendaraan: " + imageKendaraan.getImage());
-                }
+                System.out.println("Display Kendaraan Data By ID" + id);
                 return new Response(HttpStatus.OK.value(), "Success", kendaraan);
             } else {
                 return new Response(HttpStatus.NOT_FOUND.value(), "Kendaraan not found", null);
@@ -85,38 +56,44 @@ public class KendaraanServices implements BaseServices<KendaraanRequest> {
     public Response Create(KendaraanRequest request) {
 
         try {
-            Kendaraan kendaraan = new Kendaraan();
-            kendaraan.setRegent(regentrepository.findById(request.getID_Regent()).orElse(null));
-            if (kendaraan.getRegent() == null) {
+            Regent regent = regentrepository.findById(request.getIdRegent()).orElse(null);
+            if (regent == null) {
                 return new Response(HttpStatus.NOT_FOUND.value(), "Rental Agent not found", null);
             }
-            kendaraan.setJenis_Kendaraan(request.getJenis_Kendaraan());
-            kendaraan.setNopol_Kendaraan(request.getNopol_Kendaraan());
-            kendaraan.setMerk_Kendaraan(request.getMerk_Kendaraan());
-            kendaraan.setTahun_Kendaraan(request.getTahun_Kendaraan());
-            kendaraan.setWarna_Kendaraan(request.getWarna_Kendaraan());
-            kendaraan.setNoSTNK_Kendaraan(request.getNoSTNK_Kendaraan());
-            kendaraan.setKapasitas_Kendaraan(request.getKapasitas_Kendaraan());
-            kendaraan.setNoMesin_Kendaraan(request.getNoMesin_Kendaraan());
-            kendaraan.setHargaSewa_Kendaraan(request.getHargaSewa_Kendaraan());
-            kendaraan.setMaksimalWaktu_Peminjaman(request.getMaksimalWaktu_Peminjaman());
-            kendaraan.setStatus_Kendaraan(request.getStatus_Kendaraan());
-            kendaraan.setStatus_ValidasiKendaraan(false);
+            Kendaraan kendaraan = new Kendaraan();
+            kendaraan.setRegent(regent);
+            kendaraan.setJenisKendaraan(request.getJenisKendaraan());
+            kendaraan.setMerkKendaraan(request.getMerkKendaraan());
+            kendaraan.setModel(request.getModel());
+            kendaraan.setNomorPlat(request.getNomorPlat());
+            kendaraan.setWarna(request.getWarna());
+            kendaraan.setTahun(request.getTahun());
+            kendaraan.setNomorMesin(request.getNomorMesin());
+            kendaraan.setTransmisi(request.getTransmisi());
+            kendaraan.setHargaSewa(request.getHargaSewa());
+            kendaraan.setKondisiKendaraan(request.getKondisiKendaraan());
             kendaraan.setStnk(request.getStnk());
+            kendaraan.setTotalOrdered(0);
+            kendaraan.setTotalRating(0);
+
             List<ImageKendaraan> listImageKendaraan = new ArrayList<>();
             for (ImageKendaraanRequest imageKendaraanRequest : request.getImageKendaraan()) {
                 ImageKendaraan imageKendaraan = new ImageKendaraan();
-                imageKendaraan.setImage(imageKendaraanRequest.getImageKendaraan());
+                imageKendaraan.setImage(imageKendaraanRequest.getImage());
                 imageKendaraan.setKendaraan(kendaraan);
                 listImageKendaraan.add(imageKendaraan);
             }
             kendaraan.setImageKendaraan(listImageKendaraan);
+
+            List<Rating> listRating = new ArrayList<>();
+            kendaraan.setRating(listRating);
+            kendaraan.setValid("Pending");
             kendaraan.setHidden(false);
             kendaraanRepository.save(kendaraan);
 
             return new Response(HttpStatus.OK.value(), "Success", kendaraan);
         } catch (Exception e) {
-            return new Response(HttpStatus.BAD_REQUEST.value(), "Failed", request);
+            return new Response(HttpStatus.BAD_REQUEST.value(), "Failed", null);
         }
     }
 
@@ -125,30 +102,32 @@ public class KendaraanServices implements BaseServices<KendaraanRequest> {
         try {
             Kendaraan kendaraanTarget = kendaraanRepository.findById(id).orElse(null);
             if (kendaraanTarget != null) {
-                kendaraanTarget.setRegent(regentrepository.findById(id).orElse(null));
-                kendaraanTarget.setJenis_Kendaraan(request.getJenis_Kendaraan());
-                kendaraanTarget.setNopol_Kendaraan(request.getNopol_Kendaraan());
-                kendaraanTarget.setMerk_Kendaraan(request.getMerk_Kendaraan());
-                kendaraanTarget.setTahun_Kendaraan(request.getTahun_Kendaraan());
-                kendaraanTarget.setWarna_Kendaraan(request.getWarna_Kendaraan());
-                kendaraanTarget.setNoSTNK_Kendaraan(request.getNoSTNK_Kendaraan());
-                kendaraanTarget.setKapasitas_Kendaraan(request.getKapasitas_Kendaraan());
-                kendaraanTarget.setNoMesin_Kendaraan(request.getNoMesin_Kendaraan());
-                kendaraanTarget.setHargaSewa_Kendaraan(request.getHargaSewa_Kendaraan());
-                kendaraanTarget.setMaksimalWaktu_Peminjaman(request.getMaksimalWaktu_Peminjaman());
-                kendaraanTarget.setStatus_Kendaraan(request.getStatus_Kendaraan());
-                kendaraanTarget.setStatus_ValidasiKendaraan(request.getStatus_ValidasiKendaraan());
+
+                kendaraanTarget.setJenisKendaraan(request.getJenisKendaraan());
+                kendaraanTarget.setMerkKendaraan(request.getMerkKendaraan());
+                kendaraanTarget.setModel(request.getModel());
+                kendaraanTarget.setNomorPlat(request.getNomorPlat());
+                kendaraanTarget.setWarna(request.getWarna());
+                kendaraanTarget.setTahun(request.getTahun());
+                kendaraanTarget.setNomorMesin(request.getNomorMesin());
+                kendaraanTarget.setTransmisi(request.getTransmisi());
+                kendaraanTarget.setHargaSewa(request.getHargaSewa());
+                kendaraanTarget.setKondisiKendaraan(request.getKondisiKendaraan());
                 kendaraanTarget.setStnk(request.getStnk());
+
                 List<ImageKendaraan> listImageKendaraan = new ArrayList<>();
                 for (ImageKendaraanRequest imageKendaraanRequest : request.getImageKendaraan()) {
                     ImageKendaraan imageKendaraan = new ImageKendaraan();
-                    imageKendaraan.setImage(imageKendaraanRequest.getImageKendaraan());
+                    imageKendaraan.setImage(imageKendaraanRequest.getImage());
                     imageKendaraan.setKendaraan(kendaraanTarget);
                     listImageKendaraan.add(imageKendaraan);
                 }
-                kendaraanTarget.setImageKendaraan(listImageKendaraan);     
-                kendaraanTarget.setHidden(false);           
+
+                kendaraanTarget.setImageKendaraan(listImageKendaraan);
+                kendaraanTarget.setValid("Pending");
+                kendaraanTarget.setHidden(false);
                 kendaraanRepository.save(kendaraanTarget);
+                System.out.println("Update Kendaraan Data By ID" + id);
                 return new Response(HttpStatus.OK.value(), "Success", kendaraanTarget);
             } else {
                 return new Response(HttpStatus.NOT_FOUND.value(), "Kendaraan not found", null);
@@ -161,10 +140,11 @@ public class KendaraanServices implements BaseServices<KendaraanRequest> {
     @Override
     public Response Delete(Integer id) {
         try {
-            Kendaraan kendaraan = kendaraanRepository.findById(id).orElse(null);
+            Kendaraan kendaraan = kendaraanRepository.findByHiddenFalseAndIdKendaraan(id).orElse(null);
             if (kendaraan != null) {
                 kendaraan.setHidden(true);
                 kendaraanRepository.save(kendaraan);
+                System.out.println("Delete Kendaraan Data By ID" + id);
                 return new Response(HttpStatus.OK.value(), "Success", null);
             } else {
                 return new Response(HttpStatus.NOT_FOUND.value(), "Kendaraan not found", null);
@@ -176,7 +156,7 @@ public class KendaraanServices implements BaseServices<KendaraanRequest> {
 
     public Response search(String keyword) {
         try {
-            List<Kendaraan> kendaraan = kendaraanRepository.searchKendaraan(keyword);
+            List<Kendaraan> kendaraan = kendaraanRepository.searchByKeyword(keyword);
             if (kendaraan != null) {
                 return new Response(HttpStatus.OK.value(), "Success", kendaraan);
             } else {

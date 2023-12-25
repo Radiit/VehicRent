@@ -29,7 +29,7 @@ public class Transaksi {
     private Client client;
 
     @ManyToOne
-    @JoinColumn(name = "ID_Kendaraan")
+    @JoinColumn(name = "idKendaraan")
     private Kendaraan kendaraan;
 
     @Column

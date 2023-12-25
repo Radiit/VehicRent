@@ -77,7 +77,7 @@ public class TransaksiServices implements BaseServices<TransaksiRequest> {
             transaksi.setRentDateStart(request.getRentDateStart());
             transaksi.setRentDateEnd(request.getRentDateEnd());
             transaksi.setDateTransaksi(LocalDateTime.now());
-            transaksi.setStatus(request.getStatus());
+            transaksi.setStatus("WaitingPayment");
 
             // hitung total hari kendaraan disewa
             LocalDate startLocalDate = request.getRentDateStart().toLocalDate();
@@ -87,7 +87,7 @@ public class TransaksiServices implements BaseServices<TransaksiRequest> {
 
             // hitung harga total dengan pajak
             double pajak = 0.1;
-            long hargaTemp = kendaraan.getHargaSewa_Kendaraan() * lamaSewa;
+            long hargaTemp = kendaraan.getHargaSewa() * lamaSewa;
             int totalPajak = (int) (hargaTemp * pajak);
             transaksi.setHargaTotal((int) (hargaTemp + totalPajak));
 
@@ -126,7 +126,6 @@ public class TransaksiServices implements BaseServices<TransaksiRequest> {
                 transaksi.setRentDateStart(request.getRentDateStart());
                 transaksi.setRentDateEnd(request.getRentDateEnd());
                 transaksi.setDateTransaksi(LocalDateTime.now());
-                transaksi.setStatus(request.getStatus());
 
                 // hitung total hari kendaraan disewa
                 LocalDate startLocalDate = request.getRentDateStart().toLocalDate();
@@ -136,7 +135,7 @@ public class TransaksiServices implements BaseServices<TransaksiRequest> {
 
                 // hitung harga total dengan pajak
                 double pajak = 0.1;
-                long hargaTemp = kendaraan.getHargaSewa_Kendaraan() * lamaSewa;
+                long hargaTemp = kendaraan.getHargaSewa() * lamaSewa;
                 int totalPajak = (int) (hargaTemp * pajak);
                 transaksi.setHargaTotal((int) (hargaTemp + totalPajak));
 

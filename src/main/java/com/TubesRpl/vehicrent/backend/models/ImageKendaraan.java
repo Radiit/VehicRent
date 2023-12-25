@@ -20,11 +20,11 @@ public class ImageKendaraan {
     private Integer ID_ImageKendaraan;
 
     @ManyToOne
-    @JoinColumn(name = "ID_Kendaraan", referencedColumnName = "ID_Kendaraan")
+    @JoinColumn(name = "idKendaraan", referencedColumnName = "idKendaraan")
     @JsonIgnore
     private Kendaraan kendaraan;
 
-    @Column(name = "image")
+    @Column()
     private String image;
 
     public ImageKendaraan(Integer ID_ImageKendaraan, Kendaraan kendaraan, String image) {
