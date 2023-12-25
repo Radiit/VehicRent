@@ -13,14 +13,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.TubesRpl.vehicrent.backend.payloads.requests.ClientRequest;
 import com.TubesRpl.vehicrent.backend.payloads.response.Response;
-import com.TubesRpl.vehicrent.backend.services.RoleServices;
+import com.TubesRpl.vehicrent.backend.services.BaseServices;
 
 @Controller
 @RequestMapping("dashboard/client")
 public class ClientController {
     
     @Autowired
-    private RoleServices<ClientRequest> clientServices;
+    private BaseServices<ClientRequest> clientServices;
     
     @RequestMapping("/display")
     public ResponseEntity<?> index(){

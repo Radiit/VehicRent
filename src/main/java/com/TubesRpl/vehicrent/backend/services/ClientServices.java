@@ -15,7 +15,7 @@ import com.TubesRpl.vehicrent.backend.payloads.requests.ClientRequest;
 import com.TubesRpl.vehicrent.backend.payloads.response.Response;
 
 @Service
-public class ClientServices implements RoleServices<ClientRequest>{
+public class ClientServices implements BaseServices<ClientRequest>{
     @Autowired
     private ClientRepository clientRepository;
     @Autowired
@@ -49,7 +49,7 @@ public class ClientServices implements RoleServices<ClientRequest>{
             client.setHidden(false);
             client.setValid("Pending");
             clientRepository.save(client);
-            System.out.println("Create new client with id: " + client.getIdClient());
+            System.out.println("Create new client with id: " + client.getIdClient() + " and NIK: " + client.getUser().getNIK_User());
             return new Response(HttpStatus.OK.value(), "Success", client);
         }catch(Exception e){
             return new Response(HttpStatus.BAD_REQUEST.value(), "Failed", null);
