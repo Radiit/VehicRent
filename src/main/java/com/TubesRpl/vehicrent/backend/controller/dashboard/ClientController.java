@@ -5,6 +5,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -69,11 +70,28 @@ public class ClientController {
         }
     }
 
-    //ini contoh pemakaian give rating, silahkan disesuakan lagi dengan kebutuhan
+    //ini contoh pemakaian rating, silahkan disesuakan lagi dengan kebutuhan
     @PostMapping("/rate")
     public ResponseEntity<Response> giveRating(@RequestBody RatingRequest ratingRequest) {
         Response response = ratingServices.giveRating(ratingRequest);
         return ResponseEntity.status(response.getStatus()).body(response);
     }
 
+    @PutMapping("/rate/edit/{id}")
+    public ResponseEntity<Response> updateRating(@PathVariable Integer id, @RequestBody RatingRequest ratingRequest) {
+        Response response = ratingServices.updateRating(id, ratingRequest);
+        return ResponseEntity.status(response.getStatus()).body(response);
+    }
+
+    @RequestMapping("/rate/{id}")
+    public ResponseEntity<?> displayRating(@PathVariable Integer id) {
+        Response response = ratingServices.displayRatingById(id);
+        return ResponseEntity.status(200).body(response);
+    }
+
+    @DeleteMapping("/rate/delete/{id}")
+    public ResponseEntity<?> deleteRating(@PathVariable Integer id) {
+        Response response = ratingServices.deleteRating(id);
+        return ResponseEntity.status(200).body(response);
+    }
 }
