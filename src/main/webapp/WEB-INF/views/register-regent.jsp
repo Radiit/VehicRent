@@ -430,25 +430,48 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
     -->
 <script>
-    document.addEventListener('DOMContentLoaded', function () {
-        var cardBodies = document.querySelectorAll('.card-body-js');
+document.addEventListener('DOMContentLoaded', function () {
+    var nextButton = document.querySelector('.button-pilih'); // Pilih tombol "Selanjutnya"
 
-        cardBodies.forEach(function (cardBody) {
-            cardBody.addEventListener('click', function () {
-                // Menghapus kelas 'inactive' dari semua card-body
-                cardBodies.forEach(function (c) {
-                    c.classList.remove('inactive');
-                });
+    nextButton.addEventListener('click', function () {
 
-                // Menambahkan kelas 'inactive' pada card-body yang tidak diklik
-                cardBodies.forEach(function (c) {
-                    if (c !== cardBody) {
-                        c.classList.add('inactive');
-                    }
-                });
-            });
+        var combineData = JSON.parse(sessionStorage.getItem('userData'));
+        
+        var inputGambar = document.getElementById('formFile1');
+        var selectedFile = inputGambar.files[0];
+        
+        var formData = new FormData();
+        formData.append('ktp', selectedFile);
+
+        combineData.formData = formData;
+
+        sessionStorage.setItem('userData', JSON.stringify(combineData));
+        
+
+        fetch('/dashboard/user/create', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(combineData) // Kirim data jika diperlukan
+        })
+        .then(response => {
+            if (response.ok) {
+                // Jika respons berhasil, arahkan pengguna ke halaman '/register-status'
+                window.location.href = '${pageContext.request.contextPath}/register-status';
+            } else {
+                // Tangani situasi ketika respons tidak berhasil
+                throw new Error('Something went wrong');
+            }
+        })
+        .catch(error => {
+            // Tangani error jika ada
+            console.error('Error:', error);
+            // Lakukan sesuatu, misalnya tampilkan pesan kepada pengguna
         });
     });
+});
+
 
     function preview(event, frameId, containerId) {
         var frame = document.getElementById(frameId);
