@@ -25,7 +25,7 @@ public class Regent {
     private Integer ID_Regent;
 
     @ManyToOne
-    @JoinColumn(name = "NIK_User", referencedColumnName = "NIK_User")
+    @JoinColumn(name = "nik", referencedColumnName = "nik")
     private User user;
 
     @Column
