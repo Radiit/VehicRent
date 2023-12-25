@@ -11,36 +11,154 @@ import jakarta.persistence.Table;
 @Table(name = "User")
 public class User {
     @Id
-    private Integer NIK_User;
+    @Column(length = 16)
+    private Integer nik;
 
     @Column
-    private String Role_User;
-    
-    @Column
-    private String Nama_User;
+    private String role_user;
 
     @Column
-    private String JenisKelamin_User;
+    private String nama_depan;
 
     @Column
-    private Integer Umur_User;
+    private String nama_belakang;
 
     @Column
-    private String Email_User;
+    private String noTelepon;
+
+    @Column
+    private String kontakDarurat;
+
+    @Column
+    private Integer umur;
+
+    @Column
+    private String email;
 
     @Column
     @JsonIgnore
-    private String Username;
+    private String password;
 
     @Column
-    @JsonIgnore
-    private String Password;
+    private String alamat;
 
     @Column
     private String ktp;
 
     @Column
-    private String foto;
+    private String fotoDiri;
+
+    @Column
+    private Boolean hidden;
+
+    public User(Integer nik, String role_user, String nama_depan, String nama_belakang, String noTelepon,
+            String kontakDarurat, Integer umur, String email, String Password, String alamat, String ktp,
+            String fotoDiri, Boolean hidden) {
+        this.nik = nik;
+        this.role_user = role_user;
+        this.nama_depan = nama_depan;
+        this.nama_belakang = nama_belakang;
+        this.noTelepon = noTelepon;
+        this.kontakDarurat = kontakDarurat;
+        this.umur = umur;
+        this.email = email;
+        this.password = Password;
+        this.alamat = alamat;
+        this.ktp = ktp;
+        this.fotoDiri = fotoDiri;
+        this.hidden = hidden;
+    }
+
+    public User() {
+    }
+
+    public Boolean getHidden() {
+        return hidden;
+    }
+
+    public void setHidden(Boolean hidden) {
+        this.hidden = hidden;
+    }
+
+    public Integer getNIK_User() {
+        return nik;
+    }
+
+    public void setNIK_User(Integer nik) {
+        this.nik = nik;
+    }
+
+    public String getRole_user() {
+        return role_user;
+    }
+
+    public void setRole_user(String role_user) {
+        this.role_user = role_user;
+    }
+
+    public String getNama_depan() {
+        return nama_depan;
+    }
+
+    public void setNama_depan(String nama_depan) {
+        this.nama_depan = nama_depan;
+    }
+
+    public String getNama_belakang() {
+        return nama_belakang;
+    }
+
+    public void setNama_belakang(String nama_belakang) {
+        this.nama_belakang = nama_belakang;
+    }
+
+    public String getNoTelepon() {
+        return noTelepon;
+    }
+
+    public void setNoTelepon(String noTelepon) {
+        this.noTelepon = noTelepon;
+    }
+
+    public String getKontakDarurat() {
+        return kontakDarurat;
+    }
+
+    public void setKontakDarurat(String kontakDarurat) {
+        this.kontakDarurat = kontakDarurat;
+    }
+
+    public Integer getUmur() {
+        return umur;
+    }
+
+    public void setUmur(Integer umur) {
+        this.umur = umur;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String Password) {
+        this.password = Password;
+    }
+
+    public String getAlamat() {
+        return alamat;
+    }
+
+    public void setAlamat(String alamat) {
+        this.alamat = alamat;
+    }
 
     public String getKtp() {
         return ktp;
@@ -50,92 +168,11 @@ public class User {
         this.ktp = ktp;
     }
 
-    public Integer getNIK_User() {
-        return NIK_User;
+    public String getFotoDiri() {
+        return fotoDiri;
     }
 
-    public void setNIK_User(Integer nIK_User) {
-        NIK_User = nIK_User;
-    }
-
-    public String getRole_User() {
-        return Role_User;
-    }
-
-    public void setRole_User(String role_User) {
-        Role_User = role_User;
-    }
-
-    public String getNama_User() {
-        return Nama_User;
-    }
-
-    public void setNama_User(String nama_User) {
-        Nama_User = nama_User;
-    }
-
-    public String getJenisKelamin_User() {
-        return JenisKelamin_User;
-    }
-
-    public void setJenisKelamin_User(String jenisKelamin_User) {
-        JenisKelamin_User = jenisKelamin_User;
-    }
-
-    public Integer getUmur_User() {
-        return Umur_User;
-    }
-
-    public void setUmur_User(Integer umur_User) {
-        Umur_User = umur_User;
-    }
-
-    public String getEmail_User() {
-        return Email_User;
-    }
-
-    public void setEmail_User(String email_User) {
-        Email_User = email_User;
-    }
-
-    public String getUsername() {
-        return Username;
-    }
-
-    public void setUsername(String username) {
-        Username = username;
-    }
-
-    public String getPassword() {
-        return Password;
-    }
-
-    public void setPassword(String password) {
-        Password = password;
-    }
-
-    public String getFoto() {
-        return foto;
-    }
-
-    public void setFoto(String foto) {
-        this.foto = foto;
-    }
-
-    public User(Integer nIK_User, String role_User, String nama_User, String jenisKelamin_User, Integer umur_User,
-            String email_User, String username, String password, String ktp, String foto) {
-        NIK_User = nIK_User;
-        Role_User = role_User;
-        Nama_User = nama_User;
-        JenisKelamin_User = jenisKelamin_User;
-        Umur_User = umur_User;
-        Email_User = email_User;
-        Username = username;
-        Password = password;
-        this.ktp = ktp;
-        this.foto = foto;
-    }
-
-    public User() {
+    public void setFotoDiri(String fotoDiri) {
+        this.fotoDiri = fotoDiri;
     }
 }

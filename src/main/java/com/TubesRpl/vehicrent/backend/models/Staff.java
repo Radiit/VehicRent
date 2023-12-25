@@ -17,7 +17,7 @@ public class Staff {
     private int ID_Staff;
 
     @ManyToOne
-    @JoinColumn(name = "NIK_User", referencedColumnName = "NIK_User")
+    @JoinColumn(name = "nik", referencedColumnName = "nik")
     private User user;
     
     public Staff() {

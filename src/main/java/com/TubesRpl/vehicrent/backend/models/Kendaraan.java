@@ -64,6 +64,9 @@ public class Kendaraan {
 
     @Column
     private Boolean Status_ValidasiKendaraan;
+
+    @Column
+    private boolean hidden;
     
    // @JsonIgnore
     @OneToMany(mappedBy = "kendaraan", cascade = CascadeType.ALL)
@@ -72,7 +75,7 @@ public class Kendaraan {
     public Kendaraan(int iD_Kendaraan, Regent regent, String jenis_Kendaraan, String nopol_Kendaraan,
             String merk_Kendaraan, int tahun_Kendaraan, String warna_Kendaraan, String noSTNK_Kendaraan,
             String kapasitas_Kendaraan, String noMesin_Kendaraan, int hargaSewa_Kendaraan, int maksimalWaktu_Peminjaman,
-            String status_Kendaraan, boolean status_ValidasiKendaraan, List<ImageKendaraan> imageKendaraan, String stnk) {
+            String status_Kendaraan, boolean status_ValidasiKendaraan, List<ImageKendaraan> imageKendaraan, String stnk, boolean hidden) {
         ID_Kendaraan = iD_Kendaraan;
         this.regent = regent;
         this.jenis_Kendaraan = jenis_Kendaraan;
@@ -89,6 +92,15 @@ public class Kendaraan {
         Status_ValidasiKendaraan = status_ValidasiKendaraan;
         this.imageKendaraan = imageKendaraan;
         this.stnk = stnk;
+        this.hidden = hidden;
+    }
+
+    public boolean isHidden() {
+        return hidden;
+    }
+
+    public void setHidden(boolean hidden) {
+        this.hidden = hidden;
     }
 
     public String getStnk() {
