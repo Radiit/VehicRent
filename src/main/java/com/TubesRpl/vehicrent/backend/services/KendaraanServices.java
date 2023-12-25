@@ -27,8 +27,7 @@ public class KendaraanServices implements BaseServices<KendaraanRequest> {
     @Override
     public Response DisplayAllData() {
 
-        List<Kendaraan> allKendaraan = new ArrayList();
-        kendaraanRepository.findAll().forEach(allKendaraan::add);
+        List<Kendaraan> allKendaraan = kendaraanRepository.findByHiddenFalse();
         for (Kendaraan kendaraan : allKendaraan) {
             System.out.println("Kendaraan ID: " + kendaraan.getID_Kendaraan());
             System.out.println("Rental Agent: " + kendaraan.getRegent());
@@ -43,7 +42,6 @@ public class KendaraanServices implements BaseServices<KendaraanRequest> {
             System.out.println("Harga Sewa: " + kendaraan.getHargaSewa_Kendaraan());
             System.out.println("Maksimal Waktu Peminjaman: " + kendaraan.getMaksimalWaktu_Peminjaman());
             System.out.println("Status Kendaraan: " + kendaraan.getStatus_Kendaraan());
-            ;
             System.out.println("Status Validasi Kendaraan: " + kendaraan.getStatus_ValidasiKendaraan());
         }
         return new Response(HttpStatus.OK.value(), "Success", allKendaraan);
@@ -113,6 +111,7 @@ public class KendaraanServices implements BaseServices<KendaraanRequest> {
                 listImageKendaraan.add(imageKendaraan);
             }
             kendaraan.setImageKendaraan(listImageKendaraan);
+            kendaraan.setHidden(false);
             kendaraanRepository.save(kendaraan);
 
             return new Response(HttpStatus.OK.value(), "Success", kendaraan);
@@ -147,7 +146,8 @@ public class KendaraanServices implements BaseServices<KendaraanRequest> {
                     imageKendaraan.setKendaraan(kendaraanTarget);
                     listImageKendaraan.add(imageKendaraan);
                 }
-                kendaraanTarget.setImageKendaraan(listImageKendaraan);                
+                kendaraanTarget.setImageKendaraan(listImageKendaraan);     
+                kendaraanTarget.setHidden(false);           
                 kendaraanRepository.save(kendaraanTarget);
                 return new Response(HttpStatus.OK.value(), "Success", kendaraanTarget);
             } else {
@@ -163,7 +163,8 @@ public class KendaraanServices implements BaseServices<KendaraanRequest> {
         try {
             Kendaraan kendaraan = kendaraanRepository.findById(id).orElse(null);
             if (kendaraan != null) {
-                kendaraanRepository.delete(kendaraan);
+                kendaraan.setHidden(true);
+                kendaraanRepository.save(kendaraan);
                 return new Response(HttpStatus.OK.value(), "Success", null);
             } else {
                 return new Response(HttpStatus.NOT_FOUND.value(), "Kendaraan not found", null);

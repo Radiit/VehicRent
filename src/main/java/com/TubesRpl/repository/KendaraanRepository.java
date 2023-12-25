@@ -21,4 +21,5 @@ public interface KendaraanRepository extends JpaRepository<Kendaraan, Integer> {
             "k.NoMesin_Kendaraan LIKE %:keyword%")
     List<Kendaraan> searchKendaraan(String keyword);
 
+    List<Kendaraan> findByHiddenFalse();
 }
