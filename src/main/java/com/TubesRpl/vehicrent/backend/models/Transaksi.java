@@ -18,7 +18,7 @@ public class Transaksi {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int ID_Transaksi;
+    private int idTransaksi;
 
     @ManyToOne
     @JoinColumn(name = "ID_Regent")
@@ -65,13 +65,16 @@ public class Transaksi {
     @Column
     private String status;
 
+    @Column
+    private boolean hidden;
+
     public Transaksi() {
     }
 
     public Transaksi(int ID_Transaksi, Regent regent, Client client, Kendaraan kendaraan, String orderName,
             String phoneNumber, String pickUpAddress, String dropOffAddString, String destination, Date rentDateStart,
-            Date rentDateEnd, LocalDateTime dateTransaksi, int rentTotalDay, int hargaTotal, String status) {
-        this.ID_Transaksi = ID_Transaksi;
+            Date rentDateEnd, LocalDateTime dateTransaksi, int rentTotalDay, int hargaTotal, String status, boolean hidden) {
+        this.idTransaksi = ID_Transaksi;
         this.regent = regent;
         this.client = client;
         this.kendaraan = kendaraan;
@@ -86,10 +89,19 @@ public class Transaksi {
         this.lamaSewa = rentTotalDay;
         this.hargaTotal = hargaTotal;
         this.status = status;
+        this.hidden = hidden;
     }
 
     public String getStatus() {
         return status;
+    }
+
+    public boolean isHidden() {
+        return hidden;
+    }
+
+    public void setHidden(boolean hidden){
+        this.hidden = hidden;
     }
 
     public void setStatus(String status){
@@ -112,12 +124,12 @@ public class Transaksi {
         this.hargaTotal = hargaTotal;
     }
 
-    public int getID_Transaksi() {
-        return ID_Transaksi;
+    public int getIdTransaksi() {
+        return idTransaksi;
     }
 
-    public void setID_Transaksi(int ID_Transaksi) {
-        this.ID_Transaksi = ID_Transaksi;
+    public void setIdTransaksi(int ID_Transaksi) {
+        this.idTransaksi = ID_Transaksi;
     }
 
     public Regent getRegent() {

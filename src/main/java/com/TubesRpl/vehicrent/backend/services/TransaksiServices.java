@@ -34,16 +34,20 @@ public class TransaksiServices implements BaseServices<TransaksiRequest> {
 
     @Override
     public Response DisplayAllData() {
-        List<Transaksi> allTransaksi = new ArrayList<>();
-        transaksiRepository.findAll().forEach(allTransaksi::add);
+        List<Transaksi> allTransaksi = transaksiRepository.findAllByHiddenFalse();
+        if (allTransaksi.isEmpty()) {
+            return new Response(HttpStatus.NOT_FOUND.value(), "Transaksi not found", null);
+        }
+        System.out.println("Display all transaksi data");
         return new Response(HttpStatus.OK.value(), "Success", allTransaksi);
     }
 
     @Override
     // override method display by id
     public Response DisplayByID(Integer id) {
-        Transaksi transaksi = transaksiRepository.findById(id).orElse(null);
+        Transaksi transaksi = transaksiRepository.findByHiddenFalseAndIdTransaksi(id).orElse(null);
         if (transaksi != null) {
+            System.out.println("Display transaksi data by id " + id);
             return new Response(HttpStatus.OK.value(), "Success", transaksi);
         } else {
             return new Response(HttpStatus.NOT_FOUND.value(), "Transaksi not found", null);
@@ -54,15 +58,15 @@ public class TransaksiServices implements BaseServices<TransaksiRequest> {
     public Response Create(TransaksiRequest request) {
         try {
             Transaksi transaksi = new Transaksi();
-            Client client = clientRepository.findById(request.getID_Client()).orElse(null);
+            Client client = clientRepository.findByHiddenFalseAndIdClient(request.getID_Client()).orElse(null);
             if (client == null) {
                 return new Response(HttpStatus.NOT_FOUND.value(), "Client not found", request);
             }
-            Regent regent = regentRepository.findById(request.getID_Regent()).orElse(null);
+            Regent regent = regentRepository.findByHiddenFalseAndIdRegent(request.getID_Regent()).orElse(null);
             if (regent == null) {
                 return new Response(HttpStatus.NOT_FOUND.value(), "Regent not found", request);
             }
-            Kendaraan kendaraan = kendaraanRepository.findById(request.getID_Kendaraan()).orElse(null);
+            Kendaraan kendaraan = kendaraanRepository.findByHiddenFalseAndIdKendaraan(request.getID_Kendaraan()).orElse(null);
             if (kendaraan == null) {
                 return new Response(HttpStatus.NOT_FOUND.value(), "Kendaraan not found", request);
             }
@@ -91,6 +95,7 @@ public class TransaksiServices implements BaseServices<TransaksiRequest> {
             int totalPajak = (int) (hargaTemp * pajak);
             transaksi.setHargaTotal((int) (hargaTemp + totalPajak));
 
+            transaksi.setHidden(false);
             transaksiRepository.save(transaksi);
             return new Response(HttpStatus.OK.value(), "Success", transaksi);
         } catch (Exception e) {
@@ -139,6 +144,7 @@ public class TransaksiServices implements BaseServices<TransaksiRequest> {
                 int totalPajak = (int) (hargaTemp * pajak);
                 transaksi.setHargaTotal((int) (hargaTemp + totalPajak));
 
+                transaksi.setHidden(false);
                 transaksiRepository.save(transaksi);
                 return new Response(HttpStatus.OK.value(), "Success", transaksi);
             } else {
@@ -152,9 +158,11 @@ public class TransaksiServices implements BaseServices<TransaksiRequest> {
     @Override
     public Response Delete(Integer id) {
         try {
-            Transaksi transaksi = transaksiRepository.findById(id).orElse(null);
+            Transaksi transaksi = transaksiRepository.findByHiddenFalseAndIdTransaksi(id).orElse(null);
             if (transaksi != null) {
-                transaksiRepository.delete(transaksi);
+                transaksi.setHidden(true);
+                transaksiRepository.save(transaksi);
+                System.out.println("Delete transaksi data by id " + id);
                 return new Response(HttpStatus.OK.value(), "Success", transaksi);
             } else {
                 return new Response(HttpStatus.NOT_FOUND.value(), "Transaksi not found", null);
@@ -164,11 +172,24 @@ public class TransaksiServices implements BaseServices<TransaksiRequest> {
         }
     }
 
-    public Response UpdateStatus(Integer id, String Status){
+    public Response UpdateStatus(Integer id, String status){
         try {
-            Transaksi 
+            Transaksi transaksi = transaksiRepository.findByHiddenFalseAndIdTransaksi(id).orElse(null);
+            if (transaksi != null){
+                transaksi.setStatus(status);
+                if (status.equals("Done")){
+                    Kendaraan kendaraan = transaksi.getKendaraan();
+                    kendaraan.setTotalOrdered(kendaraan.getTotalOrdered() + 1);
+                    kendaraanRepository.save(kendaraan);
+                }
+                transaksiRepository.save(transaksi);
+                System.out.println("Update transaksi status by id " + id + " to " + status);
+                return new Response(HttpStatus.OK.value(), "Success", transaksi);
+            }else{
+                return new Response(HttpStatus.NOT_FOUND.value(), "Transaksi not found", null);
+            }
         } catch (Exception e) {
-            // TODO: handle exception
+            return new Response(HttpStatus.BAD_REQUEST.value(), "Failed", null);
         }
     }
 

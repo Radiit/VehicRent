@@ -94,4 +94,5 @@ public class ClientController {
         Response response = ratingServices.deleteRating(id);
         return ResponseEntity.status(200).body(response);
     }
+    
 }
