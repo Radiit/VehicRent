@@ -64,6 +64,7 @@ public class UserServices implements BaseServices<UserRequest> {
             user.setFotoDiri(request.getFotoDiri());
             user.setAlamat(request.getAlamat());
             user.setHidden(false);
+            user.setValid("Pending");
             userRepository.save(user);
             System.out.println("Create new user with nik : " + request.getNik() + " and role : " + request.getRole_user());
             return new Response(HttpStatus.OK.value(), "Success", user);
@@ -90,6 +91,7 @@ public class UserServices implements BaseServices<UserRequest> {
                 user.setFotoDiri(request.getFotoDiri());
                 user.setAlamat(request.getAlamat());
                 user.setHidden(false);
+                user.setValid("Pending");
                 userRepository.save(user);
                 System.out.println("Update user by id : " + id);
                 return new Response(HttpStatus.OK.value(), "Success", user);

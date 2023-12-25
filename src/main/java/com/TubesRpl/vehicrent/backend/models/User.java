@@ -51,9 +51,12 @@ public class User {
     @Column
     private Boolean hidden;
 
+    @Column
+    private String valid;
+
     public User(Integer nik, String role_user, String nama_depan, String nama_belakang, String noTelepon,
             String kontakDarurat, Integer umur, String email, String Password, String alamat, String ktp,
-            String fotoDiri, Boolean hidden) {
+            String fotoDiri, Boolean hidden, String valid) {
         this.nik = nik;
         this.role_user = role_user;
         this.nama_depan = nama_depan;
@@ -67,9 +70,18 @@ public class User {
         this.ktp = ktp;
         this.fotoDiri = fotoDiri;
         this.hidden = hidden;
+        this.valid = valid;
     }
 
     public User() {
+    }
+
+    public void setValid(String valid) {
+        this.valid = valid;
+    }
+
+    public String getValid() {
+        return valid;
     }
 
     public Boolean getHidden() {

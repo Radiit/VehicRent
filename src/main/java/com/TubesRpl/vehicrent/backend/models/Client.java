@@ -27,19 +27,31 @@ public class Client {
     @Column
     private boolean hidden;
 
+    @Column
+    private String valid;
+
     @ManyToOne
     @JoinColumn(name = "ID_Rekomendasi", referencedColumnName = "ID_Rekomendasi")
     private Rekomendasi rekomendasi;
 
-    public Client(Integer ID_Client, User user, String noSIM, Rekomendasi rekomendasi, boolean hidden) {
+    public Client(Integer ID_Client, User user, String noSIM, Rekomendasi rekomendasi, boolean hidden, String valid) {
         this.idClient = ID_Client;
         this.user = user;
         sim = noSIM;
         this.rekomendasi = rekomendasi;
         this.hidden = hidden;
+        this.valid = valid;
     }
 
     public Client() {
+    }
+
+    public void setValid(String valid) {
+        this.valid = valid;
+    }
+
+    public String getValid() {
+        return valid;
     }
 
     public void setHidden(boolean hidden) {

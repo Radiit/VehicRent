@@ -5,33 +5,15 @@ import java.util.List;
 import com.TubesRpl.vehicrent.backend.models.Kendaraan;
 
 public class RegentRequest {
-    private Integer NIK_User;
-    private String Password;
-    private String Norek_Regent;
+    private Integer nik;
     private List<Kendaraan> listKendaraan;
 
-    public Integer getNIK_User() {
-        return NIK_User;
+    public Integer getNik() {
+        return nik;
     }
 
-    public void setNIK_User(Integer NIK_User) {
-        this.NIK_User = NIK_User;
-    }
-
-    public String getPassword() {
-        return Password;
-    }
-
-    public void setPassword(String Password) {
-        this.Password = Password;
-    }
-
-    public String getNorek_Regent() {
-        return Norek_Regent;
-    }
-
-    public void setNorek_Regent(String Norek_Regent) {
-        this.Norek_Regent = Norek_Regent;
+    public void setNik(Integer NIK_User) {
+        this.nik = NIK_User;
     }
 
     public List<Kendaraan> getListKendaraan() {
