@@ -1,6 +1,5 @@
 package com.TubesRpl.vehicrent.backend.services;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,117 +7,99 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import com.TubesRpl.repository.StaffRepository;
+import com.TubesRpl.repository.UserRepository;
 import com.TubesRpl.vehicrent.backend.models.Staff;
 import com.TubesRpl.vehicrent.backend.models.User;
-import com.TubesRpl.vehicrent.backend.payloads.requests.UserRequest;
+import com.TubesRpl.vehicrent.backend.payloads.requests.StaffRequest;
 import com.TubesRpl.vehicrent.backend.payloads.response.Response;
 
 @Service
-public class StaffServices implements RoleServices<UserRequest>{
-    
+public class StaffServices implements BaseServices<StaffRequest> {
+
     @Autowired
     private StaffRepository staffRepository;
-    
+
     @Autowired
-    private UserServices userServices;
-    
+    private UserRepository userrepository;
 
     @Override
-    public Response DisplayAllData(){
-        List<Staff> allStaff = new ArrayList<>();
-        staffRepository.findAll().forEach(allStaff::add);
-        for (Staff staff : allStaff){
-            System.out.println("ID Staff: " + staff.getID_Staff());
-            System.out.println("NIK User: " + staff.getUser());
+    public Response DisplayAllData() {
+        List<Staff> allStaff = staffRepository.findAllByHiddenFalse();
+        if (allStaff.isEmpty()) {
+            return new Response(HttpStatus.NOT_FOUND.value(), "Staff not found", null);
         }
+        System.out.println("Display all staff data");
         return new Response(HttpStatus.OK.value(), "Success", allStaff);
     }
 
     @Override
-    public Response Create(UserRequest request){
-        try{
-            Staff staffCheck = staffRepository.findById(request.getNIK_User()).orElse(null);
-            if (staffCheck != null){
-                return new Response(HttpStatus.BAD_REQUEST.value(), "Staff already exist", request);
+    public Response Create(StaffRequest request) {
+        try {
+            User userCheck = userrepository.findByHiddenFalseAndNik(request.getNik()).orElse(null);
+            if (userCheck == null) {
+                return new Response(HttpStatus.BAD_REQUEST.value(), "User not exist", null);
             }
             Staff staff = new Staff();
-            User user = new User();
-            user.setNIK_User(request.getNIK_User());
-            user.setRole_User(request.getRole_User());
-            user.setNama_User(request.getNama_User());
-            user.setJenisKelamin_User(request.getJenisKelamin_User());
-            user.setUmur_User(request.getUmur_User());
-            user.setEmail_User(request.getEmail_User());
-            user.setUsername(request.getUsername());
-            user.setPassword(request.getPassword());
-            userServices.Create(user);
-            staff.setUser(user);
+            staff.setUser(userCheck);
+            staff.setHidden(false);
             staffRepository.save(staff);
-            return new Response(HttpStatus.OK.value(), "Success", request);
-        }catch(Exception e){
-            return new Response(HttpStatus.BAD_REQUEST.value(), "Failed", request);
-        }
-    }
-
-    @Override
-    public Response Update(Integer id, UserRequest request){
-        try{
-            Staff staff = staffRepository.findById(id).orElse(null);
-            if (staff != null){
-                User user = new User();
-                user.setNIK_User(request.getNIK_User());
-                user.setRole_User(request.getRole_User());
-                user.setNama_User(request.getNama_User());
-                user.setJenisKelamin_User(request.getJenisKelamin_User());
-                user.setUmur_User(request.getUmur_User());
-                user.setEmail_User(request.getEmail_User());
-                user.setUsername(request.getUsername());
-                user.setPassword(request.getPassword());
-                System.out.println("ID User: " + user.getNIK_User());
-                System.out.println("ID staff: " + staff.getID_Staff());
-                userServices.Update(user.getNIK_User(), user);
-                System.out.println("WUMBO");
-                staff.setUser(user);
-                staffRepository.save(staff);
-                return new Response(HttpStatus.OK.value(), "Success", staff);
-            }else{
-                return new Response(HttpStatus.NOT_FOUND.value(), "Staff not found", request);
-            }
-        }catch(Exception e){
-            return new Response(HttpStatus.BAD_REQUEST.value(), "Failed", request);
-        }
-    }
-
-    @Override
-    public Response Delete(Integer id){
-        try{
-            Staff staff = staffRepository.findById(id).orElse(null);
-            if (staff != null){
-                User user = staff.getUser();
-                staffRepository.deleteById(id);
-                userServices.Delete(user.getNIK_User());
-                return new Response(HttpStatus.OK.value(), "Success", staff);
-            }else{
-                return new Response(HttpStatus.NOT_FOUND.value(), "Staff Not Found", null);
-            }
-        }catch(Exception e){
+            System.out.println("Create new staff with id: " + staff.getIdStaff() + " and NIK: " + staff.getUser().getNIK_User());
+            return new Response(HttpStatus.OK.value(), "Success", staff);
+        } catch (Exception e) {
             return new Response(HttpStatus.BAD_REQUEST.value(), "Failed", null);
         }
     }
 
     @Override
-    public Response DisplayByID(Integer id){
-        try{
+    public Response Update(Integer id, StaffRequest request) {
+        try {
             Staff staff = staffRepository.findById(id).orElse(null);
-            if(staff != null){
-                System.out.println("ID Staff: " + staff.getID_Staff());
-                System.out.println("NIK User: " + staff.getUser().getNIK_User());
+            if (staff != null) {
+                User user = userrepository.findByHiddenFalseAndNik(request.getNik()).orElse(null);
+                if (user == null) {
+                    return new Response(HttpStatus.NOT_FOUND.value(), "User not found", null);
+                }
+                staff.setUser(user);
+                staff.setHidden(false);
+                staffRepository.save(staff);
+                System.out.println("Update staff by id : " + id + " and NIK: " + staff.getUser().getNIK_User());
                 return new Response(HttpStatus.OK.value(), "Success", staff);
-            }else{
+            } else {
                 return new Response(HttpStatus.NOT_FOUND.value(), "Staff not found", null);
             }
+        } catch (Exception e) {
+            return new Response(HttpStatus.BAD_REQUEST.value(), "Failed", null);
         }
-        catch(Exception e){
+    }
+
+    @Override
+    public Response Delete(Integer id) {
+        try {
+            Staff staff = staffRepository.findById(id).orElse(null);
+            if (staff != null) {
+                staff.setHidden(true);
+                staffRepository.save(staff);
+                System.out.println("Delete staff by id : " + id);
+                return new Response(HttpStatus.OK.value(), "Success", staff);
+            } else {
+                return new Response(HttpStatus.NOT_FOUND.value(), "Staff Not Found", null);
+            }
+        } catch (Exception e) {
+            return new Response(HttpStatus.BAD_REQUEST.value(), "Failed", null);
+        }
+    }
+
+    @Override
+    public Response DisplayByID(Integer id) {
+        try {
+            Staff staff = staffRepository.findByHiddenFalseAndIdStaff(id).orElse(null);
+            if (staff != null) {
+                System.out.println("Display staff by id : " + id);
+                return new Response(HttpStatus.OK.value(), "Success", staff);
+            } else {
+                return new Response(HttpStatus.NOT_FOUND.value(), "Staff not found", null);
+            }
+        } catch (Exception e) {
             return new Response(HttpStatus.BAD_REQUEST.value(), "Failed", null);
         }
     }
