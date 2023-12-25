@@ -436,6 +436,7 @@ pageEncoding="UTF-8"%>
               <div class="divider">atau</div>
 
               <div class="fields">
+<<<<<<< HEAD
                 <div class="input-fields">
                   <label for="namadepan" class="form-label">Nama Depan</label>
                   <input
@@ -578,6 +579,82 @@ pageEncoding="UTF-8"%>
               >
                 Registrasi
               </button>
+=======
+                  <div class="input-fields">
+                      <label for="namadepan" class="form-label">Nama Depan</label>
+                      <input type="namadepan" class="form-control" id="namadepan"
+                          placeholder="Masukkan Nama Depan Anda" />
+                  </div>
+
+                  <div class="input-fields">
+                      <label for="namabelakang" class="form-label">Nama Belakang</label>
+                      <input type="namabelakang" class="form-control" id="namabelakang"
+                          placeholder="Masukkan Nama Belakang Anda" />
+                  </div>
+              </div>
+
+              <div class="fields">
+                  <div class="input-fields">
+                      <label for="nomortelepon" class="form-label">Nomor Telepon</label>
+                      <input type="nomortelepon" class="form-control" id="nomortelepon"
+                          placeholder="Masukkan Nomor Telepon Anda" />
+                  </div>
+
+                  <div class="input-fields">
+                      <label for="nomorkontakdarurat" class="form-label">Nomor Kontak Darurat</label>
+                      <input type="nomorkontakdarurat" class="form-control" id="nomorkontakdarurat"
+                          placeholder="Masukkan Nomor Kontak Darurat Anda" />
+                  </div>
+              </div>
+
+              <div class="fields">
+                  <div class="input-fields">
+                      <label for="umur" class="form-label">Umur</label>
+                      <input type="umur" class="form-control" id="umur" placeholder="Masukkan Umur Anda" />
+                  </div>
+
+                  <div class="input-fields">
+                      <label for="fototerbaru" class="form-label">Foto Terbaru</label>
+                      <input class="form-control custom-large" id="fototerbaru" type="file" />
+                  </div>
+              </div>
+
+              <div class="fields">
+                  <div class="input-fields">
+                      <label for="email" class="form-label">Email</label>
+                      <input type="email" class="form-control" id="email" placeholder="Masukkan Email Anda" />
+                  </div>
+
+                  <div class="input-fields">
+                      <label for="password" class="form-label">Kata Sandi</label>
+                      <input type="password" class="form-control" id="katasandi"
+                          placeholder="Masukkan Kata Sandi Anda" />
+                  </div>
+              </div>
+
+              <div class="fields">
+                  <div class="input-fields">
+                      <label for="alamatlengkap" class="form-label">Alamat Lengkap</label>
+                      <input type="alamatlengkap" class="form-control" id="alamatlengkap"
+                          placeholder="Masukkan Alamat Lengkap Anda" />
+                  </div>
+
+                  <div class="input-fields">
+                      <label for="NIK" class="form-label">Nomor Induk Kependudukan</label>
+                      <input type="nik" class="form-control" id="nik" placeholder="Masukkan NIK" />
+                  </div>
+              </div>
+
+              <div class="form-check">
+                  <input class="form-check-inpt" type="checkbox" value="" id="flexCheckDefault">
+                  <label class="form-check-label" for="flexCheckDefault">
+                      Saya menyetujui semua Ketentuan, Privasi, dan Biaya
+                  </label>
+              </div>
+
+              <!-- Button trigger modal -->
+              <button type="button" class="masuk btn" data-bs-toggle="modal" data-bs-target="#myModal" onclick="registerUser()">Registrasi</button>
+>>>>>>> d5bbc0051d52371dc7d700f3c0cd3243911b3609
 
               <div style="margin-top: 10px; margin-bottom: 100px">
                 <span class="d-inline"
@@ -707,12 +784,18 @@ pageEncoding="UTF-8"%>
 
         // Create an object with the user data
         var userData = {
+<<<<<<< HEAD
           nik: nik,
           role_user: null,
+=======
+          nik: null, // Isi dengan nilai NIK jika diperlukan
+          role_user: null, // Isi dengan nilai role_user jika diperlukan
+>>>>>>> d5bbc0051d52371dc7d700f3c0cd3243911b3609
           nama_depan: firstName,
           nama_belakang: lastName,
           noTelepon: phoneNumber,
           kontakDarurat: emergencyNumber,
+<<<<<<< HEAD
           umur: parseInt(age),
           email: email,
           password: password,
@@ -762,7 +845,48 @@ pageEncoding="UTF-8"%>
         //   .catch((error) => {
         //     console.error("Error:", error);
         //   });
+=======
+          umur: parseInt(age), // Pastikan umur bertipe data Integer
+          email: email,
+          password: password,
+          alamat: address,
+          ktp: null, // Isi dengan nilai KTP jika diperlukan
+          fotoDiri: null, // Isi dengan nilai fotoDiri jika diperlukan
+          hidden: false, // Isi dengan nilai hidden jika diperlukan
+          valid: Valid, // Isi dengan nilai valid jika diperlukan
+        };
+
+        // Make a POST request to the '/register' endpoint
+        fetch("/dashboard/user/create", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(userData),
+        })
+          .then((response) => {
+            if (response.ok) {
+              var successModal = new bootstrap.Modal(
+                document.getElementById("successModal")
+              );
+              successModal.show();
+              setTimeout(function () {
+                window.location.href =
+                  "${pageContext.request.contextPath}/register-konfirmasi";
+              }, 2000);
+            } else {
+              var errorModal = new bootstrap.Modal(
+                document.getElementById("errorModal")
+              );
+              errorModal.show();
+            }
+          })
+          .catch((error) => {
+            console.error("Error:", error);
+          });
+>>>>>>> d5bbc0051d52371dc7d700f3c0cd3243911b3609
       }
     </script>
+
   </body>
 </html>

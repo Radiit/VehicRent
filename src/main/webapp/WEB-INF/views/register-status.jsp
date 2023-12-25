@@ -69,19 +69,16 @@
                     <div class="card w-100">
                         <div class="card-body-navigasi card-body-js text-center">
                             <h5 class="card-title">Peran</h5>
-                            <!-- Isi untuk peran di sini -->
                         </div>
                     </div>
                     <div class="card w-100 inactive">
                         <div class="card-body-navigasi card-body-js text-center">
                             <h5 class="card-title">Verifikasi Data</h5>
-                            <!-- Isi untuk verifikasi data di sini -->
                         </div>
                     </div>
                     <div class="card w-100 inactive">
                         <div class="card-body-navigasi card-body-js text-center">
                             <h5 class="card-title">Status</h5>
-                            <!-- Isi untuk status di sini -->
                         </div>
                     </div>
                 </div>
@@ -90,12 +87,12 @@
                 <div class="status-item-sukses" style="display: none">
                     <img id="img-sukses" src="${pageContext.request.contextPath}/resources/img/img-sukses.png" alt="Verifikasi Berhasil" width="150" />
                     <p class="text-berhasil">Verifikasi Berhasil</p>
-                </div>
-                <div class="status-item status-item-load">
+                </div> 
+                <div class="status-item-load">
                     <img id="img-load" src="${pageContext.request.contextPath}/resources/img/img-load.gif" alt="Memproses" />
                     <p class="text-memproses">Memproses Registrasi</p>
                 </div>
-                <div class="status-item status-item-gagal" style="display: none">
+                <div class="status-item-gagal" style="display: none">
                     <img id="img-gagal" src="${pageContext.request.contextPath}/resources/img/img-gagal.png" alt="Verifikasi Gagal" width="150" />
                     <p class="text-gagal">Verifikasi Gagal</p>
                 </div>
@@ -150,17 +147,17 @@
         var textGagal = document.querySelector(".text-gagal");
 
         switch (status) {
-            case "sukses":
+            case "Valid":
                 statusItemSukses.style.display = "block";
                 statusItemLoad.style.display = "none";
                 statusItemGagal.style.display = "none";
                 break;
-            case "load":
+            case "Pending":
                 statusItemSukses.style.display = "none";
                 statusItemLoad.style.display = "block";
                 statusItemGagal.style.display = "none";
                 break;
-            case "gagal":
+            case "Tidak Valid":
                 statusItemSukses.style.display = "none";
                 statusItemLoad.style.display = "none";
                 statusItemGagal.style.display = "block";
@@ -170,11 +167,11 @@
         }
     }
 
-    showStatus("load");
+    showStatus("${user.valid}");
 
-    setTimeout(() => {
-        showStatus("sukses");
-    }, 2000);
+    //setTimeout(() => {
+    //    showStatus("${user.valid}");
+    //}, 2000);
 </script>
 
 </html>
