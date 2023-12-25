@@ -1,6 +1,5 @@
 package com.TubesRpl.vehicrent.backend.services;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,6 +47,7 @@ public class ClientServices implements RoleServices<ClientRequest>{
             rekomendasiServices.Create(rekomendasi);
             client.setRekomendasi(rekomendasi);
             client.setHidden(false);
+            client.setValid("Pending");
             clientRepository.save(client);
             System.out.println("Create new client with id: " + client.getIdClient());
             return new Response(HttpStatus.OK.value(), "Success", client);
@@ -64,6 +64,7 @@ public class ClientServices implements RoleServices<ClientRequest>{
                 client.setUser(client.getUser());
                 client.setSim(request.getSim());
                 client.setHidden(false);
+                client.setValid("Pending");
                 clientRepository.save(client);
                 System.out.println("Update client with id: " + client.getIdClient());
                 return new Response(HttpStatus.OK.value(), "Success", client);
