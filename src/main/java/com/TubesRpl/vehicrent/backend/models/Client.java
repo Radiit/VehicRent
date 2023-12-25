@@ -15,35 +15,47 @@ public class Client {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer ID_Client;
+    private Integer idClient;
 
     @ManyToOne
     @JoinColumn(name = "nik", referencedColumnName = "nik")
     private User user;
 
     @Column
-    private String No_SIM;
+    private String sim;
+
+    @Column
+    private boolean hidden;
 
     @ManyToOne
     @JoinColumn(name = "ID_Rekomendasi", referencedColumnName = "ID_Rekomendasi")
     private Rekomendasi rekomendasi;
 
-    public Client(Integer ID_Client, User user, String noSIM, Rekomendasi rekomendasi) {
-        this.ID_Client = ID_Client;
+    public Client(Integer ID_Client, User user, String noSIM, Rekomendasi rekomendasi, boolean hidden) {
+        this.idClient = ID_Client;
         this.user = user;
-        No_SIM = noSIM;
+        sim = noSIM;
         this.rekomendasi = rekomendasi;
+        this.hidden = hidden;
     }
 
     public Client() {
     }
 
-    public void setID_Client(Integer ID_Client) {
-        this.ID_Client = ID_Client;
+    public void setHidden(boolean hidden) {
+        this.hidden = hidden;
     }
 
-    public Integer getID_Client() {
-        return ID_Client;
+    public boolean isHidden() {
+        return hidden;
+    }
+
+    public void setIdClient(Integer ID_Client) {
+        this.idClient = ID_Client;
+    }
+
+    public Integer getIdClient() {
+        return idClient;
     }
 
     public User getUser() {
@@ -62,12 +74,12 @@ public class Client {
         this.rekomendasi = rekomendasi;
     }
 
-    public String getNoSIM() {
-        return No_SIM;
+    public String getSim() {
+        return sim;
     }
 
-    public void setNoSIM(String noSIM) {
-        No_SIM = noSIM;
+    public void setSim(String sim) {
+        this.sim = sim;
     }
 
 }
