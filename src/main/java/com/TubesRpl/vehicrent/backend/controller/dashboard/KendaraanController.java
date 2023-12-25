@@ -74,4 +74,10 @@ public class KendaraanController {
         Response response = kendaraanServices.search(keyword);
         return ResponseEntity.status(200).body(response);
     }
+
+    @RequestMapping("/displayByJenis/{jenis}")
+    public ResponseEntity<?> displayByJenis(@PathVariable String jenis) {
+        Response kendaraanByJenis = kendaraanServices.DisplayByJenis(jenis);
+        return ResponseEntity.status(200).body(kendaraanByJenis);
+    }
 }

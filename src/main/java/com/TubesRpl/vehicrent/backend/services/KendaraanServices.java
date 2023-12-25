@@ -28,7 +28,7 @@ public class KendaraanServices implements BaseServices<KendaraanRequest> {
 
     @Override
     public Response DisplayAllData() {
-        List<Kendaraan> allKendaraan = kendaraanRepository.findAllByHiddenFalseAndValid("Valid");
+        List<Kendaraan> allKendaraan = kendaraanRepository.findAllSortedByTotalOrderedAndValid();
         if (allKendaraan.isEmpty()) {
             return new Response(HttpStatus.NOT_FOUND.value(), "Kendaraan not found", null);
         }
@@ -157,6 +157,19 @@ public class KendaraanServices implements BaseServices<KendaraanRequest> {
     public Response search(String keyword) {
         try {
             List<Kendaraan> kendaraan = kendaraanRepository.searchByKeyword(keyword);
+            if (kendaraan != null) {
+                return new Response(HttpStatus.OK.value(), "Success", kendaraan);
+            } else {
+                return new Response(HttpStatus.NOT_FOUND.value(), "Kendaraan not found", null);
+            }
+        } catch (Exception e) {
+            return new Response(HttpStatus.BAD_REQUEST.value(), "Failed", null);
+        }
+    }
+
+    public Response DisplayByJenis(String jenis) {
+        try {
+            List<Kendaraan> kendaraan = kendaraanRepository.findByHiddenFalseAndJenisKendaraan(jenis);
             if (kendaraan != null) {
                 return new Response(HttpStatus.OK.value(), "Success", kendaraan);
             } else {
