@@ -14,10 +14,12 @@ import com.TubesRpl.repository.ClientRepository;
 import com.TubesRpl.repository.KendaraanRepository;
 import com.TubesRpl.repository.RegentRepository;
 import com.TubesRpl.repository.TransaksiRepository;
+import com.TubesRpl.repository.UserRepository;
 import com.TubesRpl.vehicrent.backend.models.Client;
 import com.TubesRpl.vehicrent.backend.models.Kendaraan;
 import com.TubesRpl.vehicrent.backend.models.Regent;
 import com.TubesRpl.vehicrent.backend.models.Transaksi;
+import com.TubesRpl.vehicrent.backend.models.User;
 import com.TubesRpl.vehicrent.backend.payloads.requests.TransaksiRequest;
 import com.TubesRpl.vehicrent.backend.payloads.response.Response;
 
@@ -27,6 +29,8 @@ public class TransaksiServices implements BaseServices<TransaksiRequest> {
     TransaksiRepository transaksiRepository;
     @Autowired
     ClientRepository clientRepository;
+    @Autowired
+    UserRepository userRepository;
     @Autowired
     RegentRepository regentRepository;
     @Autowired
@@ -56,17 +60,26 @@ public class TransaksiServices implements BaseServices<TransaksiRequest> {
 
     @Override
     public Response Create(TransaksiRequest request) {
+        Transaksi transaksi = new Transaksi();
+
         try {
-            Transaksi transaksi = new Transaksi();
-            Client client = clientRepository.findByHiddenFalseAndIdClient(request.getID_Client()).orElse(null);
+            // Client client =
+            // clientRepository.findByHiddenFalseAndIdClient(request.getID_Client()).orElse(null);
+            User client = userRepository.findByHiddenFalseAndNik(request.getID_Client()).orElse(null);
+
             if (client == null) {
                 return new Response(HttpStatus.NOT_FOUND.value(), "Client not found", request);
             }
-            Regent regent = regentRepository.findByHiddenFalseAndIdRegent(request.getID_Regent()).orElse(null);
+
+            // Regent regent =
+            // regentRepository.findByHiddenFalseAndIdRegent(request.getID_Regent()).orElse(null);
+            User regent = userRepository.findByHiddenFalseAndNik(request.getID_Regent()).orElse(null);
+
             if (regent == null) {
                 return new Response(HttpStatus.NOT_FOUND.value(), "Regent not found", request);
             }
-            Kendaraan kendaraan = kendaraanRepository.findByHiddenFalseAndIdKendaraan(request.getID_Kendaraan()).orElse(null);
+            Kendaraan kendaraan = kendaraanRepository.findByHiddenFalseAndIdKendaraan(request.getID_Kendaraan())
+                    .orElse(null);
             if (kendaraan == null) {
                 return new Response(HttpStatus.NOT_FOUND.value(), "Kendaraan not found", request);
             }
@@ -99,7 +112,7 @@ public class TransaksiServices implements BaseServices<TransaksiRequest> {
             transaksiRepository.save(transaksi);
             return new Response(HttpStatus.OK.value(), "Success", transaksi);
         } catch (Exception e) {
-            return new Response(HttpStatus.BAD_REQUEST.value(), "Failed", request);
+            return new Response(HttpStatus.BAD_REQUEST.value(), "Failed", transaksi);
         }
     }
 
@@ -172,12 +185,12 @@ public class TransaksiServices implements BaseServices<TransaksiRequest> {
         }
     }
 
-    public Response UpdateStatus(Integer id, String status){
+    public Response UpdateStatus(Integer id, String status) {
         try {
             Transaksi transaksi = transaksiRepository.findByHiddenFalseAndIdTransaksi(id).orElse(null);
-            if (transaksi != null){
+            if (transaksi != null) {
                 transaksi.setStatus(status);
-                if (status.equals("Done")){
+                if (status.equals("Done")) {
                     Kendaraan kendaraan = transaksi.getKendaraan();
                     kendaraan.setTotalOrdered(kendaraan.getTotalOrdered() + 1);
                     kendaraanRepository.save(kendaraan);
@@ -185,7 +198,7 @@ public class TransaksiServices implements BaseServices<TransaksiRequest> {
                 transaksiRepository.save(transaksi);
                 System.out.println("Update transaksi status by id " + id + " to " + status);
                 return new Response(HttpStatus.OK.value(), "Success", transaksi);
-            }else{
+            } else {
                 return new Response(HttpStatus.NOT_FOUND.value(), "Transaksi not found", null);
             }
         } catch (Exception e) {

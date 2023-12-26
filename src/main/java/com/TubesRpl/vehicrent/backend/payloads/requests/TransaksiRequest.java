@@ -2,6 +2,8 @@ package com.TubesRpl.vehicrent.backend.payloads.requests;
 
 import java.sql.Date;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 public class TransaksiRequest {
 
     private int ID_Kendaraan;
@@ -27,9 +29,6 @@ public class TransaksiRequest {
         this.destination = destination;
         this.rentDateStart = rentDateStart;
         this.rentDateEnd = rentDateEnd;
-    }
-
-    public TransaksiRequest() {
     }
 
     public int getID_Kendaraan() {

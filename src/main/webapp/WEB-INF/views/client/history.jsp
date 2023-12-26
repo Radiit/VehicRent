@@ -56,20 +56,20 @@
                   <div class="col-md-4 d-flex align-items-center px-2">
                     <!-- Adjust these fields based on your Transaksi model -->
                     <img
-                      src="${pageContext.request.contextPath}${transaksi.kendaraan.imageKendaraan[0].image}?timestamp=${System.currentTimeMillis()}"
+                      src="${pageContext.request.contextPath}${transaksi.kendaraan.mainImage}"
                       class="img-fluid" alt="" width="250px">
                   </div>
                   <div class="col-md-8">
                     <div class="card-body">
                       <!-- Adjust these fields based on your Transaksi model -->
                       <h3 class="card-title">
-                        <c:out value="${transaksi.kendaraan.merkKendaraan}" />
+                        <c:out value="${transaksi.kendaraan.jenisKendaraan}" />
                       </h3>
                       <p class="card-text">
-                        <c:out value="${transaksi.rentDateStart}" />
+                        <c:out value="${transaksi.rentDateStart} - ${transaksi.rentDateEnd}" />
                       </p>
                       <p class="card-text">
-                        <c:out value="${transaksi.lamaSewa}" />
+                        <c:out value="${transaksi.kendaraan.merkKendaraan}" />
                       </p>
                       <h4 class="card-text">
                         <c:out value="${transaksi.hargaTotal}" />
@@ -160,6 +160,18 @@
 
       <script src="${pageContext.request.contextPath}resources/script/script.js" async defer></script>
       <script src="${pageContext.request.contextPath}resources/script/script1.js" async defer></script>
+      <script> 
+
+          // fetch("${pageContext.request.contextPath}/dashboard/transaksi/display")
+          //   .then(response => response.json()) // Assuming the response is JSON
+          //   .then(response => {
+          //       console.log(response);
+          //   })
+          //   .catch(error => {
+          //       console.error('Error fetching data:', error);
+          //       // Handle errors
+          //   });
+      </script>
 
     </body>
 

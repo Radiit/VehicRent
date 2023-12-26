@@ -80,10 +80,13 @@ public class Kendaraan {
     @Column
     private boolean hidden;
 
+    @Column
+    private String mainImage;
+
     public Kendaraan(int idKendaraan, Regent regent, List<ImageKendaraan> imageKendaraan, List<Rating> rating,
             String jenisKendaraan, String merkKendaraan, String model, String nomorPlat, String warna, int tahun,
             String nomorMesin, String transmisi, int hargaSewa, String kondisiKendaraan, String stnk, String valid,
-            boolean hidden, float totalRating, int totalOrdered) {
+            boolean hidden, float totalRating, int totalOrdered, String mainImage) {
         this.idKendaraan = idKendaraan;
         this.regent = regent;
         this.imageKendaraan = imageKendaraan;
@@ -103,6 +106,15 @@ public class Kendaraan {
         this.hidden = hidden;
         this.totalRating = totalRating;
         this.totalOrdered = totalOrdered;
+        this.mainImage = mainImage;
+    }
+
+    public String getMainImage() {
+        return mainImage;
+    }
+
+    public void setMainImage(String image) {
+        this.mainImage = image;
     }
 
     public Kendaraan() {

@@ -10,10 +10,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.TubesRpl.repository.KendaraanRepository;
 import com.TubesRpl.repository.TransaksiRepository;
+import com.TubesRpl.vehicrent.backend.models.Kendaraan;
 import com.TubesRpl.vehicrent.backend.models.Transaksi;
 import com.TubesRpl.vehicrent.backend.models.User;
 
+import org.springframework.web.bind.annotation.PathVariable;
 import jakarta.servlet.http.HttpSession;
 
 @Controller
@@ -24,13 +27,16 @@ public class HomePageController {
     @Autowired
     private TransaksiRepository transaksiRepository;
 
+    @Autowired
+    private KendaraanRepository kendaraanRepository;
+
     @RequestMapping("/home")
     public String homePage(Model model, HttpSession session) {
         try {
             if (session.getAttribute("user") != null) {
                 User user = (User) session.getAttribute("user");
                 if (user.getRole_user().equals("Regent") || user.getRole_user().equals("Client")) {
-                    return "home";
+                    return "client/home";
                 } else if (user.getRole_user().equals("Staff")) {
                     return "redirect:/dashboard/staff";
                 }
@@ -48,7 +54,7 @@ public class HomePageController {
             if (session.getAttribute("user") != null) {
                 User user = (User) session.getAttribute("user");
                 if (user.getRole_user().equals("Regent") || user.getRole_user().equals("Client")) {
-                    return "home";
+                    return "client/home";
                 } else if (user.getRole_user().equals("Staff")) {
                     return "redirect:/dashboard/staff";
                 }
@@ -67,14 +73,45 @@ public class HomePageController {
         try {
             if (session.getAttribute("user") != null) {
                 User user = (User) session.getAttribute("user");
-                if (user.getRole_user().equals("Regent") || user.getRole_user().equals("Client")) {
-                    return "shop";
+                if (user.getRole_user().equals("Regent") ||
+                        user.getRole_user().equals("Client")) {
+                    return "client/shop";
                 } else if (user.getRole_user().equals("Staff")) {
                     return "redirect:/dashboard/staff";
                 }
             }
-
+            return "login";
+        } catch (Exception e) {
             return "error-page";
+        }
+    }
+
+    @RequestMapping("/product")
+    public String product(Model model, HttpSession session) {
+        if (session.getAttribute("selected") != null) {
+            Kendaraan kendaraan = (Kendaraan) session.getAttribute("selected");
+            model.addAttribute("kendaraan", kendaraan);
+        }
+        try {
+            if (session.getAttribute("user") != null) {
+                return "client/sproduct";
+            }
+            return "redirect:/login";
+        } catch (Exception e) {
+            return "error-page";
+        }
+
+    }
+
+    @RequestMapping("/product/{id}")
+    public String showProduct(@PathVariable Integer id, Model model, HttpSession session) {
+        try {
+            if (session.getAttribute("user") != null) {
+                Kendaraan kendaraan = kendaraanRepository.findByHiddenFalseAndIdKendaraan(id).get();
+                session.setAttribute("selected", kendaraan);
+                return "redirect:/product";
+            }
+            return "redirect:/login";
         } catch (Exception e) {
             return "error-page";
         }
@@ -88,7 +125,7 @@ public class HomePageController {
                 if (user.getRole_user().equals("Regent") || user.getRole_user().equals("Client")) {
                     List<Transaksi> transaksi = transaksiRepository.findAllByHiddenFalse();
                     model.addAttribute("listTransaksi", transaksi);
-                    return "history";
+                    return "client/history";
                 } else if (user.getRole_user().equals("Staff")) {
                     return "redirect:/dashboard/staff";
                 }

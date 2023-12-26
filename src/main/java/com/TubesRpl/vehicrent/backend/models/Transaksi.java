@@ -21,12 +21,12 @@ public class Transaksi {
     private int idTransaksi;
 
     @ManyToOne
-    @JoinColumn(name = "ID_Regent")
-    private Regent regent;
+    // @JoinColumn(name = "ID_Regent")
+    private User regent;
 
     @ManyToOne
-    @JoinColumn(name = "ID_Client")
-    private Client client;
+    // @JoinColumn(name = "ID_Client")
+    private User client;
 
     @ManyToOne
     @JoinColumn(name = "idKendaraan")
@@ -71,9 +71,10 @@ public class Transaksi {
     public Transaksi() {
     }
 
-    public Transaksi(int ID_Transaksi, Regent regent, Client client, Kendaraan kendaraan, String orderName,
+    public Transaksi(int ID_Transaksi, User regent, User client, Kendaraan kendaraan, String orderName,
             String phoneNumber, String pickUpAddress, String dropOffAddString, String destination, Date rentDateStart,
-            Date rentDateEnd, LocalDateTime dateTransaksi, int rentTotalDay, int hargaTotal, String status, boolean hidden) {
+            Date rentDateEnd, LocalDateTime dateTransaksi, int rentTotalDay, int hargaTotal, String status,
+            boolean hidden) {
         this.idTransaksi = ID_Transaksi;
         this.regent = regent;
         this.client = client;
@@ -100,11 +101,11 @@ public class Transaksi {
         return hidden;
     }
 
-    public void setHidden(boolean hidden){
+    public void setHidden(boolean hidden) {
         this.hidden = hidden;
     }
 
-    public void setStatus(String status){
+    public void setStatus(String status) {
         this.status = status;
     }
 
@@ -132,19 +133,19 @@ public class Transaksi {
         this.idTransaksi = ID_Transaksi;
     }
 
-    public Regent getRegent() {
+    public User getRegent() {
         return regent;
     }
 
-    public void setRegent(Regent regent) {
+    public void setRegent(User regent) {
         this.regent = regent;
     }
 
-    public Client getClient() {
+    public User getClient() {
         return client;
     }
 
-    public void setClient(Client client) {
+    public void setClient(User client) {
         this.client = client;
     }
 

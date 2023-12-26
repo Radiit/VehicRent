@@ -44,179 +44,8 @@
     </section>
 
     <section id="product1" class="seksi-p1">
-        <div class="pro-container">
-            <div class="pro" onclick="window.location.href='${pageContext.request.contextPath}/sproduct'">
-                <img src="${pageContext.request.contextPath}resources/img/mobilkeluarga.jpg" alt="">
-                <div class="de">
-                    <span>Lintas</span>
-                    <h5>Toyota Avanza New</h5>
-                    <div class="star">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                    </div>
-                    <h4>Rp 300.000</h4>
-                    <span>Bandung</span>
-                </div>
-                <a href="#">
-                    <div class="cart">
-                        <i class="fa-solid fa-cart-shopping"></i>
-                    </div>
-                </a>
-            </div>
-
-        
-            <div class="pro">
-                <img src="${pageContext.request.contextPath}resources/img/kendaraan/m3.jpg" alt="">
-                <div class="de">
-                    <span>Bhineka</span>
-                    <h5>New Avanza G Type</h5>
-                    <div class="star">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                    </div>
-                    <h4>Rp 200.000</h4>
-                    <span>Bandung</span>
-                </div>
-                <a href="#">
-                    <div class="cart">
-                        <i class="fa-solid fa-cart-shopping"></i>
-                    </div>
-                </a>
-            </div>
-
-            <div class="pro">
-                <img src="${pageContext.request.contextPath}resources/img/kendaraan/m1.jpg" alt="">
-                <div class="de">
-                    <span>Mantap</span>
-                    <h5>BMW X6 2020</h5>
-                    <div class="star">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                    </div>
-                    <h4>Rp 500.000</h4>
-                    <span>Jakarta</span>
-                </div>
-                <a href="#">
-                    <div class="cart">
-                        <i class="fa-solid fa-cart-shopping"></i>
-                    </div>
-                </a>
-            </div>
-
-            <div class="pro">
-                <img src="${pageContext.request.contextPath}resources/img/kendaraan/m4.jpg" alt="">
-                <div class="de">
-                    <span>Lintas</span>
-                    <h5>New Innova G Type</h5>
-                    <div class="star">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                    </div>
-                    <h4>Rp 300.000</h4>
-                    <span>Bandung</span>
-                </div>
-                <a href="#">
-                    <div class="cart">
-                        <i class="fa-solid fa-cart-shopping"></i>
-                    </div>
-                </a>
-            </div>
-
-            <div class="pro">
-                <img src="${pageContext.request.contextPath}resources/img/kendaraan/b1.jpg" alt="">
-                <div class="de">
-                    <span>PBB Rent</span>
-                    <h5>Beat CBS 2018</h5>
-                    <div class="star">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                    </div>
-                    <h4>Rp 80.000</h4>
-                    <span>Bandung</span>
-                </div>
-                <a href="#">
-                    <div class="cart">
-                        <i class="fa-solid fa-cart-shopping"></i>
-                    </div>
-                </a>
-            </div>
-
-            <div class="pro">
-                <img src="${pageContext.request.contextPath}resources/img/kendaraan/m7.jpg" alt="">
-                <div class="de">
-                    <span>Lintas</span>
-                    <h5>Daihatsu Gran Max</h5>
-                    <div class="star">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                    </div>
-                    <h4>Rp 250.000</h4>
-                    <span>Bandung</span>
-                </div>
-                <a href="#">
-                    <div class="cart">
-                        <i class="fa-solid fa-cart-shopping"></i>
-                    </div>
-                </a>
-            </div>
-
-            <div class="pro">
-                <img src="${pageContext.request.contextPath}resources/img/kendaraan/b3.jpg" alt="">
-                <div class="de">
-                    <span>PBB Rent</span>
-                    <h5>Vespa Primavera</h5>
-                    <div class="star">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                    </div>
-                    <h4>Rp 150.000</h4>
-                    <span>Bandung</span>
-                </div>
-                <a href="#">
-                    <div class="cart">
-                        <i class="fa-solid fa-cart-shopping"></i>
-                    </div>
-                </a>
-            </div>
-
-            <div class="pro">
-                <img src="${pageContext.request.contextPath}resources/img/kendaraan/b2.jpg" alt="">
-                <div class="de">
-                    <span>PBB Rent</span>
-                    <h5>Scoopy Fashion</h5>
-                    <div class="star">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                    </div>
-                    <h4>Rp 88.000</h4>
-                    <span>Bandung</span>
-                </div>
-                <a href="#">
-                    <div class="cart">
-                        <i class="fa-solid fa-cart-shopping"></i>
-                    </div>
-                </a>
-            </div>
-
+        <div class="pro-container" id="vehicleList">
+            <!-- Vehicle data will be populated here -->
         </div>
     </section>
 
@@ -281,6 +110,76 @@
 
     <script src="${pageContext.request.contextPath}resources/script/script.js" async defer></script>
     <script src="${pageContext.request.contextPath}resources/script/script1.js" async defer></script>
+    
+    <script>
+        fetch("${pageContext.request.contextPath}/dashboard/kendaraan/display")
+            .then(response => response.json()) // Assuming the response is JSON
+            .then(response => {
+                const vehicleList = document.getElementById('vehicleList');
+
+                const data = response.data; // Get the results array
+                console.log(data);
+                
+                // Loop through the data received from the API
+                data.forEach(vehicle => {
+                    console.log(vehicle);
+                    // Create HTML elements dynamically to display each vehicle
+                    const div = document.createElement('div');
+                    div.className = 'pro';
+                    div.onclick = function() {
+                        window.location.href = `${pageContext.request.contextPath}/product/` + vehicle.idKendaraan;
+                    };
+
+                    const img = document.createElement('img');
+                    img.src = vehicle.mainImage; // Replace with the property in your API response containing image URL
+
+                    const deDiv =  document.createElement('div');
+                    deDiv.className = 'de';
+                    
+                    const span = document.createElement('span');
+                    span.innerHTML = vehicle.merkKendaraan;
+
+                    const h5 = document.createElement('h5');
+                    h5.innerHTML = vehicle.jenisKendaraan;
+
+                    const divStar = document.createElement('div');
+                    divStar.className = 'star';
+
+                    for (let i = 0; i < vehicle.totalRating; i++) {
+                        const iStar = document.createElement('i');
+                        iStar.className = 'fa-solid fa-star';
+                        divStar.appendChild(iStar);
+                    }
+
+                    const h4 = document.createElement('h4');
+                    h4.innerHTML = "Rp. " + vehicle.hargaSewa;
+
+                    const span2 = document.createElement('span');
+                    span2.innerHTML = vehicle.kondisiKendaraan;
+
+                    // Create other elements (span, h5, div.star, h4, span, a, etc.) to display vehicle details
+
+                    // Append elements to the div
+                    div.appendChild(img);
+                    div.appendChild(deDiv);
+                    deDiv.appendChild(span);
+                    deDiv.appendChild(h5);
+                    deDiv.appendChild(divStar);
+                    deDiv.appendChild(h4);
+                    deDiv.appendChild(span2);
+
+                    // Append other elements as needed
+
+                    // Append the vehicle div to the vehicleList container
+                    vehicleList.appendChild(div);
+                });
+            })
+            .catch(error => {
+                console.error('Error fetching data:', error);
+                // Handle errors
+            });
+
+    </script>
     </body>
 </html>
     

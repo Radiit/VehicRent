@@ -27,7 +27,10 @@ public class Regent {
     @ManyToOne
     @JoinColumn(name = "nik", referencedColumnName = "nik")
     private User user;
-    
+
+    // @Column
+    // private String name;
+
     @Column(name = "listKendaraan")
     @JsonIgnore
     @OneToMany(mappedBy = "regent", cascade = CascadeType.ALL)
@@ -39,9 +42,13 @@ public class Regent {
     @Column
     private boolean hidden;
 
+    // public Regent(Integer ID_Regent, User user, String name, List<Kendaraan>
+    // listKendaraan, String valid, boolean hidden) {
     public Regent(Integer ID_Regent, User user, List<Kendaraan> listKendaraan, String valid, boolean hidden) {
+
         this.idRegent = ID_Regent;
         this.user = user;
+        // this.name = name;
         this.listKendaraan = listKendaraan;
         this.valid = valid;
         this.hidden = hidden;

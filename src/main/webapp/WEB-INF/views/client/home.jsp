@@ -47,7 +47,7 @@
         <br>We invite you to try our service and 
         <br> we personally guarantee that <br> 
         <strong>you will be completely Satisfied.</strong></p>
-        <a href="shop.html"><button><b>Rent Now</button></a>
+        <a href="shop"><button><b>Rent Now</button></a>
     </section>
 
     <section id="feature" class="seksi-p1">

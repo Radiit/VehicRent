@@ -45,7 +45,7 @@ pageEncoding="UTF-8"%>
         <div id="blur">
             <section id="prodetails" class="seksi-p1">
                 <div class="single-pro-image">
-                    <img src="${pageContext.request.contextPath}resources/img/mobilkeluarga.jpg" width="100%" id="MainImg" alt="">
+                    <img id="selectedMainImage" src="${pageContext.request.contextPath}resources/img/mobilkeluarga.jpg" width="100%" id="MainImg" alt="">
                     
                     <div class="small-img-group">
                         <div class="small-img-col">
@@ -63,11 +63,13 @@ pageEncoding="UTF-8"%>
                     </div>
                 </div>
 
+                <!-- print selected items -->
+
                 <div class="single-pro-details">
-                    <h4>Lintas</h4>
+                    <h4 id="selectedRental">Lintas</h4>
                     <h5>Bandung Bojongsoang</h5>
-                    <h2>Toyota Avanza</h2>
-                    <h3>Rp 300.000</h3>
+                    <h2 id="selectedJenisKendaraan">Toyota Avanza</h2>
+                    <h3 id="selectedHargaSewa">Rp 300.000</h3>
                     <a href="#" onclick="toggleOrderForm()"><button>Rent Now</button></a>
 
                     <h4>Product Details</h4>
@@ -239,31 +241,37 @@ pageEncoding="UTF-8"%>
             <h3>Order Form</h3>
             <p>Please fill this form to order</p>
             <!-- Add more content as needed -->
-            <form action="#">
+            <form action="" method="" enctype="application/json">
                 <div class="OrderForm">
                     <label for="order_name">Order Name: </label>
-                        <input type="text" name="order_name" placeholder="Your Order Name">
+                        <input type="text" name="orderName" placeholder="Your Order Name">
                     <label for="phone_number">Phone Number: </label>
-                        <input type="text" name="phone_number" placeholder="Your Phone Number">
+                        <input type="text" name="phoneNumber" placeholder="Your Phone Number">
                     <label for="pick_up_address">Pick up Address: </label>
-                        <input type="text" name="pick_up_address" placeholder="Pick Up Address">
+                        <input type="text" name="pickUpAddress" placeholder="Pick Up Address">
                     <label for="drop_off_address">Drop off Address:</label>
-                        <input type="text" name="drop_off_address" placeholder="Drop Off Address">
+                        <input type="text" name="dropOffAddress" placeholder="Drop Off Address">
                     <label for="Destination">Destination:</label>
-                        <input type="text" name="Destination" placeholder="Destination">
+                        <input type="text" name="destination" placeholder="Destination">
                     
                     <!-- tambahkan date range picker disini -->
-                    <label for="daterange">Choose date for rent: </label>
-                        <input type="text" name="daterange" id="daterange" placeholder="Select Date Range">
+                    <!-- <label for="daterange">Choose date for rent: </label>
+                        <input type="date" name="rentDateStart" id="daterange" placeholder="Select Date Range"> -->
+
+                    <label for="daterange">Choose date start for rent: </label>
+                        <input type="date" name="rentDateStart" id="daterange" placeholder="Select Date Range">
 
                     <!--Memasukan jumlah kendaraan-->
-                    <label for="jumlah">Enter total vehicle: </label>
-                        <input type="number" id="jumlah" name="jumlah" min="1" max="100">
+                    <!-- <label for="jumlah">Enter total vehicle: </label>
+                        <input type="number" id="jumlah" name="jumlah" min="1" max="100"> -->
                 </div>
+
+                <button onclick="toggleOrderForm()" type="button">Cancel</button>
+                <button type="button" onclick="handleSubmit()">Pay</button>
             </form>
 
-            <a href="#" onclick="toggleOrderForm()"><button>Cancel</button></a>
-            <a href="${pageContext.request.contextPath}/konfirmasi" onclick="toggleOrderForm()"><button>Pay</button></a>
+            <!-- <a href="#" onclick="toggleOrderForm()"><button>Cancel</button></a>
+            <a href="${pageContext.request.contextPath}/konfirmasi" onclick="toggleOrderForm()"><button>Pay</button></a> -->
             
         </div>
 
@@ -271,8 +279,25 @@ pageEncoding="UTF-8"%>
             // Inisialisasi date range picker
             flatpickr("#daterange", {
                 mode: "range",
-                dateFormat: "d-m-Y",
+                dateFormat: "Y-m-d",
             });
+
+            var selectedJenisKendaraan = document.getElementById("selectedJenisKendaraan");
+            var SelectedMainImage = document.getElementById("selectedMainImage");
+            var selectedRental = document.getElementById("selectedRental");
+            var selectedJenisKendaraan = document.getElementById("selectedJenisKendaraan");
+            var selectedHargaSewa = document.getElementById("selectedHargaSewa");
+            
+            selectedJenisKendaraan.innerHTML = "${kendaraan.jenisKendaraan}";
+            SelectedMainImage.src = "${kendaraan.mainImage}";
+            selectedRental.innerHTML = "${kendaraan.kondisiKendaraan}";
+            // selectedRental.innerHTML = "${kendaraan.regent.namaRegent}";
+            selectedJenisKendaraan.innerHTML = "${kendaraan.jenisKendaraan}";
+            selectedHargaSewa.innerHTML = "Rp ${kendaraan.hargaSewa}";
+
+            console.log("kendaraan: ${kendaraan}");
+
+
             // Munculin form order
             function toggleOrderForm() {
                 var blur = document.getElementById('blur');
@@ -294,6 +319,49 @@ pageEncoding="UTF-8"%>
             }
             smallimg[3].onclick=function(){
                 MainImg.src = smallimg[3].src;
+            }
+
+            function handleSubmit() {
+                var orderName = document.getElementsByName("orderName")[0].value;
+                var phoneNumber = document.getElementsByName("phoneNumber")[0].value;
+                var pickUpAddress = document.getElementsByName("pickUpAddress")[0].value;
+                var dropOffAddress = document.getElementsByName("dropOffAddress")[0].value;
+                var destination = document.getElementsByName("destination")[0].value;
+                var dateRange = document.getElementsByName("rentDateStart")[0].value;                
+                var rentDateStart = dateRange.split(" to ")[0];
+                var rentDateEnd = dateRange.split(" to ")[1];
+                var data = {
+                    "ID_Kendaraan": parseInt("${kendaraan.idKendaraan}"), // ID kendaraan yang dipilih
+                    "ID_Regent": 200, // ID regent yang dipilih
+                    "orderName": orderName,
+                    "phoneNumber": phoneNumber,
+                    "pickUpAddress": pickUpAddress,
+                    "dropOffAddress": dropOffAddress,
+                    "destination": destination,
+                    "rentDateStart": rentDateStart,
+                    "rentDateEnd": rentDateEnd,
+                };
+                
+                fetch('/dashboard/transaksi/create', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(data),
+                })
+                    .then(response => {
+                        if (response.ok) {
+                            // Redirect ke halaman selanjutnya jika berhasil
+                            window.location.href = '${pageContext.request.contextPath}/history';
+                        } else {
+                            // Tangani jika terjadi kesalahan
+                            throw new Error('Something went wrong');
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                        // Lakukan sesuatu, misalnya tampilkan pesan kesalahan kepada pengguna
+                    });
             }
             
         </script>

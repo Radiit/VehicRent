@@ -51,12 +51,12 @@ public class AuthController {
         }
     }
 
-    // // Endpoint untuk logout jika diperlukan
-    // @GetMapping("/logout")
-    // public String logout(HttpSession session) {
-    // session.invalidate(); // Bersihkan session
-    // return "redirect:/login"; // Redirect ke halaman login setelah logout
-    // }
+    // Endpoint untuk logout jika diperlukan
+    @GetMapping("/logout")
+    public String logout(HttpSession session) {
+        session.invalidate(); // Bersihkan session
+        return "redirect:/login"; // Redirect ke halaman login setelah logout
+    }
 
     @GetMapping("/register-form")
     public String showRegisterPage(Model model, HttpSession session) {
