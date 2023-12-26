@@ -122,4 +122,135 @@ public class AuthController {
             return "error-page";
         }
     }
+
+    @RequestMapping("/home")
+    public String showHome(Model model, HttpSession session) {
+        try {
+            if (session.getAttribute("user") != null) {
+                return "index"; // Change to "index" or the appropriate page if the user is logged in
+            } else {
+                return "home";
+            }
+        } catch (Exception e) {
+            return "error-page";
+        }
+    }
+
+    @GetMapping("/shop")
+    public String showShop(Model model, HttpSession session) {
+        try {
+            if (session.getAttribute("user") != null) {
+                return "login"; // Change to "login" or the appropriate page if the user is logged in
+            } else {
+                return "shop";
+            }
+        } catch (Exception e) {
+            return "error-page";
+        }
+    }
+
+    @GetMapping("/history")
+    public String showHistory(Model model, HttpSession session) {
+        try {
+            if (session.getAttribute("user") != null) {
+                return "login"; // Change to "login" or the appropriate page if the user is logged in
+            } else {
+                return "history";
+            }
+        } catch (Exception e) {
+            return "error-page";
+        }
+    }
+
+    @GetMapping("/sproduct")
+    public String showSproduct(Model model, HttpSession session) {
+        try {
+            if (session.getAttribute("user") != null) {
+                return "login"; // Change to "login" or the appropriate page if the user is logged in
+            } else {
+                return "sproduct";
+            }
+        } catch (Exception e) {
+            return "error-page";
+        }
+    }
+
+    @GetMapping("/konfirmasi")
+    public String showKonfirmasi(Model model, HttpSession session) {
+        try {
+            if (session.getAttribute("user") != null) {
+                return "login"; // Change to "login" or the appropriate page if the user is logged in
+            } else {
+                return "konfirmasi";
+            }
+        } catch (Exception e) {
+            return "error-page";
+        }
+    }
+
+    @GetMapping("/home-regent")
+    public String showHomeRegent(Model model, HttpSession session) {
+        try {
+            if (session.getAttribute("user") != null) {
+                return "login"; // Change to "login" or the appropriate page if the user is logged in
+            } else {
+                return "home-regent";
+            }
+        } catch (Exception e) {
+            return "error-page";
+        }
+    }
+
+    @GetMapping("/history-regent")
+    public String showHistoryRegent(Model model, HttpSession session) {
+        try {
+            if (session.getAttribute("user") != null) {
+                return "login"; // Change to "login" or the appropriate page if the user is logged in
+            } else {
+                return "history-regent";
+            }
+        } catch (Exception e) {
+            return "error-page";
+        }
+    }
+
+    @GetMapping("/list-regent")
+    public String showListRegent(Model model, HttpSession session) {
+        try {
+            if (session.getAttribute("user") != null) {
+                return "login"; // Change to "login" or the appropriate page if the user is logged in
+            } else {
+                return "list-regent";
+            }
+        } catch (Exception e) {
+            return "error-page";
+        }
+    }
+
+    @GetMapping("/sproduct-regent")
+    public String showSproductRegent(Model model, HttpSession session) {
+        try {
+            if (session.getAttribute("user") != null) {
+                return "login"; // Change to "login" or the appropriate page if the user is logged in
+            } else {
+                return "sproduct-regent";
+            }
+        } catch (Exception e) {
+            return "error-page";
+        }
+    }
+
+    @GetMapping("/register-vehicle")
+    public String showRegisterVehicle(Model model, HttpSession session) {
+        try {
+            if (session.getAttribute("user") != null) {
+                return "login"; // Change to "login" or the appropriate page if the user is logged in
+            } else {
+                return "register-vehicle";
+            }
+        } catch (Exception e) {
+            return "error-page";
+        }
+    }
+
 }

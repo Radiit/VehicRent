@@ -941,4 +941,265 @@ textarea {
   border: 1px solid #ccc;
   border-radius: 4px;
   margin-bottom: 16px;
+<<<<<<< HEAD
+}
+
+/*DELETE POP UP*/
+
+#delete-card {
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 2rem;
+  width: 40%;
+  max-height: 80vh; /* Set a maximum height (adjust as needed) */
+  overflow-y: auto; /* Enable vertical scrolling */
+  background-color: #fff;
+  box-shadow: 8px 8px 30px rgba(0, 0, 0, 0.5);
+  border-radius: 0.75rem;
+  text-align: center;
+  z-index: 1000;
+}
+
+
+#delete-card h3 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+#delete-card button {
+  background-color: #ffff;
+  color: #8aae92;
+  border-color: #465b52;
+  padding: 10px 26px 10px 26px;
+  border-radius: 25px;
+  cursor: pointer;
+  font-weight: 700;
+  font-size: 15px;
+}
+
+#delete-card button:hover {
+  background-color: #8aae92;
+  color: #ffff;
+  transition: 0.3s ease;
+}
+
+.DeletePop {
+  display: flex;
+  flex-direction: column;
+  max-width: 400px;
+  margin: 20px 0;
+  padding: 20px;
+  background-color: #fff;
+}
+
+.DeletePop label {
+  text-align: left;
+  display: block;
+  font-weight: bold;
+  margin-bottom: 8px;
+}
+
+.DeletePop input {
+  width: 100%;
+  height: 4vh;
+  padding: 8px;
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin-bottom: 16px;
+}
+
+#header button{
+  background-color: #ffff;
+  color: #8aae92;
+  border-color: #465b52;
+  padding: 5px 10px 5px 10px;
+  border-radius: 20px;
+  cursor: pointer;
+  font-weight: 700;
+  font-size: 15px;
+
+}
+
+#header button:hover{
+  background-color: #8aae92;
+  color: #ffff;
+  transition: 0.3s ease;
+}
+
+#logout-card {
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 2rem;
+  max-width: 576px;
+  width: 100%;
+  background-color: #fff;
+  box-shadow: 8px 8px 30px rgba(0, 0, 0, 0.5);
+  border-radius: 0.75rem;
+  text-align: center;
+  z-index: 1000;
+}
+
+#logout-card h3 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+#logout-card button {
+  background-color: #ffff;
+  color: #8aae92;
+  border-color: #465b52;
+  padding: 10px 26px 10px 26px;
+  border-radius: 25px;
+  cursor: pointer;
+  font-weight: 700;
+  font-size: 15px;
+}
+#logout-card button:hover {
+  background-color: #8aae92;
+  color: #ffff;
+  transition: 0.3s ease;
+}
+
+
+/* FORM REGISTER KENDARAAN */
+
+.form-wrapper {
+  
+  width: 100%;
+  padding: 2rem 0 4rem;
+  /* background-color: aqua; */
+}
+
+.form-wrapper form {
+  width: 80%;
+  margin: 0 auto;
+  display: grid;
+  gap: 2rem;
+  grid-template-columns: 1fr 0.75fr;
+  justify-content: stretch;
+  /* border: 2px solid yellow; */
+}
+
+.form-left textarea {
+  resize: none;
+  background-color: #e8efe8;
+}
+
+.form-left-inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  justify-content: space-between;
+  /* background-color: cadetblue; */
+}
+
+.form-input {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  /* background-color: red; */
+}
+
+.form-input label {
+  font-weight: 500;
+}
+
+.form-input input {
+  width: 100%;
+  border-radius: 8px;
+  padding: 6px;
+  margin-bottom: 6px;
+  border: none;
+  background-color: #e8efe8;
+}
+
+.form-right {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  /* background-color: red; */
+}
+
+.input-image {
+  width: 100%;
+  height: 300px;
+  margin-top: 30px;
+  border-radius: 10px;
+  background-color: #e8efe8;
+}
+
+.drop-container {
+  position: relative;
+  display: flex;
+  gap: 10px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  padding: 20px;
+  border-radius: 10px;
+  border: 2px dashed #555;
+  color: #444;
+  cursor: pointer;
+  transition: background 0.2s ease-in-out, border 0.2s ease-in-out;
+}
+
+.drop-container:hover {
+  background: #eee;
+  border-color: #111;
+}
+
+.drop-container:hover .drop-title {
+  color: #222;
+}
+
+.drop-title {
+  color: #444;
+  font-size: 40px;
+  font-weight: bold;
+  text-align: center;
+  transition: color 0.2s ease-in-out;
+}
+
+.btn-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-bottom: 10px;
+}
+
+.btn-daftar {
+  border-radius: 6px;
+  color: white;
+  border: none;
+  padding: 0.75rem 0;
+  background-color: #9ebd71;
+}
+
+.btn-batal {
+  border-radius: 6px;
+  color: white;
+  border: none;
+  padding: 0.75rem 0;
+  background-color: #ff3e3e;
+}
+
+.btn-register {
+  transition: all 0.25s;
+}
+
+.btn-register:hover {
+  opacity: 0.7;
+  transition: all 0.25s;
+=======
+>>>>>>> 644ba2e1dd4165592c2a6daa37e69dee465ed180
 }
