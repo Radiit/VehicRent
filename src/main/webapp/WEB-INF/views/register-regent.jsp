@@ -538,6 +538,7 @@
                     .then(response => {
                         if (response.ok) {
                             // Redirect ke halaman selanjutnya jika berhasil
+                            sessionStorage.setItem('userData', JSON.stringify(response.data));
                             window.location.href = '${pageContext.request.contextPath}/register-status';
                         } else {
                             // Tangani jika terjadi kesalahan

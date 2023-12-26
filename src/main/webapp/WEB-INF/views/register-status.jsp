@@ -109,7 +109,10 @@
               src="${pageContext.request.contextPath}/resources/img/img-load.gif"
               alt="Memproses"
             />
-            <p class="text-memproses">Memproses Registrasi</p>
+
+            <p class="text-memproses">
+              Memproses Registrasi - <%= request.getSession().getAttribute("status") %>
+            </p>
           </div>
           <div class="status-item-gagal" style="display: none">
             <img
@@ -193,8 +196,9 @@
       }
     }
 
-    console.log(`${user.valid}`);
-    showStatus(`${user.valid}`);
+    console.log(`STATUS: ${status}`);
+    console.log(`USER: ${user}`);
+    showStatus(`${status}`);
 
     //setTimeout(() => {
     //    showStatus("${user.valid}");

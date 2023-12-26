@@ -113,8 +113,10 @@ public class AuthController {
     @GetMapping("/register-status")
     public String showRegisterStatus(Model model, HttpSession session) {
         try {
-            if (session.getAttribute("status") == null) {
+            if (session.getAttribute("status") == "Pending") {
                 return "register-status";
+            } else if (session.getAttribute("status") == "Valid") {
+                return "register-success";
             } else {
                 return "register-form";
             }

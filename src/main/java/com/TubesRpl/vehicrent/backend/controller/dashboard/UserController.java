@@ -14,6 +14,8 @@ import com.TubesRpl.vehicrent.backend.payloads.response.Response;
 import com.TubesRpl.vehicrent.backend.services.BaseServices;
 
 import ch.qos.logback.core.model.Model;
+
+import jakarta.servlet.http.HttpSession;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
@@ -58,7 +60,8 @@ public class UserController {
             @RequestPart("alamat") String alamat,
             @RequestPart("ktp") MultipartFile ktpRaw,
             @RequestPart("fotoDiri") MultipartFile fotoDiriRaw,
-            Model model) {
+            Model model,
+            HttpSession session) {
         try {
             User userCheck = userRepository.findById(
                     Integer.parseInt(nik)).orElse(null);
@@ -105,10 +108,18 @@ public class UserController {
                     ktpOutDir.resolve(ktpFilename).toString(),
                     fotoDiriOutDir.resolve(fotoDiriFilename).toString()));
 
+            session.setAttribute("status", "Pending");
+
             return ResponseEntity.status(HttpStatus.CREATED).body(response);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Error: " + e.getMessage());
         }
+    }
+
+    @GetMapping("/update/test")
+    public ResponseEntity<?> UpdateStatus(HttpSession session) {
+        session.setAttribute("status", "Valid");
+        return ResponseEntity.status(200).body(session.getAttribute("status"));
     }
 
     @PutMapping("/update/{id}")

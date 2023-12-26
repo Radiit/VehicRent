@@ -30,15 +30,15 @@ public class HomePageController {
             if (session.getAttribute("user") != null) {
                 User user = (User) session.getAttribute("user");
                 if (user.getRole_user().equals("Regent") || user.getRole_user().equals("Client")) {
-                    return "home"; 
+                    return "home";
                 } else if (user.getRole_user().equals("Staff")) {
                     return "redirect:/dashboard/staff";
                 }
             }
 
-            return "error-page"; 
+            return "error-page";
         } catch (Exception e) {
-            return "error-page"; 
+            return "error-page";
         }
     }
 
@@ -48,17 +48,17 @@ public class HomePageController {
             if (session.getAttribute("user") != null) {
                 User user = (User) session.getAttribute("user");
                 if (user.getRole_user().equals("Regent") || user.getRole_user().equals("Client")) {
-                    return "home"; 
+                    return "home";
                 } else if (user.getRole_user().equals("Staff")) {
                     return "redirect:/dashboard/staff";
                 }
-            }else if(session.getAttribute("user") == null){
+            } else if (session.getAttribute("user") == null) {
                 return "redirect:/login";
             }
 
-            return "error-page"; 
+            return "error-page";
         } catch (Exception e) {
-            return "error-page"; 
+            return "error-page";
         }
     }
 
@@ -68,15 +68,15 @@ public class HomePageController {
             if (session.getAttribute("user") != null) {
                 User user = (User) session.getAttribute("user");
                 if (user.getRole_user().equals("Regent") || user.getRole_user().equals("Client")) {
-                    return "shop"; 
+                    return "shop";
                 } else if (user.getRole_user().equals("Staff")) {
                     return "redirect:/dashboard/staff";
                 }
             }
 
-            return "error-page"; 
+            return "error-page";
         } catch (Exception e) {
-            return "error-page"; 
+            return "error-page";
         }
     }
 
@@ -88,15 +88,15 @@ public class HomePageController {
                 if (user.getRole_user().equals("Regent") || user.getRole_user().equals("Client")) {
                     List<Transaksi> transaksi = transaksiRepository.findAllByHiddenFalse();
                     model.addAttribute("listTransaksi", transaksi);
-                    return "history"; 
+                    return "history";
                 } else if (user.getRole_user().equals("Staff")) {
                     return "redirect:/dashboard/staff";
                 }
             }
 
-            return "error-page"; 
+            return "error-page";
         } catch (Exception e) {
-            return "error-page"; 
+            return "error-page";
         }
     }
 }
