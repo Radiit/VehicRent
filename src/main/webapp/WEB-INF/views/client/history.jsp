@@ -66,7 +66,7 @@
                         <c:out value="${transaksi.kendaraan.jenisKendaraan}" />
                       </h3>
                       <p class="card-text">
-                        <c:out value="${transaksi.rentDateStart} - ${transaksi.rentDateEnd}" />
+                        <c:out value="${transaksi.rentDateStart} - ${transaksi.rentDateEnd} - ${transaksi.idTransaksi}" />
                       </p>
                       <p class="card-text">
                         <c:out value="${transaksi.kendaraan.merkKendaraan}" />
@@ -80,7 +80,7 @@
                           <c:when test="${transaksi.status eq 'WaitingPayment'}">
                             <h5 class="card-text special-class"><strong>Status: <span style="color: #FFA500;">Waiting
                                   for Payment</span></strong></h5>
-                            <a href="${pageContext.request.contextPath}/konfirmasi"><button>Payment</button></a>
+                            <button onclick='updateStatus("${transaksi.idTransaksi}", "Done")'>Payment</button>
                           </c:when>
                           <c:when test="${transaksi.status eq 'Done'}">
                             <h5 class="card-text"><strong>Status: <span style="color: green;">Done</span></strong></h5>
@@ -161,16 +161,25 @@
       <script src="${pageContext.request.contextPath}resources/script/script.js" async defer></script>
       <script src="${pageContext.request.contextPath}resources/script/script1.js" async defer></script>
       <script> 
-
-          // fetch("${pageContext.request.contextPath}/dashboard/transaksi/display")
-          //   .then(response => response.json()) // Assuming the response is JSON
-          //   .then(response => {
-          //       console.log(response);
-          //   })
-          //   .catch(error => {
-          //       console.error('Error fetching data:', error);
-          //       // Handle errors
-          //   });
+        function updateStatus(idTransaksi, status) {
+          const form = new FormData();
+          form.append('status', status);
+          fetch('${pageContext.request.contextPath}/dashboard/transaksi/status/' + idTransaksi, {
+            method: 'POST',
+            
+            body: form
+          }).then(response => {
+            if (response.ok) {
+              return response.json()
+            }
+            throw new Error(response.statusText)
+          }).then(data => {
+            console.log(data)
+            window.location.reload()
+          }).catch(error => {
+            console.error('Error:', error)
+          })
+        };
       </script>
 
     </body>

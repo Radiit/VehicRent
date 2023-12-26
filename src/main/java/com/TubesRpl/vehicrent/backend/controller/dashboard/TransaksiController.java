@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestPart;
 
 import com.TubesRpl.vehicrent.backend.models.User;
 import com.TubesRpl.vehicrent.backend.payloads.requests.TransaksiRequest;
@@ -79,7 +80,7 @@ public class TransaksiController {
     }
 
     @PostMapping("/status/{id}")
-    public ResponseEntity<?> UpdateStatus(@PathVariable Integer id, @RequestParam String status) {
+    public ResponseEntity<?> UpdateStatus(@PathVariable Integer id, @RequestPart("status") String status) {
         Response response = transaksiServices.UpdateStatus(id, status);
         return ResponseEntity.status(200).body(response);
     }

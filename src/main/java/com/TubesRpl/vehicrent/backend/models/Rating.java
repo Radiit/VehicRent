@@ -15,7 +15,7 @@ import jakarta.persistence.ManyToOne;
 
 @Entity
 public class Rating {
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int idRating;
@@ -41,7 +41,8 @@ public class Rating {
     @Column
     private boolean hidden;
 
-    public Rating(int idRating, int rating, String komentar, Client client, Kendaraan kendaraan, LocalDateTime tanggalRating,
+    public Rating(int idRating, int rating, String komentar, Client client, Kendaraan kendaraan,
+            LocalDateTime tanggalRating,
             boolean hidden) {
         this.idRating = idRating;
         this.rating = rating;

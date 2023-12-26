@@ -80,7 +80,7 @@ public class HomePageController {
                     return "redirect:/dashboard/staff";
                 }
             }
-            return "login";
+            return "redirect:/login";
         } catch (Exception e) {
             return "error-page";
         }
@@ -126,6 +126,24 @@ public class HomePageController {
                     List<Transaksi> transaksi = transaksiRepository.findAllByHiddenFalse();
                     model.addAttribute("listTransaksi", transaksi);
                     return "client/history";
+                } else if (user.getRole_user().equals("Staff")) {
+                    return "redirect:/dashboard/staff";
+                }
+            }
+
+            return "error-page";
+        } catch (Exception e) {
+            return "error-page";
+        }
+    }
+
+    @RequestMapping("/konfirmasi")
+    public String konfirmasi(Model model, HttpSession session) {
+        try {
+            if (session.getAttribute("user") != null) {
+                User user = (User) session.getAttribute("user");
+                if (user.getRole_user().equals("Regent") || user.getRole_user().equals("Client")) {
+                    return "client/konfirmasi";
                 } else if (user.getRole_user().equals("Staff")) {
                     return "redirect:/dashboard/staff";
                 }
