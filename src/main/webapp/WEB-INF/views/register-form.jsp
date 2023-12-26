@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-pageEncoding="UTF-8"%>
+
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -8,19 +8,10 @@ pageEncoding="UTF-8"%>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <!-- Bootstrap CSS -->
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-      integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
-      crossorigin="anonymous"
-    />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous" />
 
     <!-- jQuery -->
-    <script
-      src="https://code.jquery.com/jquery-3.6.4.min.js"
-      integrity="sha384-oJ6LNGO8lHLzjvkrF8g7jGqFHpHcZ1r2IOjNsm1zXsIRD5F70ZI1I23veMzFezfn"
-      crossorigin="anonymous"
-    ></script>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js" integrity="sha384-oJ6LNGO8lHLzjvkrF8g7jGqFHpHcZ1r2IOjNsm1zXsIRD5F70ZI1I23veMzFezfn" crossorigin="anonymous"></script>
 
     <!-- My Style -->
     <link rel="stylesheet" href="style.css" />
@@ -28,10 +19,7 @@ pageEncoding="UTF-8"%>
     <!-- Fonts Google -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,700;1,500&display=swap"
-      rel="stylesheet"
-    />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,700;1,500&display=swap" rel="stylesheet" />
 
     <title>Registrasi Page</title>
     <style>
@@ -409,346 +397,133 @@ pageEncoding="UTF-8"%>
       <!-- Other HTML content remains the same -->
       <div class="register-left w-50">
         <div class="logo">
-          <img
-            src="${pageContext.request.contextPath}/resources/img/img_logo.png"
-            alt="Welcome Image"
-            width="200"
-            style="margin-left: -120px"
-          />
+          <img src="${pageContext.request.contextPath}/resources/img/img_logo.png" alt="Welcome Image" width="200" style="margin-left: -120px" />
         </div>
         <div class="row">
-          <div
-            class="col-12 d-flex flex-column align-items-center justify-content-center"
-          >
+          <div class="col-12 d-flex flex-column align-items-center justify-content-center">
             <div class="header d-flex flex-column align-items-center">
               <h1>DAFTAR AKUN</h1>
               <p>Selamat datang! Mau rental apa hari ini?</p>
             </div>
             <div class="register-form">
               <button class="masukgoogle">
-                <img
-                  src="${pageContext.request.contextPath}/resources/img/img_google.png"
-                  alt=""
-                />
+                <img src="${pageContext.request.contextPath}/resources/img/img_google.png" alt="" />
                 Masuk menggunakan google
               </button>
 
               <div class="divider">atau</div>
 
               <div class="fields">
-<<<<<<< HEAD
                 <div class="input-fields">
                   <label for="namadepan" class="form-label">Nama Depan</label>
-                  <input
-                    type="namadepan"
-                    class="form-control"
-                    id="namadepan"
-                    placeholder="Masukkan Nama Depan Anda"
-                  />
+                  <input type="namadepan" class="form-control" id="namadepan" placeholder="Masukkan Nama Depan Anda" />
                 </div>
 
                 <div class="input-fields">
-                  <label for="namabelakang" class="form-label"
-                    >Nama Belakang</label
-                  >
-                  <input
-                    type="namabelakang"
-                    class="form-control"
-                    id="namabelakang"
-                    placeholder="Masukkan Nama Belakang Anda"
-                  />
+                  <label for="namabelakang" class="form-label">Nama Belakang</label>
+                  <input type="namabelakang" class="form-control" id="namabelakang" placeholder="Masukkan Nama Belakang Anda" />
                 </div>
               </div>
 
               <div class="fields">
                 <div class="input-fields">
-                  <label for="nomortelepon" class="form-label"
-                    >Nomor Telepon</label
-                  >
-                  <input
-                    type="nomortelepon"
-                    class="form-control"
-                    id="nomortelepon"
-                    placeholder="Masukkan Nomor Telepon Anda"
-                  />
+                  <label for="nomortelepon" class="form-label">Nomor Telepon</label>
+                  <input type="nomortelepon" class="form-control" id="nomortelepon" placeholder="Masukkan Nomor Telepon Anda" />
                 </div>
 
                 <div class="input-fields">
-                  <label for="nomorkontakdarurat" class="form-label"
-                    >Nomor Kontak Darurat</label
-                  >
-                  <input
-                    type="nomorkontakdarurat"
-                    class="form-control"
-                    id="nomorkontakdarurat"
-                    placeholder="Masukkan Nomor Kontak Darurat Anda"
-                  />
+                  <label for="nomorkontakdarurat" class="form-label">Nomor Kontak Darurat</label>
+                  <input type="nomorkontakdarurat" class="form-control" id="nomorkontakdarurat" placeholder="Masukkan Nomor Kontak Darurat Anda" />
                 </div>
               </div>
 
               <div class="fields">
                 <div class="input-fields">
                   <label for="umur" class="form-label">Umur</label>
-                  <input
-                    type="umur"
-                    class="form-control"
-                    id="umur"
-                    placeholder="Masukkan Umur Anda"
-                  />
+                  <input type="umur" class="form-control" id="umur" placeholder="Masukkan Umur Anda" />
                 </div>
 
                 <div class="input-fields">
-                  <label for="fototerbaru" class="form-label"
-                    >Foto Terbaru</label
-                  >
-                  <input
-                    class="form-control custom-large"
-                    id="fototerbaru"
-                    type="file"
-                  />
+                  <label for="fototerbaru" class="form-label">Foto Terbaru</label>
+                  <input class="form-control custom-large" id="fototerbaru" type="file" />
                 </div>
               </div>
 
               <div class="fields">
                 <div class="input-fields">
                   <label for="email" class="form-label">Email</label>
-                  <input
-                    type="email"
-                    class="form-control"
-                    id="email"
-                    placeholder="Masukkan Email Anda"
-                  />
+                  <input type="email" class="form-control" id="email" placeholder="Masukkan Email Anda" />
                 </div>
 
                 <div class="input-fields">
                   <label for="password" class="form-label">Kata Sandi</label>
-                  <input
-                    type="password"
-                    class="form-control"
-                    id="katasandi"
-                    placeholder="Masukkan Kata Sandi Anda"
-                  />
+                  <input type="password" class="form-control" id="katasandi" placeholder="Masukkan Kata Sandi Anda" />
                 </div>
               </div>
 
               <div class="fields">
                 <div class="input-fields">
-                  <label for="alamatlengkap" class="form-label"
-                    >Alamat Lengkap</label
-                  >
-                  <input
-                    type="alamatlengkap"
-                    class="form-control"
-                    id="alamatlengkap"
-                    placeholder="Masukkan Alamat Lengkap Anda"
-                  />
+                  <label for="alamatlengkap" class="form-label">Alamat Lengkap</label>
+                  <input type="alamatlengkap" class="form-control" id="alamatlengkap" placeholder="Masukkan Alamat Lengkap Anda" />
                 </div>
 
                 <div class="input-fields">
-                  <label for="NIK" class="form-label"
-                    >Nomor Induk Kependudukan</label
-                  >
-                  <input
-                    type="nik"
-                    class="form-control"
-                    id="nik"
-                    placeholder="Masukkan NIK"
-                  />
+                  <label for="NIK" class="form-label">Nomor Induk Kependudukan</label>
+                  <input type="nik" class="form-control" id="nik" placeholder="Masukkan NIK" />
                 </div>
               </div>
 
               <div class="form-check">
-                <input
-                  class="form-check-inpt"
-                  type="checkbox"
-                  value=""
-                  id="flexCheckDefault"
-                />
-                <label class="form-check-label" for="flexCheckDefault">
-                  Saya menyetujui semua Ketentuan, Privasi, dan Biaya
-                </label>
-              </div>
-
-              <!-- Button trigger modal -->
-              <button
-                type="button"
-                class="masuk btn"
-                data-bs-toggle="modal"
-                data-bs-target="#myModal"
-                onclick="window.location.href='${pageContext.request.contextPath}/register-konfirmasi'"
-              >
-                Registrasi
-              </button>
-=======
-                  <div class="input-fields">
-                      <label for="namadepan" class="form-label">Nama Depan</label>
-                      <input type="namadepan" class="form-control" id="namadepan"
-                          placeholder="Masukkan Nama Depan Anda" />
-                  </div>
-
-                  <div class="input-fields">
-                      <label for="namabelakang" class="form-label">Nama Belakang</label>
-                      <input type="namabelakang" class="form-control" id="namabelakang"
-                          placeholder="Masukkan Nama Belakang Anda" />
-                  </div>
-              </div>
-
-              <div class="fields">
-                  <div class="input-fields">
-                      <label for="nomortelepon" class="form-label">Nomor Telepon</label>
-                      <input type="nomortelepon" class="form-control" id="nomortelepon"
-                          placeholder="Masukkan Nomor Telepon Anda" />
-                  </div>
-
-                  <div class="input-fields">
-                      <label for="nomorkontakdarurat" class="form-label">Nomor Kontak Darurat</label>
-                      <input type="nomorkontakdarurat" class="form-control" id="nomorkontakdarurat"
-                          placeholder="Masukkan Nomor Kontak Darurat Anda" />
-                  </div>
-              </div>
-
-              <div class="fields">
-                  <div class="input-fields">
-                      <label for="umur" class="form-label">Umur</label>
-                      <input type="umur" class="form-control" id="umur" placeholder="Masukkan Umur Anda" />
-                  </div>
-
-                  <div class="input-fields">
-                      <label for="fototerbaru" class="form-label">Foto Terbaru</label>
-                      <input class="form-control custom-large" id="fototerbaru" type="file" />
-                  </div>
-              </div>
-
-              <div class="fields">
-                  <div class="input-fields">
-                      <label for="email" class="form-label">Email</label>
-                      <input type="email" class="form-control" id="email" placeholder="Masukkan Email Anda" />
-                  </div>
-
-                  <div class="input-fields">
-                      <label for="password" class="form-label">Kata Sandi</label>
-                      <input type="password" class="form-control" id="katasandi"
-                          placeholder="Masukkan Kata Sandi Anda" />
-                  </div>
-              </div>
-
-              <div class="fields">
-                  <div class="input-fields">
-                      <label for="alamatlengkap" class="form-label">Alamat Lengkap</label>
-                      <input type="alamatlengkap" class="form-control" id="alamatlengkap"
-                          placeholder="Masukkan Alamat Lengkap Anda" />
-                  </div>
-
-                  <div class="input-fields">
-                      <label for="NIK" class="form-label">Nomor Induk Kependudukan</label>
-                      <input type="nik" class="form-control" id="nik" placeholder="Masukkan NIK" />
-                  </div>
-              </div>
-
-              <div class="form-check">
-                  <input class="form-check-inpt" type="checkbox" value="" id="flexCheckDefault">
-                  <label class="form-check-label" for="flexCheckDefault">
-                      Saya menyetujui semua Ketentuan, Privasi, dan Biaya
-                  </label>
+                <input class="form-check-inpt" type="checkbox" value="" id="flexCheckDefault" />
+                <label class="form-check-label" for="flexCheckDefault"> Saya menyetujui semua Ketentuan, Privasi, dan Biaya </label>
               </div>
 
               <!-- Button trigger modal -->
               <button type="button" class="masuk btn" data-bs-toggle="modal" data-bs-target="#myModal" onclick="registerUser()">Registrasi</button>
->>>>>>> d5bbc0051d52371dc7d700f3c0cd3243911b3609
 
               <div style="margin-top: 10px; margin-bottom: 100px">
-                <span class="d-inline"
-                  >Sudah mempunyai akun?
-                  <a
-                    href="${pageContext.request.contextPath}/index"
-                    class="signup d-inline text-decoration-none"
-                    >Masuk</a
-                  ></span
-                >
+                <span class="d-inline">Sudah mempunyai akun? <a href="${pageContext.request.contextPath}/index" class="signup d-inline text-decoration-none">Masuk</a></span>
               </div>
             </div>
           </div>
         </div>
       </div>
       <div class="register-right w-50 h-100">
-        <div
-          class="position-relative w-100 h-100 register-gambar d-flex justify-content-center align-items-center"
-        >
-          <div
-            class="register-wrapper text-white bg-black bg-opacity-75 w-100 d-flex justify-content-start py-4"
-          >
+        <div class="position-relative w-100 h-100 register-gambar d-flex justify-content-center align-items-center">
+          <div class="register-wrapper text-white bg-black bg-opacity-75 w-100 d-flex justify-content-start py-4">
             <div class="register-desc-wrapper">
               <h2 class="fw-bolder">Tentang Kami</h2>
-              <p class="fw-normal">
-                Perusahaan rental terbaik dan terlengkap. Moto kami pelanggan
-                puas, Kami senang, Kami VehicRent siap melayani
-              </p>
+              <p class="fw-normal">Perusahaan rental terbaik dan terlengkap. Moto kami pelanggan puas, Kami senang, Kami VehicRent siap melayani</p>
             </div>
           </div>
         </div>
       </div>
 
       <!-- Modal Sukses -->
-      <div
-        id="successModal"
-        class="modal fade"
-        data-bs-backdrop="static"
-        data-bs-keyboard="false"
-        tabindex="-1"
-        aria-labelledby="successModalLabel"
-        aria-hidden="true"
-      >
+      <div id="successModal" class="modal fade" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="successModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
-          <div
-            class="modal-content d-flex justify-content-center align-items-center"
-          >
+          <div class="modal-content d-flex justify-content-center align-items-center">
             <div class="modal-body text-center">
-              <img
-                src="${pageContext.request.contextPath}/resources/img/img_checklist.png"
-                alt="Checklist Image"
-                width="100"
-              />
+              <img src="${pageContext.request.contextPath}/resources/img/img_checklist.png" alt="Checklist Image" width="100" />
               <p>Terima kasih. Akun anda telah berhasil didaftarkan</p>
             </div>
             <div class="modal-footer">
-              <button type="verification-button" class="btn btn-secondary">
-                Verification Data
-              </button>
+              <button type="verification-button" class="btn btn-secondary">Verification Data</button>
             </div>
           </div>
         </div>
       </div>
 
       <!-- Modal Gagal -->
-      <div
-        id="errorModal"
-        class="modal fade"
-        data-bs-backdrop="static"
-        data-bs-keyboard="false"
-        tabindex="-1"
-        aria-labelledby="errorModalLabel"
-        aria-hidden="true"
-      >
+      <div id="errorModal" class="modal fade" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="errorModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
-          <div
-            class="modal-content d-flex justify-content-center align-items-center"
-          >
+          <div class="modal-content d-flex justify-content-center align-items-center">
             <div class="modal-body text-center">
-              <img
-                src="${pageContext.request.contextPath}/resources/img/img_error.png"
-                alt="Error Image"
-                width="100"
-              />
+              <img src="${pageContext.request.contextPath}/resources/img/img_error.png" alt="Error Image" width="100" />
               <p>Mohon lengkapi formulir dengan benar.</p>
             </div>
             <div class="modal-footer">
-              <button
-                type="close-button"
-                class="btn btn-secondary"
-                data-bs-dismiss="modal"
-              >
-                Complete Data
-              </button>
+              <button type="close-button" class="btn btn-secondary" data-bs-dismiss="modal">Complete Data</button>
             </div>
           </div>
         </div>
@@ -762,20 +537,16 @@ pageEncoding="UTF-8"%>
       <!-- Other HTML content remains the same -->
     </section>
 
-    <script
-      src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
-      integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
-      crossorigin="anonymous"
-    ></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 
     <script>
       function registerUser() {
+        // console.log("ok");
         var nik = document.getElementById("nik").value;
         var firstName = document.getElementById("namadepan").value;
         var lastName = document.getElementById("namabelakang").value;
         var phoneNumber = document.getElementById("nomortelepon").value;
-        var emergencyNumber =
-          document.getElementById("nomorkontakdarurat").value;
+        var emergencyNumber = document.getElementById("nomorkontakdarurat").value;
         var age = document.getElementById("umur").value;
         var email = document.getElementById("email").value;
         var password = document.getElementById("katasandi").value;
@@ -784,18 +555,12 @@ pageEncoding="UTF-8"%>
 
         // Create an object with the user data
         var userData = {
-<<<<<<< HEAD
           nik: nik,
           role_user: null,
-=======
-          nik: null, // Isi dengan nilai NIK jika diperlukan
-          role_user: null, // Isi dengan nilai role_user jika diperlukan
->>>>>>> d5bbc0051d52371dc7d700f3c0cd3243911b3609
           nama_depan: firstName,
           nama_belakang: lastName,
           noTelepon: phoneNumber,
           kontakDarurat: emergencyNumber,
-<<<<<<< HEAD
           umur: parseInt(age),
           email: email,
           password: password,
@@ -804,7 +569,7 @@ pageEncoding="UTF-8"%>
           fotoDiri: fototerbaru,
         };
 
-        var inputGambar = document.getElementById('fototerbaru');
+        var inputGambar = document.getElementById("fototerbaru");
         var selectedFile = inputGambar.files[0];
 
         var formData = new FormData();
@@ -814,8 +579,7 @@ pageEncoding="UTF-8"%>
 
         sessionStorage.setItem("userData", JSON.stringify(userData));
 
-        window.location.href =
-          "${pageContext.request.contextPath}/register-konfirmasi";
+        window.location.href = "${pageContext.request.contextPath}/register-konfirmasi";
 
         // Make a POST request to the '/register' endpoint
         // fetch("/dashboard/user/create", {
@@ -845,48 +609,8 @@ pageEncoding="UTF-8"%>
         //   .catch((error) => {
         //     console.error("Error:", error);
         //   });
-=======
-          umur: parseInt(age), // Pastikan umur bertipe data Integer
-          email: email,
-          password: password,
-          alamat: address,
-          ktp: null, // Isi dengan nilai KTP jika diperlukan
-          fotoDiri: null, // Isi dengan nilai fotoDiri jika diperlukan
-          hidden: false, // Isi dengan nilai hidden jika diperlukan
-          valid: Valid, // Isi dengan nilai valid jika diperlukan
-        };
-
-        // Make a POST request to the '/register' endpoint
-        fetch("/dashboard/user/create", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(userData),
-        })
-          .then((response) => {
-            if (response.ok) {
-              var successModal = new bootstrap.Modal(
-                document.getElementById("successModal")
-              );
-              successModal.show();
-              setTimeout(function () {
-                window.location.href =
-                  "${pageContext.request.contextPath}/register-konfirmasi";
-              }, 2000);
-            } else {
-              var errorModal = new bootstrap.Modal(
-                document.getElementById("errorModal")
-              );
-              errorModal.show();
-            }
-          })
-          .catch((error) => {
-            console.error("Error:", error);
-          });
->>>>>>> d5bbc0051d52371dc7d700f3c0cd3243911b3609
       }
     </script>
-
   </body>
 </html>
+

@@ -1,3 +1,4 @@
+
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
@@ -409,8 +410,9 @@
                         </div>
                     </div>
                 </div>
-                <a href="${pageContext.request.contextPath}/register-status"
-                    class="button-pilih align-items-center justify-content-center">Selanjutnya</a>
+                <a
+               
+                class="button-pilih align-items-center justify-content-center">Selanjutnya</a>
             </div>
         </div>
     </section>
@@ -431,55 +433,13 @@
     -->
 <script>
 document.addEventListener('DOMContentLoaded', function () {
-    var nextButton = document.querySelector('.button-pilih'); // Pilih tombol "Selanjutnya"
-
-    nextButton.addEventListener('click', function () {
-
-        var combineData = JSON.parse(sessionStorage.getItem('userData'));
-        
-        var inputGambar = document.getElementById('formFile1');
-        var selectedFile = inputGambar.files[0];
-        
-        var formData = new FormData();
-        formData.append('ktp', selectedFile);
-
-        combineData.formData = formData;
-
-        sessionStorage.setItem('userData', JSON.stringify(combineData));
-        
-
-        fetch('/dashboard/user/create', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(combineData) // Kirim data jika diperlukan
-        })
-        .then(response => {
-            if (response.ok) {
-                // Jika respons berhasil, arahkan pengguna ke halaman '/register-status'
-                window.location.href = '${pageContext.request.contextPath}/register-status';
-            } else {
-                // Tangani situasi ketika respons tidak berhasil
-                throw new Error('Something went wrong');
-            }
-        })
-        .catch(error => {
-            // Tangani error jika ada
-            console.error('Error:', error);
-            // Lakukan sesuatu, misalnya tampilkan pesan kepada pengguna
-        });
-    });
-});
-
-
     function preview(event, frameId, containerId) {
         var frame = document.getElementById(frameId);
         var container = document.getElementById(containerId);
         frame.src = URL.createObjectURL(event.target.files[0]);
         container.style.display = "block";
     }
-
+    
     function clearImage(frameId, inputId, containerId) {
         var frame = document.getElementById(frameId);
         var container = document.getElementById(containerId);
@@ -487,6 +447,49 @@ document.addEventListener('DOMContentLoaded', function () {
         frame.src = "";
         container.style.display = "none";
     }
+    var nextButton = document.querySelector('.button-pilih'); // Pilih tombol "Selanjutnya"
+
+    nextButton.addEventListener('click', function () {
+        var userData = JSON.parse(sessionStorage.getItem("userData")) || {}; // Mendapatkan data dari sessionStorage atau objek kosong jika tidak ada
+
+        var inputGambar = document.getElementById('formFile1');
+        var selectedFile = inputGambar.files[0];
+
+        var formData = new FormData();
+        formData.append('ktp', selectedFile);
+
+        userData.ktp = formData;
+
+        sessionStorage.setItem('userData', JSON.stringify(userData));
+
+        console.log(userData);
+
+        // Kirim data jika diperlukan
+        fetch('/dashboard/user/create', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(userData)
+        })
+        .then(response => {
+            if (response.ok) {
+                // Redirect ke halaman selanjutnya jika berhasil
+                window.location.href = '${pageContext.request.contextPath}/register-status';
+            } else {
+                // Tangani jika terjadi kesalahan
+                throw new Error('Something went wrong');
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            // Lakukan sesuatu, misalnya tampilkan pesan kesalahan kepada pengguna
+        });
+    });
+});
+
+
+    
 </script>
 
 </body>

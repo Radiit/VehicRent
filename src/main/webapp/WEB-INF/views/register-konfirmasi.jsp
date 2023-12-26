@@ -452,8 +452,8 @@ pageEncoding="UTF-8"%>
                 />
               </div>
               <a
-                href="${pageContext.request.contextPath}/register-regent"
                 class="button-choose align-items-center justify-content-center"
+                onclick="addUser('Regent')"
                 >Choose</a
               >
             </div>
@@ -484,8 +484,8 @@ pageEncoding="UTF-8"%>
                 />
               </div>
               <a
-                href="${pageContext.request.contextPath}/register-client"
                 class="button-choose align-items-center justify-content-center"
+                onclick="addUser('Client')"
                 >Choose</a
               >
             </div>
@@ -512,6 +512,7 @@ pageEncoding="UTF-8"%>
     <script>
       document.addEventListener("DOMContentLoaded", function () {
         var cardBodies = document.querySelectorAll(".card-body-js");
+        // var btnRegent = document.querySelector(".btn-regent");
 
         cardBodies.forEach(function (cardBody, index) {
           cardBody.addEventListener("click", function () {
@@ -526,24 +527,29 @@ pageEncoding="UTF-8"%>
                 c.classList.add("inactive");
               }
             });
-
-            
-            var role = index == 0 ? "Regent" : "Client";
-            
-            var userData = JSON.parse(sessionStorage.getItem("userData"));
-            
-            userData.role = role;
-
-            sessionStorage.setItem('userData', JSON.stringify(userData));
-            var redirectURL =
-              index == 0
-                ? "${pageContext.request.contextPath}/register-regent"
-                : "${pageContext.request.contextPath}/register-client";
-
-            window.location.href = redirectURL;
           });
         });
       });
+
+      function addUser(role) {
+        console.log("tes");
+        var userData = JSON.parse(sessionStorage.getItem("userData"));
+
+        console.log(userData);
+
+        userData.role_user = role;
+
+        sessionStorage.setItem("userData", JSON.stringify(userData));
+
+        console.log(userData);
+
+        var redirectURL =
+          role == 'Regent'
+            ? "${pageContext.request.contextPath}/register-regent"
+            : "${pageContext.request.contextPath}/register-client";
+
+        window.location.href = redirectURL;
+      }
     </script>
   </body>
 </html>
