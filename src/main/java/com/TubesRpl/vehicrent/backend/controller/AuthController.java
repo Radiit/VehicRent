@@ -61,8 +61,34 @@ public class AuthController {
     @GetMapping("/register-form")
     public String showRegisterPage(Model model, HttpSession session) {
         try {
-            if (session.getAttribute("user") != null) {
-                return "index";
+            if (session.getAttribute("user") == null) {
+                return "register-form";
+            } else {
+                return "login";
+            }
+        } catch (Exception e) {
+            return "error-page";
+        }
+    }
+
+    @GetMapping("/register-konfirmasi")
+    public String showRegisterKonfirmasi(Model model, HttpSession session) {
+        try {
+            if (session.getAttribute("user") == null) {
+                return "register-konfirmasi";
+            } else {
+                return "redirect:/register-form";
+            }
+        } catch (Exception e) {
+            return "error-page";
+        }
+    }
+
+    @GetMapping("/register-regent")
+    public String showRegisterRegent(Model model, HttpSession session) {
+        try {
+            if (session.getAttribute("regent") == null) {
+                return "register-regent";
             } else {
                 return "register-form";
             }
@@ -71,29 +97,29 @@ public class AuthController {
         }
     }
 
-    // @GetMapping("/register-konfirmasi")
-    // public String showRegisterKonfirmasi(Model model, HttpSession session) {
-    // try {
-    // if (session.getAttribute("user") != null) {
-    // return "register-konfirmasi";
-    // } else {
-    // return "register-form";
-    // }
-    // } catch (Exception e) {
-    // return "error-page";
-    // }
-    // }
+    @GetMapping("/register-client")
+    public String showRegisterClient(Model model, HttpSession session) {
+        try {
+            if (session.getAttribute("client") == null) {
+                return "register-client";
+            } else {
+                return "register-form";
+            }
+        } catch (Exception e) {
+            return "error-page";
+        }
+    }
 
-    // @GetMapping("/register-regent")
-    // public String showRegisterRegent(Model model, HttpSession session) {
-    // try {
-    // if (session.getAttribute("regent") != null) {
-    // return "register-regent";
-    // } else {
-    // return "register-form";
-    // }
-    // } catch (Exception e) {
-    // return "error-page";
-    // }
-    // }
+    @GetMapping("/register-status")
+    public String showRegisterStatus(Model model, HttpSession session) {
+        try {
+            if (session.getAttribute("status") == null) {
+                return "register-status";
+            } else {
+                return "register-form";
+            }
+        } catch (Exception e) {
+            return "error-page";
+        }
+    }
 }
