@@ -1,0 +1,149 @@
+html,
+body {
+  overflow: hidden;
+}
+
+* {
+  font-family: "Poppins", sans-serif;
+}
+.login {
+  height: 100vh;
+}
+.login-left{
+  margin-top: -88px;
+  transform: scale(0.75);
+}
+.header h1 {
+  /* width: 486px; */
+
+  flex-shrink: 0;
+  color: #000;
+  font-size: 40px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  margin-bottom: 28px;
+  margin-top: 30px;
+  /*
+  margin-left: 20px;
+  margin-right: 20px; */
+}
+.header p {
+  /* width: 512px; */
+
+  flex-shrink: 0;
+  color: #000;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  opacity: 0.6;
+  margin-bottom: 28px; /* 
+  margin-top: 24px; */
+}
+.login-form label {
+  color: #000;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  margin-top: 20px;
+}
+.login-form input {
+  color: #000;
+  font-family: Poppins;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  opacity: 0.4;
+  width: 592px;
+  height: 40px;
+  flex-shrink: 0;
+  border-radius: 16px;
+  border: 1px solid rgba(0, 0, 0, 0.3);
+  background: #fff;
+}
+.login-form a {
+  flex-shrink: 0;
+  color: #616161;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  margin-top: 10px;
+  display: block;
+}
+.login-form .masuk {
+  width: 600px;
+  height: 48px;
+  flex-shrink: 0;
+  border-radius: 16px;
+  border: 1px solid rgba(0, 0, 0, 0.3);
+  background: #a0bc71;
+  color: #fff;
+  margin-top: 24px;
+}
+.login-form .masukgoogle {
+  width: 600px;
+  height: 48px;
+  flex-shrink: 0;
+  border-radius: 16px;
+  border: 1px solid rgba(0, 0, 0, 0.3);
+  background: #fff;
+}
+.login-form span {
+  color: #000;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  width: 309px;
+  height: 29px;
+  flex-shrink: 0;
+  margin-top: 10px;
+  display: block;
+}
+.login-form span a {
+  color: #616161;
+  font-family: Poppins;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  margin-top: 10px;
+  display: block;
+}
+
+.login-gambar {
+  background-image: url("img/img-login.png");
+  background-position: left center;
+  background-size: cover;
+}
+
+.login-wrapper {
+  padding-left: 100px;
+  margin-left: 0px;
+}
+
+.login-desc-wrapper {
+  width: 70%;
+}
+
+.divider {
+  /* font-size: 30px; */
+  display: flex;
+  align-items: center;
+  margin-top: 20px;
+  color: rgba(0, 0, 0, 0.4);
+}
+
+.divider::before,
+.divider::after {
+  flex: 1;
+  content: "";
+  padding: 1.25px;
+  background-color: black;
+  opacity: 0.1;
+  margin: 5px;
+}

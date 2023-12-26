@@ -1,5 +1,8 @@
 package com.TubesRpl.vehicrent.backend.services;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,7 +22,7 @@ import com.TubesRpl.vehicrent.backend.payloads.requests.TransaksiRequest;
 import com.TubesRpl.vehicrent.backend.payloads.response.Response;
 
 @Service
-public class TransaksiServices implements BaseServices<TransaksiRequest>{
+public class TransaksiServices implements BaseServices<TransaksiRequest> {
     @Autowired
     TransaksiRepository transaksiRepository;
     @Autowired
@@ -30,35 +33,21 @@ public class TransaksiServices implements BaseServices<TransaksiRequest>{
     KendaraanRepository kendaraanRepository;
 
     @Override
-    public Response DisplayAllData(){
-        List<Transaksi> allTransaksi = new ArrayList<>();
-        transaksiRepository.findAll().forEach(allTransaksi::add);
-        for (Transaksi transaksi : allTransaksi){
-            System.out.println("ID Transaksi: " + transaksi.getID_Transaksi());
-            System.out.println("Regent: " + transaksi.getRegent());
-            System.out.println("Client: " + transaksi.getClient());
-            System.out.println("ID Kendaraan: " + transaksi.getKendaraan());
-            System.out.println("Waktu Pemesanan: " + transaksi.getWaktu_Pemesanan());
-            System.out.println("Harga Total Pemesanan: " + transaksi.getHargatotal_Pemesanan());
-            System.out.println("Status Pemesanan: " + transaksi.getStatus_Pemesanan());
-            System.out.println("Virtual Account Number: " + transaksi.getVirtualAccountNumber());
+    public Response DisplayAllData() {
+        List<Transaksi> allTransaksi = transaksiRepository.findAllByHiddenFalse();
+        if (allTransaksi.isEmpty()) {
+            return new Response(HttpStatus.NOT_FOUND.value(), "Transaksi not found", null);
         }
+        System.out.println("Display all transaksi data");
         return new Response(HttpStatus.OK.value(), "Success", allTransaksi);
     }
 
     @Override
-    //override method display by id
-    public Response DisplayByID(Integer id){
-        Transaksi transaksi = transaksiRepository.findById(id).orElse(null);
-        if (transaksi != null){
-            System.out.println("ID Transaksi: " + transaksi.getID_Transaksi());
-            System.out.println("Regent: " + transaksi.getRegent());
-            System.out.println("Client: " + transaksi.getClient());
-            System.out.println("ID Kendaraan: " + transaksi.getKendaraan());
-            System.out.println("Waktu Pemesanan: " + transaksi.getWaktu_Pemesanan());
-            System.out.println("Harga Total Pemesanan: " + transaksi.getHargatotal_Pemesanan());
-            System.out.println("Status Pemesanan: " + transaksi.getStatus_Pemesanan());
-            System.out.println("Virtual Account Number: " + transaksi.getVirtualAccountNumber());
+    // override method display by id
+    public Response DisplayByID(Integer id) {
+        Transaksi transaksi = transaksiRepository.findByHiddenFalseAndIdTransaksi(id).orElse(null);
+        if (transaksi != null) {
+            System.out.println("Display transaksi data by id " + id);
             return new Response(HttpStatus.OK.value(), "Success", transaksi);
         } else {
             return new Response(HttpStatus.NOT_FOUND.value(), "Transaksi not found", null);
@@ -66,76 +55,140 @@ public class TransaksiServices implements BaseServices<TransaksiRequest>{
     }
 
     @Override
-    public Response Create(TransaksiRequest request){
-        try{
+    public Response Create(TransaksiRequest request) {
+        try {
             Transaksi transaksi = new Transaksi();
-            System.out.println(request.getID_Client());
-            System.out.println(request.getID_Regent());
-            System.out.println(request.getID_Kendaraan());
-            Client client = clientRepository.findById(request.getID_Client()).orElse(null);
+            Client client = clientRepository.findByHiddenFalseAndIdClient(request.getID_Client()).orElse(null);
             if (client == null) {
                 return new Response(HttpStatus.NOT_FOUND.value(), "Client not found", request);
             }
-            System.out.println("2");
-            Regent regent = regentRepository.findById(request.getID_Regent()).orElse(null);
+            Regent regent = regentRepository.findByHiddenFalseAndIdRegent(request.getID_Regent()).orElse(null);
             if (regent == null) {
                 return new Response(HttpStatus.NOT_FOUND.value(), "Regent not found", request);
             }
-            System.out.println("3");
-            Kendaraan kendaraan = kendaraanRepository.findById(request.getID_Kendaraan()).orElse(null);
+            Kendaraan kendaraan = kendaraanRepository.findByHiddenFalseAndIdKendaraan(request.getID_Kendaraan()).orElse(null);
             if (kendaraan == null) {
                 return new Response(HttpStatus.NOT_FOUND.value(), "Kendaraan not found", request);
             }
-            transaksi.setWaktu_Pemesanan(request.getWaktu_Pemesanan());
-            transaksi.setHargatotal_Pemesanan(request.getHargatotal_Pemesanan());
-            transaksi.setStatus_Pemesanan(request.getStatus_Pemesanan());
-            transaksi.setVirtualAccountNumber(request.getVirtualAccountNumber());
-            System.out.println("4");
             transaksi.setClient(client);
             transaksi.setRegent(regent);
             transaksi.setKendaraan(kendaraan);
-            System.out.println("5");
+            transaksi.setOrderName(request.getOrderName());
+            transaksi.setPhoneNumber(request.getPhoneNumber());
+            transaksi.setPickUpAddress(request.getPickUpAddress());
+            transaksi.setDropOffAddress(request.getDropOffAddress());
+            transaksi.setDestination(request.getDestination());
+            transaksi.setRentDateStart(request.getRentDateStart());
+            transaksi.setRentDateEnd(request.getRentDateEnd());
+            transaksi.setDateTransaksi(LocalDateTime.now());
+            transaksi.setStatus("WaitingPayment");
+
+            // hitung total hari kendaraan disewa
+            LocalDate startLocalDate = request.getRentDateStart().toLocalDate();
+            LocalDate endLocalDate = request.getRentDateEnd().toLocalDate();
+            long lamaSewa = ChronoUnit.DAYS.between(startLocalDate, endLocalDate);
+            transaksi.setLamaSewa(lamaSewa);
+
+            // hitung harga total dengan pajak
+            double pajak = 0.1;
+            long hargaTemp = kendaraan.getHargaSewa() * lamaSewa;
+            int totalPajak = (int) (hargaTemp * pajak);
+            transaksi.setHargaTotal((int) (hargaTemp + totalPajak));
+
+            transaksi.setHidden(false);
             transaksiRepository.save(transaksi);
-            System.out.println("6");
             return new Response(HttpStatus.OK.value(), "Success", transaksi);
-        }catch (Exception e){
+        } catch (Exception e) {
             return new Response(HttpStatus.BAD_REQUEST.value(), "Failed", request);
         }
     }
-    
+
     @Override
-    public Response Update(Integer id, TransaksiRequest request){
-        try{
+    public Response Update(Integer id, TransaksiRequest request) {
+        try {
             Transaksi transaksi = transaksiRepository.findById(id).orElse(null);
-            if (transaksi != null){
-                transaksi.setClient(transaksi.getClient());
-                transaksi.setRegent(transaksi.getRegent());
-                transaksi.setKendaraan(transaksi.getKendaraan());
-                transaksi.setWaktu_Pemesanan(request.getWaktu_Pemesanan());
-                transaksi.setHargatotal_Pemesanan(request.getHargatotal_Pemesanan());
-                transaksi.setStatus_Pemesanan(request.getStatus_Pemesanan());
-                transaksi.setVirtualAccountNumber(request.getVirtualAccountNumber());
+            if (transaksi != null) {
+                Client client = clientRepository.findById(request.getID_Client()).orElse(null);
+                if (client == null) {
+                    return new Response(HttpStatus.NOT_FOUND.value(), "Client not found", request);
+                }
+                Regent regent = regentRepository.findById(request.getID_Regent()).orElse(null);
+                if (regent == null) {
+                    return new Response(HttpStatus.NOT_FOUND.value(), "Regent not found", request);
+                }
+                Kendaraan kendaraan = kendaraanRepository.findById(request.getID_Kendaraan()).orElse(null);
+                if (kendaraan == null) {
+                    return new Response(HttpStatus.NOT_FOUND.value(), "Kendaraan not found", request);
+                }
+                transaksi.setClient(client);
+                transaksi.setRegent(regent);
+                transaksi.setKendaraan(kendaraan);
+                transaksi.setOrderName(request.getOrderName());
+                transaksi.setPhoneNumber(request.getPhoneNumber());
+                transaksi.setPickUpAddress(request.getPickUpAddress());
+                transaksi.setDropOffAddress(request.getDropOffAddress());
+                transaksi.setDestination(request.getDestination());
+                transaksi.setRentDateStart(request.getRentDateStart());
+                transaksi.setRentDateEnd(request.getRentDateEnd());
+                transaksi.setDateTransaksi(LocalDateTime.now());
+
+                // hitung total hari kendaraan disewa
+                LocalDate startLocalDate = request.getRentDateStart().toLocalDate();
+                LocalDate endLocalDate = request.getRentDateEnd().toLocalDate();
+                long lamaSewa = ChronoUnit.DAYS.between(startLocalDate, endLocalDate);
+                transaksi.setLamaSewa(lamaSewa);
+
+                // hitung harga total dengan pajak
+                double pajak = 0.1;
+                long hargaTemp = kendaraan.getHargaSewa() * lamaSewa;
+                int totalPajak = (int) (hargaTemp * pajak);
+                transaksi.setHargaTotal((int) (hargaTemp + totalPajak));
+
+                transaksi.setHidden(false);
                 transaksiRepository.save(transaksi);
                 return new Response(HttpStatus.OK.value(), "Success", transaksi);
-            }else{
+            } else {
                 return new Response(HttpStatus.NOT_FOUND.value(), "Transaksi not found", null);
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             return new Response(HttpStatus.BAD_REQUEST.value(), "Failed", null);
         }
     }
 
     @Override
-    public Response Delete(Integer id){
-        try{
-            Transaksi transaksi = transaksiRepository.findById(id).orElse(null);
-            if (transaksi != null){
-                transaksiRepository.delete(transaksi);
+    public Response Delete(Integer id) {
+        try {
+            Transaksi transaksi = transaksiRepository.findByHiddenFalseAndIdTransaksi(id).orElse(null);
+            if (transaksi != null) {
+                transaksi.setHidden(true);
+                transaksiRepository.save(transaksi);
+                System.out.println("Delete transaksi data by id " + id);
                 return new Response(HttpStatus.OK.value(), "Success", transaksi);
             } else {
                 return new Response(HttpStatus.NOT_FOUND.value(), "Transaksi not found", null);
             }
-        }catch (Exception e){
+        } catch (Exception e) {
+            return new Response(HttpStatus.BAD_REQUEST.value(), "Failed", null);
+        }
+    }
+
+    public Response UpdateStatus(Integer id, String status){
+        try {
+            Transaksi transaksi = transaksiRepository.findByHiddenFalseAndIdTransaksi(id).orElse(null);
+            if (transaksi != null){
+                transaksi.setStatus(status);
+                if (status.equals("Done")){
+                    Kendaraan kendaraan = transaksi.getKendaraan();
+                    kendaraan.setTotalOrdered(kendaraan.getTotalOrdered() + 1);
+                    kendaraanRepository.save(kendaraan);
+                }
+                transaksiRepository.save(transaksi);
+                System.out.println("Update transaksi status by id " + id + " to " + status);
+                return new Response(HttpStatus.OK.value(), "Success", transaksi);
+            }else{
+                return new Response(HttpStatus.NOT_FOUND.value(), "Transaksi not found", null);
+            }
+        } catch (Exception e) {
             return new Response(HttpStatus.BAD_REQUEST.value(), "Failed", null);
         }
     }

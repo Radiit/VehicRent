@@ -2,6 +2,9 @@ package com.TubesRpl.vehicrent.backend.models;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -19,35 +22,56 @@ public class Regent {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer ID_Regent;
+    private Integer idRegent;
 
     @ManyToOne
-    @JoinColumn(name = "NIK_User", referencedColumnName = "NIK_User")
+    @JoinColumn(name = "nik", referencedColumnName = "nik")
     private User user;
-
-    @Column
-    private String Norek_Regent;
-
+    
     @Column(name = "listKendaraan")
+    @JsonIgnore
     @OneToMany(mappedBy = "regent", cascade = CascadeType.ALL)
     private List<Kendaraan> listKendaraan;
 
-    public Regent(Integer ID_Regent, User user, String norek_Regent, List<Kendaraan> listKendaraan) {
-        this.ID_Regent = ID_Regent;
+    @Column
+    private String valid;
+
+    @Column
+    private boolean hidden;
+
+    public Regent(Integer ID_Regent, User user, List<Kendaraan> listKendaraan, String valid, boolean hidden) {
+        this.idRegent = ID_Regent;
         this.user = user;
-        Norek_Regent = norek_Regent;
         this.listKendaraan = listKendaraan;
+        this.valid = valid;
+        this.hidden = hidden;
     }
 
     public Regent() {
     }
 
-    public void setID_Regent(Integer ID_Regent) {
-        this.ID_Regent = ID_Regent;
+    public void setValid(String valid) {
+        this.valid = valid;
     }
 
-    public Integer getID_Regent() {
-        return ID_Regent;
+    public String getValid() {
+        return valid;
+    }
+
+    public void setHidden(boolean hidden) {
+        this.hidden = hidden;
+    }
+
+    public boolean isHidden() {
+        return hidden;
+    }
+
+    public void setIdRegent(Integer ID_Regent) {
+        this.idRegent = ID_Regent;
+    }
+
+    public Integer getIdRegent() {
+        return idRegent;
     }
 
     public User getUser() {
@@ -56,14 +80,6 @@ public class Regent {
 
     public void setUser(User user) {
         this.user = user;
-    }
-
-    public String getNorek_Regent() {
-        return Norek_Regent;
-    }
-
-    public void setNorek_Regent(String norek_Regent) {
-        Norek_Regent = norek_Regent;
     }
 
     public List<Kendaraan> getListKendaraan() {
