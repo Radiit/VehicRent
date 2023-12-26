@@ -1,10 +1,7 @@
 package com.TubesRpl.vehicrent.backend.models;
 
-import java.util.List;
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -12,124 +9,83 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "Kendaraan")
 public class Kendaraan {
-
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int idKendaraan;
+    private int ID_Kendaraan;
 
     @ManyToOne
-    @JsonIgnore
     @JoinColumn(name = "ID_Regent")
+    @JsonIgnore
     private Regent regent;
 
-    @OneToMany(mappedBy = "kendaraan", cascade = CascadeType.ALL)
-    private List<ImageKendaraan> imageKendaraan;
-
-    @OneToMany(mappedBy = "kendaraan", cascade = CascadeType.ALL)
-    private List<Rating> rating;
+    @Column
+    private String jenis_Kendaraan;
 
     @Column
-    private String jenisKendaraan;
+    private String Nopol_Kendaraan;
 
     @Column
-    private String merkKendaraan;
+    private String Merk_Kendaraan;
 
     @Column
-    private String model;
+    private int Tahun_Kendaraan;
 
     @Column
-    private String nomorPlat;
+    private String Warna_Kendaraan;
 
     @Column
-    private String warna;
+    private String NoSTNK_Kendaraan;
 
     @Column
-    private int tahun;
+    private String Kapasitas_Kendaraan;
 
     @Column
-    private String nomorMesin;
+    private String NoMesin_Kendaraan;
 
     @Column
-    private String transmisi;
+    private int HargaSewa_Kendaraan;
 
     @Column
-    private int hargaSewa;
+    private int MaksimalWaktu_Peminjaman;
 
     @Column
-    private String kondisiKendaraan;
+    private String Status_Kendaraan;
 
     @Column
-    private String stnk;
+    private String Status_ValidasiKendaraan;
 
-    @Column
-    private float totalRating;
-
-    @Column
-    private int totalOrdered;
-
-    @Column
-    private String valid;
-
-    @Column
-    private boolean hidden;
-
-    public Kendaraan(int idKendaraan, Regent regent, List<ImageKendaraan> imageKendaraan, List<Rating> rating,
-            String jenisKendaraan, String merkKendaraan, String model, String nomorPlat, String warna, int tahun,
-            String nomorMesin, String transmisi, int hargaSewa, String kondisiKendaraan, String stnk, String valid,
-            boolean hidden, float totalRating, int totalOrdered) {
-        this.idKendaraan = idKendaraan;
+    public Kendaraan(int iD_Kendaraan, Regent regent, String jenis_Kendaraan, String nopol_Kendaraan,
+            String merk_Kendaraan, int tahun_Kendaraan, String warna_Kendaraan, String noSTNK_Kendaraan,
+            String kapasitas_Kendaraan, String noMesin_Kendaraan, int hargaSewa_Kendaraan, int maksimalWaktu_Peminjaman,
+            String status_Kendaraan, String status_ValidasiKendaraan) {
+        ID_Kendaraan = iD_Kendaraan;
         this.regent = regent;
-        this.imageKendaraan = imageKendaraan;
-        this.rating = rating;
-        this.jenisKendaraan = jenisKendaraan;
-        this.merkKendaraan = merkKendaraan;
-        this.model = model;
-        this.nomorPlat = nomorPlat;
-        this.warna = warna;
-        this.tahun = tahun;
-        this.nomorMesin = nomorMesin;
-        this.transmisi = transmisi;
-        this.hargaSewa = hargaSewa;
-        this.kondisiKendaraan = kondisiKendaraan;
-        this.stnk = stnk;
-        this.valid = valid;
-        this.hidden = hidden;
-        this.totalRating = totalRating;
-        this.totalOrdered = totalOrdered;
+        this.jenis_Kendaraan = jenis_Kendaraan;
+        Nopol_Kendaraan = nopol_Kendaraan;
+        Merk_Kendaraan = merk_Kendaraan;
+        Tahun_Kendaraan = tahun_Kendaraan;
+        Warna_Kendaraan = warna_Kendaraan;
+        NoSTNK_Kendaraan = noSTNK_Kendaraan;
+        Kapasitas_Kendaraan = kapasitas_Kendaraan;
+        NoMesin_Kendaraan = noMesin_Kendaraan;
+        HargaSewa_Kendaraan = hargaSewa_Kendaraan;
+        MaksimalWaktu_Peminjaman = maksimalWaktu_Peminjaman;
+        Status_Kendaraan = status_Kendaraan;
+        Status_ValidasiKendaraan = status_ValidasiKendaraan;
     }
 
-    public Kendaraan() {
+    public int getID_Kendaraan() {
+        return ID_Kendaraan;
     }
 
-    public float getTotalRating() {
-        return totalRating;
-    }
-
-    public void setTotalRating(float totalRating) {
-        this.totalRating = totalRating;
-    }
-
-    public int getTotalOrdered() {
-        return totalOrdered;
-    }
-
-    public void setTotalOrdered(int totalOrdered) {
-        this.totalOrdered = totalOrdered;
-    }
-
-    public int getIdKendaraan() {
-        return idKendaraan;
-    }
-
-    public void setIdKendaraan(int idKendaraan) {
-        this.idKendaraan = idKendaraan;
+    public void setID_Kendaraan(int iD_Kendaraan) {
+        ID_Kendaraan = iD_Kendaraan;
     }
 
     public Regent getRegent() {
@@ -140,123 +96,107 @@ public class Kendaraan {
         this.regent = regent;
     }
 
-    public List<ImageKendaraan> getImageKendaraan() {
-        return imageKendaraan;
+    public String getJenis_Kendaraan() {
+        return jenis_Kendaraan;
     }
 
-    public void setImageKendaraan(List<ImageKendaraan> imageKendaraan) {
-        this.imageKendaraan = imageKendaraan;
+    public void setJenis_Kendaraan(String jenis_Kendaraan) {
+        this.jenis_Kendaraan = jenis_Kendaraan;
     }
 
-    public List<Rating> getRating() {
-        return rating;
+    public String getNopol_Kendaraan() {
+        return Nopol_Kendaraan;
     }
 
-    public void setRating(List<Rating> rating) {
-        this.rating = rating;
+    public void setNopol_Kendaraan(String nopol_Kendaraan) {
+        Nopol_Kendaraan = nopol_Kendaraan;
     }
 
-    public String getJenisKendaraan() {
-        return jenisKendaraan;
+    public String getMerk_Kendaraan() {
+        return Merk_Kendaraan;
     }
 
-    public void setJenisKendaraan(String jenisKendaraan) {
-        this.jenisKendaraan = jenisKendaraan;
+    public void setMerk_Kendaraan(String merk_Kendaraan) {
+        Merk_Kendaraan = merk_Kendaraan;
     }
 
-    public String getMerkKendaraan() {
-        return merkKendaraan;
+    public int getTahun_Kendaraan() {
+        return Tahun_Kendaraan;
     }
 
-    public void setMerkKendaraan(String merkKendaraan) {
-        this.merkKendaraan = merkKendaraan;
+    public void setTahun_Kendaraan(int tahun_Kendaraan) {
+        Tahun_Kendaraan = tahun_Kendaraan;
     }
 
-    public String getModel() {
-        return model;
+    public String getWarna_Kendaraan() {
+        return Warna_Kendaraan;
     }
 
-    public void setModel(String model) {
-        this.model = model;
+    public void setWarna_Kendaraan(String warna_Kendaraan) {
+        Warna_Kendaraan = warna_Kendaraan;
     }
 
-    public String getNomorPlat() {
-        return nomorPlat;
+    public String getNoSTNK_Kendaraan() {
+        return NoSTNK_Kendaraan;
     }
 
-    public void setNomorPlat(String nomorPlat) {
-        this.nomorPlat = nomorPlat;
+    public void setNoSTNK_Kendaraan(String noSTNK_Kendaraan) {
+        NoSTNK_Kendaraan = noSTNK_Kendaraan;
     }
 
-    public String getWarna() {
-        return warna;
+    public String getKapasitas_Kendaraan() {
+        return Kapasitas_Kendaraan;
     }
 
-    public void setWarna(String warna) {
-        this.warna = warna;
+    public void setKapasitas_Kendaraan(String kapasitas_Kendaraan) {
+        Kapasitas_Kendaraan = kapasitas_Kendaraan;
     }
 
-    public int getTahun() {
-        return tahun;
+    public String getNoMesin_Kendaraan() {
+        return NoMesin_Kendaraan;
     }
 
-    public void setTahun(int tahun) {
-        this.tahun = tahun;
+    public void setNoMesin_Kendaraan(String noMesin_Kendaraan) {
+        NoMesin_Kendaraan = noMesin_Kendaraan;
     }
 
-    public String getNomorMesin() {
-        return nomorMesin;
+    public int getHargaSewa_Kendaraan() {
+        return HargaSewa_Kendaraan;
     }
 
-    public void setNomorMesin(String nomorMesin) {
-        this.nomorMesin = nomorMesin;
+    public void setHargaSewa_Kendaraan(int hargaSewa_Kendaraan) {
+        HargaSewa_Kendaraan = hargaSewa_Kendaraan;
     }
 
-    public String getTransmisi() {
-        return transmisi;
+    public int getMaksimalWaktu_Peminjaman() {
+        return MaksimalWaktu_Peminjaman;
     }
 
-    public void setTransmisi(String transmisi) {
-        this.transmisi = transmisi;
+    public void setMaksimalWaktu_Peminjaman(int maksimalWaktu_Peminjaman) {
+        MaksimalWaktu_Peminjaman = maksimalWaktu_Peminjaman;
     }
 
-    public int getHargaSewa() {
-        return hargaSewa;
+    public String getStatus_Kendaraan() {
+        return Status_Kendaraan;
     }
 
-    public void setHargaSewa(int hargaSewa) {
-        this.hargaSewa = hargaSewa;
+    public void setStatus_Kendaraan(String status_Kendaraan) {
+        Status_Kendaraan = status_Kendaraan;
     }
 
-    public String getKondisiKendaraan() {
-        return kondisiKendaraan;
+    public String getStatus_ValidasiKendaraan() {
+        return Status_ValidasiKendaraan;
     }
 
-    public void setKondisiKendaraan(String kondisiKendaraan) {
-        this.kondisiKendaraan = kondisiKendaraan;
+    public void setStatus_ValidasiKendaraan(String status_ValidasiKendaraan) {
+        Status_ValidasiKendaraan = status_ValidasiKendaraan;
     }
 
-    public String getStnk() {
-        return stnk;
+    public Kendaraan() {
     }
+    
 
-    public void setStnk(String stnk) {
-        this.stnk = stnk;
-    }
+    
 
-    public String getValid() {
-        return valid;
-    }
-
-    public void setValid(String valid) {
-        this.valid = valid;
-    }
-
-    public boolean isHidden() {
-        return hidden;
-    }
-
-    public void setHidden(boolean hidden) {
-        this.hidden = hidden;
-    }
+    
 }

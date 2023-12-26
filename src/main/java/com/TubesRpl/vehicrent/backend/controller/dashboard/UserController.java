@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.TubesRpl.vehicrent.backend.models.User;
-import com.TubesRpl.vehicrent.backend.payloads.requests.UserRequest;
 import com.TubesRpl.vehicrent.backend.payloads.response.Response;
 import com.TubesRpl.vehicrent.backend.services.BaseServices;
 
@@ -23,7 +22,7 @@ import ch.qos.logback.core.model.Model;
 @RequestMapping("dashboard/user")
 public class UserController {
     @Autowired
-    private BaseServices<UserRequest> display;
+    private BaseServices<User> display;
 
     @RequestMapping("/display")
     public ResponseEntity<?> index() {
@@ -38,7 +37,7 @@ public class UserController {
 }
     
     @PostMapping("/create")
-    public ResponseEntity<?> CreateAccount(@RequestBody UserRequest Userbaru, Model model) {
+    public ResponseEntity<?> CreateAccount(@RequestBody User Userbaru, Model model) {
         Response response = display.Create(Userbaru);
         if (response.getStatus() == HttpStatus.OK.value()) {
             return ResponseEntity.status(HttpStatus.CREATED).body(response);
@@ -48,7 +47,7 @@ public class UserController {
     }
 
     @PutMapping("/update/{id}")
-    public ResponseEntity<?> UpdateUser(@RequestBody UserRequest Userbaru, @PathVariable Integer id) {
+    public ResponseEntity<?> UpdateUser(@RequestBody User Userbaru, @PathVariable Integer id) {
         Response response = display.Update(id, Userbaru);
         return ResponseEntity.status(200).body(response);
     }

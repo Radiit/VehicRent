@@ -941,7 +941,6 @@ textarea {
   border: 1px solid #ccc;
   border-radius: 4px;
   margin-bottom: 16px;
-<<<<<<< HEAD
 }
 
 /*DELETE POP UP*/
@@ -1200,6 +1199,4 @@ textarea {
 .btn-register:hover {
   opacity: 0.7;
   transition: all 0.25s;
-=======
->>>>>>> 644ba2e1dd4165592c2a6daa37e69dee465ed180
 }

@@ -1,114 +1,77 @@
 package com.TubesRpl.vehicrent.backend.payloads.requests;
 
-import java.sql.Date;
-
 public class TransaksiRequest {
+    
+    private Integer ID_Transaksi;
+    private Integer ID_Regent;
+    private Integer ID_Client;
+    private Integer ID_Kendaraan;
+    private Integer Waktu_Pemesanan;
+    private Double Hargatotal_Pemesanan;
+    private String Status_Pemesanan;
+    private String virtualAccountNumber;
 
-    private int ID_Kendaraan;
-    private int ID_Regent;
-    private int ID_Client;
-    private String orderName;
-    private String phoneNumber;
-    private String pickUpAddress;
-    private String dropOffAddress;
-    private String destination;
-    private Date rentDateStart;
-    private Date rentDateEnd;
-
-    public TransaksiRequest(int ID_Kendaraan, int ID_Regent, int ID_Client, String orderName, String phoneNumber,
-            String pickUpAddress, String dropOffAddString, String destination, Date rentDateStart, Date rentDateEnd) {
-        this.ID_Kendaraan = ID_Kendaraan;
-        this.ID_Regent = ID_Regent;
-        this.ID_Client = ID_Client;
-        this.orderName = orderName;
-        this.phoneNumber = phoneNumber;
-        this.pickUpAddress = pickUpAddress;
-        this.dropOffAddress = dropOffAddString;
-        this.destination = destination;
-        this.rentDateStart = rentDateStart;
-        this.rentDateEnd = rentDateEnd;
+    public Integer getID_Transaksi() {
+        return ID_Transaksi;
     }
 
-    public TransaksiRequest() {
+    public void setID_Transaksi(Integer ID_Transaksi) {
+        this.ID_Transaksi = ID_Transaksi;
     }
 
-    public int getID_Kendaraan() {
-        return ID_Kendaraan;
-    }
-
-    public void setID_Kendaraan(int ID_Kendaraan) {
-        this.ID_Kendaraan = ID_Kendaraan;
-    }
-
-    public int getID_Regent() {
+    public Integer getID_Regent() {
         return ID_Regent;
     }
 
-    public void setID_Regent(int ID_Regent) {
+    public void setID_Regent(Integer ID_Regent) {
         this.ID_Regent = ID_Regent;
     }
 
-    public int getID_Client() {
+    public Integer getID_Client() {
         return ID_Client;
     }
 
-    public void setID_Client(int ID_Client) {
+    public void setID_Client(Integer ID_Client) {
         this.ID_Client = ID_Client;
     }
 
-    public String getOrderName() {
-        return orderName;
+    public Integer getID_Kendaraan() {
+        return ID_Kendaraan;
     }
 
-    public void setOrderName(String orderName) {
-        this.orderName = orderName;
+    public void setID_Kendaraan(Integer ID_Kendaraan) {
+        this.ID_Kendaraan = ID_Kendaraan;
     }
 
-    public String getPhoneNumber() {
-        return phoneNumber;
+    public Integer getWaktu_Pemesanan() {
+        return Waktu_Pemesanan;
     }
 
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
+    public void setWaktu_Pemesanan(Integer Waktu_Pemesanan) {
+        this.Waktu_Pemesanan = Waktu_Pemesanan;
     }
 
-    public String getPickUpAddress() {
-        return pickUpAddress;
+    public Double getHargatotal_Pemesanan() {
+        return Hargatotal_Pemesanan;
     }
 
-    public void setPickUpAddress(String pickUpAddress) {
-        this.pickUpAddress = pickUpAddress;
+    public void setHargatotal_Pemesanan(Double Hargatotal_Pemesanan) {
+        this.Hargatotal_Pemesanan = Hargatotal_Pemesanan;
     }
 
-    public String getDropOffAddress() {
-        return dropOffAddress;
+    public String getStatus_Pemesanan() {
+        return Status_Pemesanan;
     }
 
-    public void setDropOffAddress(String dropOffAddString) {
-        this.dropOffAddress = dropOffAddString;
+    public void setStatus_Pemesanan(String Status_Pemesanan) {
+        this.Status_Pemesanan = Status_Pemesanan;
     }
 
-    public String getDestination() {
-        return destination;
+    public String getVirtualAccountNumber() {
+        return virtualAccountNumber;
     }
 
-    public void setDestination(String destination) {
-        this.destination = destination;
-    }
-
-    public Date getRentDateStart() {
-        return rentDateStart;
-    }
-
-    public void setRentDateStart(Date rentDateStart) {
-        this.rentDateStart = rentDateStart;
-    }
-
-    public Date getRentDateEnd() {
-        return rentDateEnd;
-    }
-
-    public void setRentDateEnd(Date rentDateEnd) {
-        this.rentDateEnd = rentDateEnd;
+    public void setVirtualAccountNumber(String virtualAccountNumber) {
+        this.virtualAccountNumber = virtualAccountNumber;
     }
 }

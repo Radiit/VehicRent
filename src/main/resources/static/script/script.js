@@ -34,7 +34,6 @@ readMoreLink.addEventListener("click", function(event) {
     }
 });
 
-<<<<<<< HEAD
 //TOGGLE RATE
 function toggleRateCard() {
     var blur = document.getElementById('blur');
@@ -58,6 +57,3 @@ function toggleLogOut() {
     var logoutCard = document.getElementById('logout-card');
     logoutCard.style.display = (logoutCard.style.display === 'none' || logoutCard.style.display === '') ? 'block' : 'none';
 }
-=======
-
->>>>>>> 644ba2e1dd4165592c2a6daa37e69dee465ed180
