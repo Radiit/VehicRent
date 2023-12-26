@@ -28,4 +28,10 @@ public class ClientRequest {
     public void setIdRekomendasi(Integer ID_Rekomendasi) {
         this.idRekomendasi = ID_Rekomendasi;
     }
+
+    public ClientRequest(Integer NIK_User, String no_SIM, Integer ID_Rekomendasi) {
+        this.nik = NIK_User;
+        this.sim = no_SIM;
+        this.idRekomendasi = ID_Rekomendasi;
+    }
 }

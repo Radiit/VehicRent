@@ -15,7 +15,9 @@ public class UserRequest {
     private String ktp;
     private String fotoDiri;
 
-    public UserRequest(Integer NIK_User, String role_user, String nama_depan, String nama_belakang, String noTelepon, String kontakDarurat, Integer umur, String email, String Password, String alamat, String ktp, String fotoDiri) {
+    public UserRequest(Integer NIK_User, String role_user, String nama_depan, String nama_belakang, String noTelepon,
+            String kontakDarurat, Integer umur, String email, String Password, String alamat, String ktp,
+            String fotoDiri) {
         this.nik = NIK_User;
         this.role_user = role_user;
         this.nama_depan = nama_depan;

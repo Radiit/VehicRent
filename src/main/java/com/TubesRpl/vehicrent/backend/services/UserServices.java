@@ -72,32 +72,33 @@ public class UserServices implements BaseServices<UserRequest> {
             user.setUmur(request.getUmur());
             user.setEmail(request.getEmail());
             user.setPassword(request.getPassword());
+            user.setKtp(request.getKtp());
 
-            //ini nihhh hoowww
+            // ini nihhh hoowww
             // if (request.getKtp() != null) {
-            //     try {
-            //         String directory = "src/main/resources/static/uploads/images/ktp/";
-            //         String ktpFileName = directory + request.getKtp().getOriginalFilename(); // Ambil nama file
-            
-            //         File directoryPath = new File(directory);
-            
-            //         if (!directoryPath.exists()) {
-            //             directoryPath.mkdirs(); // Buat direktori jika belum ada
-            //         }
-            
-            //         File ktpFile = new File(ktpFileName);
-            
-            //         try {
-            //             request.getKtp().transferTo(ktpFile); // Simpan file
-            //             user.setKtp(ktpFileName); // Atur path file pada objek user
-            //         } catch (IOException e) {
-            //             e.printStackTrace();
-            //         }
-            //     } catch (IOException e) {
-            //         e.printStackTrace();
-            //     }
+            // try {
+            // String directory = "src/main/resources/static/uploads/images/ktp/";
+            // String ktpFileName = directory + request.getKtp().getOriginalFilename(); //
+            // Ambil nama file
+
+            // File directoryPath = new File(directory);
+
+            // if (!directoryPath.exists()) {
+            // directoryPath.mkdirs(); // Buat direktori jika belum ada
             // }
-            
+
+            // File ktpFile = new File(ktpFileName);
+
+            // try {
+            // request.getKtp().transferTo(ktpFile); // Simpan file
+            // user.setKtp(ktpFileName); // Atur path file pada objek user
+            // } catch (IOException e) {
+            // e.printStackTrace();
+            // }
+            // } catch (IOException e) {
+            // e.printStackTrace();
+            // }
+            // }
 
             user.setFotoDiri(request.getFotoDiri());
             user.setAlamat(request.getAlamat());
