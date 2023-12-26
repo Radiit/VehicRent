@@ -1,3 +1,4 @@
+
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
@@ -409,8 +410,9 @@
                         </div>
                     </div>
                 </div>
-                <a href="${pageContext.request.contextPath}/register-status"
-                    class="button-pilih align-items-center justify-content-center">Selanjutnya</a>
+                <a
+               
+                class="button-pilih align-items-center justify-content-center">Selanjutnya</a>
             </div>
         </div>
     </section>
@@ -430,33 +432,14 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
     -->
 <script>
-    document.addEventListener('DOMContentLoaded', function () {
-        var cardBodies = document.querySelectorAll('.card-body-js');
-
-        cardBodies.forEach(function (cardBody) {
-            cardBody.addEventListener('click', function () {
-                // Menghapus kelas 'inactive' dari semua card-body
-                cardBodies.forEach(function (c) {
-                    c.classList.remove('inactive');
-                });
-
-                // Menambahkan kelas 'inactive' pada card-body yang tidak diklik
-                cardBodies.forEach(function (c) {
-                    if (c !== cardBody) {
-                        c.classList.add('inactive');
-                    }
-                });
-            });
-        });
-    });
-
+document.addEventListener('DOMContentLoaded', function () {
     function preview(event, frameId, containerId) {
         var frame = document.getElementById(frameId);
         var container = document.getElementById(containerId);
         frame.src = URL.createObjectURL(event.target.files[0]);
         container.style.display = "block";
     }
-
+    
     function clearImage(frameId, inputId, containerId) {
         var frame = document.getElementById(frameId);
         var container = document.getElementById(containerId);
@@ -464,6 +447,49 @@
         frame.src = "";
         container.style.display = "none";
     }
+    var nextButton = document.querySelector('.button-pilih'); // Pilih tombol "Selanjutnya"
+
+    nextButton.addEventListener('click', function () {
+        var userData = JSON.parse(sessionStorage.getItem("userData")) || {}; // Mendapatkan data dari sessionStorage atau objek kosong jika tidak ada
+
+        var inputGambar = document.getElementById('formFile1');
+        var selectedFile = inputGambar.files[0];
+
+        var formData = new FormData();
+        formData.append('ktp', selectedFile);
+
+        userData.ktp = formData;
+
+        sessionStorage.setItem('userData', JSON.stringify(userData));
+
+        console.log(userData);
+
+        // Kirim data jika diperlukan
+        fetch('/dashboard/user/create', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(userData)
+        })
+        .then(response => {
+            if (response.ok) {
+                // Redirect ke halaman selanjutnya jika berhasil
+                window.location.href = '${pageContext.request.contextPath}/register-status';
+            } else {
+                // Tangani jika terjadi kesalahan
+                throw new Error('Something went wrong');
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            // Lakukan sesuatu, misalnya tampilkan pesan kesalahan kepada pengguna
+        });
+    });
+});
+
+
+    
 </script>
 
 </body>

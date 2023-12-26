@@ -112,7 +112,7 @@ public class UserController {
     }
 
     @PutMapping("/update/{id}")
-    public ResponseEntity<?> UpdateUser(@RequestBody UserRequest Userbaru, @PathVariable Integer id) {
+    public ResponseEntity<?> UpdateUser(@RequestBody User Userbaru, @PathVariable Integer id) {
         Response response = display.Update(id, Userbaru);
         return ResponseEntity.status(200).body(response);
     }

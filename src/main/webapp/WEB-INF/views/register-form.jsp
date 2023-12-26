@@ -456,15 +456,20 @@
                 </div>
 
                 <div class="input-fields">
-                  <label for="katasandi" class="form-label">Kata Sandi</label>
-                  <input type="katasandi" class="form-control" id="katasandi" placeholder="Masukkan Kata Sandi Anda" />
+                  <label for="password" class="form-label">Kata Sandi</label>
+                  <input type="password" class="form-control" id="katasandi" placeholder="Masukkan Kata Sandi Anda" />
                 </div>
               </div>
 
-              <div class="fields2">
-                <div class="input-fields2">
+              <div class="fields">
+                <div class="input-fields">
                   <label for="alamatlengkap" class="form-label">Alamat Lengkap</label>
                   <input type="alamatlengkap" class="form-control" id="alamatlengkap" placeholder="Masukkan Alamat Lengkap Anda" />
+                </div>
+
+                <div class="input-fields">
+                  <label for="NIK" class="form-label">Nomor Induk Kependudukan</label>
+                  <input type="nik" class="form-control" id="nik" placeholder="Masukkan NIK" />
                 </div>
               </div>
 
@@ -474,7 +479,7 @@
               </div>
 
               <!-- Button trigger modal -->
-              <button type="button" class="masuk btn" data-bs-toggle="modal" data-bs-target="#myModal" onclick="registerUser()">Masuk</button>
+              <button type="button" class="masuk btn" data-bs-toggle="modal" data-bs-target="#myModal" onclick="registerUser()">Registrasi</button>
 
               <div style="margin-top: 10px; margin-bottom: 100px">
                 <span class="d-inline">Sudah mempunyai akun? <a href="${pageContext.request.contextPath}/index" class="signup d-inline text-decoration-none">Masuk</a></span>
@@ -536,6 +541,8 @@
 
     <script>
       function registerUser() {
+        // console.log("ok");
+        var nik = document.getElementById("nik").value;
         var firstName = document.getElementById("namadepan").value;
         var lastName = document.getElementById("namabelakang").value;
         var phoneNumber = document.getElementById("nomortelepon").value;
@@ -544,45 +551,64 @@
         var email = document.getElementById("email").value;
         var password = document.getElementById("katasandi").value;
         var address = document.getElementById("alamatlengkap").value;
+        var fototerbaru = document.getElementById("fototerbaru").value;
 
         // Create an object with the user data
         var userData = {
-          firstName: firstName,
-          lastName: lastName,
-          phoneNumber: phoneNumber,
-          emergencyNumber: emergencyNumber,
-          age: age,
+          nik: nik,
+          role_user: null,
+          nama_depan: firstName,
+          nama_belakang: lastName,
+          noTelepon: phoneNumber,
+          kontakDarurat: emergencyNumber,
+          umur: parseInt(age),
           email: email,
           password: password,
-          address: address,
+          alamat: address,
+          ktp: null,
+          fotoDiri: fototerbaru,
         };
 
-        // Make a POST request to the '/register' endpoint
-        fetch("/register", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(userData),
-        })
-          .then((response) => {
-            if (response.ok) {
-              // Jika pendaftaran berhasil, tampilkan modal sukses dan redirect
-              var successModal = new bootstrap.Modal(document.getElementById("successModal"));
-              successModal.show();
-              setTimeout(function () {
-                window.location.href = "${pageContext.request.contextPath}/register-konfirmasi";
-              }, 2000);
-            } else {
-              // Jika ada kesalahan, tampilkan modal gagal
-              var errorModal = new bootstrap.Modal(document.getElementById("errorModal"));
-              errorModal.show();
-            }
-          })
+        var inputGambar = document.getElementById("fototerbaru");
+        var selectedFile = inputGambar.files[0];
 
-          .catch((error) => {
-            console.error("Error:", error);
-          });
+        var formData = new FormData();
+        formData.append("fotoDiri", selectedFile);
+
+        userData.formData = formData;
+
+        sessionStorage.setItem("userData", JSON.stringify(userData));
+
+        window.location.href = "${pageContext.request.contextPath}/register-konfirmasi";
+
+        // Make a POST request to the '/register' endpoint
+        // fetch("/dashboard/user/create", {
+        //   method: "POST",
+        //   headers: {
+        //     "Content-Type": "application/json",
+        //   },
+        //   body: JSON.stringify(userData),
+        // })
+        //   .then((response) => {
+        //     if (response.ok) {
+        //       var successModal = new bootstrap.Modal(
+        //         document.getElementById("successModal")
+        //       );
+        //       successModal.show();
+        //       setTimeout(function () {
+        //         window.location.href =
+        //           "${pageContext.request.contextPath}/register-konfirmasi";
+        //       }, 2000);
+        //     } else {
+        //       var errorModal = new bootstrap.Modal(
+        //         document.getElementById("errorModal")
+        //       );
+        //       errorModal.show();
+        //     }
+        //   })
+        //   .catch((error) => {
+        //     console.error("Error:", error);
+        //   });
       }
     </script>
   </body>
