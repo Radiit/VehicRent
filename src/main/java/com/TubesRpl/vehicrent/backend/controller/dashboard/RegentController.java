@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.TubesRpl.vehicrent.backend.payloads.requests.RegentRequest;
 import com.TubesRpl.vehicrent.backend.payloads.response.Response;
 import com.TubesRpl.vehicrent.backend.services.RegentServices;
+import com.TubesRpl.vehicrent.backend.services.BaseServices;
 
 
 @Controller

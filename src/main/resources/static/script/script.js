@@ -34,26 +34,4 @@ readMoreLink.addEventListener("click", function(event) {
     }
 });
 
-//TOGGLE RATE
-function toggleRateCard() {
-    var blur = document.getElementById('blur');
-    blur.classList.toggle('active');
-    var rateCard = document.getElementById('rate-card');
-    rateCard.style.display = (rateCard.style.display === 'none' || rateCard.style.display === '') ? 'block' : 'none';
-  }
 
-//TOGGLE DONE
-function toggleDoneCard() {
-    var blur = document.getElementById('blur');
-    blur.classList.toggle('active');
-    var doneCard = document.getElementById('done-card');
-    doneCard.style.display = (doneCard.style.display === 'none' || doneCard.style.display === '') ? 'block' : 'none';
-} 
-
-//TOGGLE LOGOUT
-function toggleLogOut() {
-    var blur = document.getElementById('blur');
-    blur.classList.toggle('active');
-    var logoutCard = document.getElementById('logout-card');
-    logoutCard.style.display = (logoutCard.style.display === 'none' || logoutCard.style.display === '') ? 'block' : 'none';
-}

@@ -17,6 +17,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.TubesRpl.vehicrent.backend.models.Kendaraan;
 import com.TubesRpl.vehicrent.backend.payloads.requests.KendaraanRequest;
 import com.TubesRpl.vehicrent.backend.payloads.response.Response;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import com.TubesRpl.vehicrent.backend.payloads.requests.KendaraanRequest;
+import com.TubesRpl.vehicrent.backend.payloads.response.Response;
+import com.TubesRpl.vehicrent.backend.services.BaseServices;
 import com.TubesRpl.vehicrent.backend.services.KendaraanServices;
 
 @Controller
@@ -41,7 +46,7 @@ public class KendaraanController {
     public ResponseEntity<?> CreateKendaraan(@RequestBody KendaraanRequest Kendaraanbaru, Model model) {
         Response response = kendaraanServices.Create(Kendaraanbaru);
         if (response.getStatus() == HttpStatus.OK.value()) {
-            return ResponseEntity.status(HttpStatus.CREATED).body(response);
+            return ResponseEntity.status(HttpStatus.OK).body(response.getData());
         } else {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
         }
@@ -63,5 +68,17 @@ public class KendaraanController {
         } else {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
         }
+    }
+
+    @GetMapping("/search")
+    public ResponseEntity<?> SearchKendaraan(@RequestParam("keyword") String keyword) {
+        Response response = kendaraanServices.search(keyword);
+        return ResponseEntity.status(200).body(response);
+    }
+
+    @RequestMapping("/displayByJenis/{jenis}")
+    public ResponseEntity<?> displayByJenis(@PathVariable String jenis) {
+        Response kendaraanByJenis = kendaraanServices.DisplayByJenis(jenis);
+        return ResponseEntity.status(200).body(kendaraanByJenis);
     }
 }

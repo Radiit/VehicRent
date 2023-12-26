@@ -51,14 +51,18 @@ public class ClientServices implements BaseServices<ClientRequest> {
             Client client = new Client();
             client.setUser(user);
             client.setSim(request.getSim());
+
             Rekomendasi rekomendasi = new Rekomendasi();
             rekomendasiServices.Create(rekomendasi);
+
             client.setRekomendasi(rekomendasi);
             client.setHidden(false);
             client.setValid("Pending");
             clientRepository.save(client);
+
             System.out.println("Create new client with id: " + client.getIdClient() + " and NIK: "
                     + client.getUser().getNIK_User());
+
             return new Response(HttpStatus.OK.value(), "Success", client);
         } catch (Exception e) {
             return new Response(HttpStatus.BAD_REQUEST.value(), "Failed", null);
@@ -117,5 +121,9 @@ public class ClientServices implements BaseServices<ClientRequest> {
         }
     }
 
+<<<<<<< HEAD
     
 }
+=======
+}
+>>>>>>> 252b601feb3ab0fdde2e1c5cd8700707e672f425
