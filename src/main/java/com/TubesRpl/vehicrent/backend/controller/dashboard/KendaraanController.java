@@ -14,20 +14,15 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-
-import com.TubesRpl.vehicrent.backend.payloads.requests.KendaraanRequest;
+import com.TubesRpl.vehicrent.backend.models.Kendaraan;
 import com.TubesRpl.vehicrent.backend.payloads.response.Response;
 import com.TubesRpl.vehicrent.backend.services.BaseServices;
-import com.TubesRpl.vehicrent.backend.services.KendaraanServices;
 
 @Controller
 @RequestMapping("dashboard/kendaraan")
 public class KendaraanController {
     @Autowired
-    private BaseServices<KendaraanRequest> display;
-    @Autowired
-    private KendaraanServices kendaraanServices;
+    private BaseServices<Kendaraan> display; 
 
     @RequestMapping("/display")
     public ResponseEntity<?> index() {
@@ -37,22 +32,22 @@ public class KendaraanController {
 
     @GetMapping("/display/{id}")
     public ResponseEntity<?> indexByID(@PathVariable Integer id) {
-        Response kendaraanByID = display.DisplayByID(id);
+        Response kendaraanByID = display.DisplayByID(id);;
         return ResponseEntity.status(kendaraanByID.getStatus()).body(kendaraanByID);
     }
 
     @PostMapping("/createkendaraan")
-    public ResponseEntity<?> CreateKendaraan(@RequestBody KendaraanRequest Kendaraanbaru, Model model) {
+    public ResponseEntity<?> CreateKendaraan(@RequestBody Kendaraan Kendaraanbaru, Model model) {
         Response response = display.Create(Kendaraanbaru);
         if (response.getStatus() == HttpStatus.OK.value()) {
-            return ResponseEntity.status(HttpStatus.OK).body(response.getData());
+            return ResponseEntity.status(HttpStatus.CREATED).body(response);
         } else {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
         }
     }
 
     @PutMapping("/updatekendaraan/{id}")
-    public ResponseEntity<?> UpdateKendaraan(@RequestBody KendaraanRequest Kendaraanbaru, @PathVariable Integer id) {
+    public ResponseEntity<?> UpdateKendaraan(@RequestBody Kendaraan Kendaraanbaru, @PathVariable Integer id) {
         Response response = display.Update(id, Kendaraanbaru);
         return ResponseEntity.status(200).body(response);
     }
@@ -67,17 +62,5 @@ public class KendaraanController {
         } else {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
         }
-    }
-
-    @GetMapping("/search")
-    public ResponseEntity<?> SearchKendaraan(@RequestParam("keyword") String keyword) {
-        Response response = kendaraanServices.search(keyword);
-        return ResponseEntity.status(200).body(response);
-    }
-
-    @RequestMapping("/displayByJenis/{jenis}")
-    public ResponseEntity<?> displayByJenis(@PathVariable String jenis) {
-        Response kendaraanByJenis = kendaraanServices.DisplayByJenis(jenis);
-        return ResponseEntity.status(200).body(kendaraanByJenis);
     }
 }

@@ -15,59 +15,35 @@ public class Client {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer idClient;
+    private Integer ID_Client;
 
     @ManyToOne
-    @JoinColumn(name = "nik", referencedColumnName = "nik")
+    @JoinColumn(name = "NIK_User", referencedColumnName = "NIK_User")
     private User user;
 
     @Column
-    private String sim;
-
-    @Column
-    private boolean hidden;
-
-    @Column
-    private String valid;
+    private String No_SIM;
 
     @ManyToOne
     @JoinColumn(name = "ID_Rekomendasi", referencedColumnName = "ID_Rekomendasi")
     private Rekomendasi rekomendasi;
 
-    public Client(Integer ID_Client, User user, String noSIM, Rekomendasi rekomendasi, boolean hidden, String valid) {
-        this.idClient = ID_Client;
+    public Client(Integer ID_Client, User user, String noSIM, Rekomendasi rekomendasi) {
+        this.ID_Client = ID_Client;
         this.user = user;
-        sim = noSIM;
+        No_SIM = noSIM;
         this.rekomendasi = rekomendasi;
-        this.hidden = hidden;
-        this.valid = valid;
     }
 
     public Client() {
     }
 
-    public void setValid(String valid) {
-        this.valid = valid;
+    public void setID_Client(Integer ID_Client) {
+        this.ID_Client = ID_Client;
     }
 
-    public String getValid() {
-        return valid;
-    }
-
-    public void setHidden(boolean hidden) {
-        this.hidden = hidden;
-    }
-
-    public boolean isHidden() {
-        return hidden;
-    }
-
-    public void setIdClient(Integer ID_Client) {
-        this.idClient = ID_Client;
-    }
-
-    public Integer getIdClient() {
-        return idClient;
+    public Integer getID_Client() {
+        return ID_Client;
     }
 
     public User getUser() {
@@ -86,12 +62,12 @@ public class Client {
         this.rekomendasi = rekomendasi;
     }
 
-    public String getSim() {
-        return sim;
+    public String getNoSIM() {
+        return No_SIM;
     }
 
-    public void setSim(String sim) {
-        this.sim = sim;
+    public void setNoSIM(String noSIM) {
+        No_SIM = noSIM;
     }
 
 }

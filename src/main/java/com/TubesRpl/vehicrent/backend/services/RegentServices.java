@@ -15,7 +15,7 @@ import com.TubesRpl.vehicrent.backend.payloads.requests.RegentRequest;
 import com.TubesRpl.vehicrent.backend.payloads.response.Response;
 
 @Service
-public class RegentServices implements BaseServices<RegentRequest> {
+public class RegentServices implements RoleServices<RegentRequest> {
     @Autowired
     private RegentRepository regentRepository;
 
@@ -24,28 +24,28 @@ public class RegentServices implements BaseServices<RegentRequest> {
 
     @Override
     public Response DisplayAllData() {
-        List<Regent> allRegent = regentRepository.findAllByHiddenFalse();
-        if (allRegent.isEmpty()) {
-            return new Response(HttpStatus.NOT_FOUND.value(), "Regent not found", null);
+        List<Regent> allRegent = new ArrayList<>();
+        regentRepository.findAll().forEach(allRegent::add);
+        for (Regent regent : allRegent) {
+            System.out.println("ID Regent: " + regent.getID_Regent());
+            System.out.println("NIK User: " + regent.getUser());
+            System.out.println("Norek Regent: " + regent.getNorek_Regent());
         }
-        System.out.println("Display all regent data");
         return new Response(HttpStatus.OK.value(), "Success", allRegent);
     }
 
     @Override
     public Response Create(RegentRequest request) {
         try {
-            User user = userrepository.findByHiddenFalseAndNik(request.getNik()).orElse(null);
+            User user = userrepository.findById(request.getNIK_User()).orElse(null);
             if (user == null) {
                 return new Response(HttpStatus.NOT_FOUND.value(), "User not found", request);
             }
             Regent regent = new Regent();
             regent.setUser(user);
-            regent.setListKendaraan(null);
-            regent.setHidden(false);
-            regent.setValid("Pending");
+            regent.setNorek_Regent(request.getNorek_Regent());
+            regent.setListKendaraan(request.getListKendaraan());
             regentRepository.save(regent);
-            System.out.println("Create new regent with id: " + regent.getIdRegent() + " and NIK: " + regent.getUser().getNIK_User());
             return new Response(HttpStatus.OK.value(), "Success", regent);
         } catch (Exception e) {
             return new Response(HttpStatus.BAD_REQUEST.value(), "Failed", request);
@@ -55,18 +55,12 @@ public class RegentServices implements BaseServices<RegentRequest> {
     @Override
     public Response Update(Integer id, RegentRequest request) {
         try {
-            Regent regent = regentRepository.findByHiddenFalseAndIdRegent(id).orElse(null);
+            Regent regent = regentRepository.findById(id).orElse(null);
             if (regent != null) {
-                User user = userrepository.findByHiddenFalseAndNik(request.getNik()).orElse(null);
-                if (user == null) {
-                    return new Response(HttpStatus.NOT_FOUND.value(), "User not found", request);
-                }
-                regent.setUser(user);
-                regent.setListKendaraan(null);
-                regent.setHidden(false);
-                regent.setValid("Pending");
+                regent.setUser(regent.getUser());
+                regent.setNorek_Regent(request.getNorek_Regent());
+                regent.setListKendaraan(request.getListKendaraan());
                 regentRepository.save(regent);
-                System.out.println("Update regent with id: " + regent.getIdRegent() + " and NIK: " + regent.getUser().getNIK_User());
                 return new Response(HttpStatus.OK.value(), "Success", regent);
             } else {
                 return new Response(HttpStatus.NOT_FOUND.value(), "Regent not found", request);
@@ -81,9 +75,7 @@ public class RegentServices implements BaseServices<RegentRequest> {
         try {
             Regent regent = regentRepository.findById(id).orElse(null);
             if (regent != null) {
-                regent.setHidden(true);
-                regentRepository.save(regent);
-                System.out.println("Delete regent with id: " + regent.getIdRegent());
+                regentRepository.delete(regent);
                 return new Response(HttpStatus.OK.value(), "Success", regent);
             } else {
                 return new Response(HttpStatus.NOT_FOUND.value(), "Regent not found", null);
@@ -96,9 +88,11 @@ public class RegentServices implements BaseServices<RegentRequest> {
     @Override
     public Response DisplayByID(Integer id) {
         try {
-            Regent regent = regentRepository.findByHiddenFalseAndIdRegent(id).orElse(null);
+            Regent regent = regentRepository.findById(id).orElse(null);
             if (regent != null) {
-                System.out.println("Display regent with id: " + regent.getIdRegent());
+                System.out.println("ID Regent: " + regent.getID_Regent());
+                System.out.println("NIK User: " + regent.getUser());
+                System.out.println("Norek Regent: " + regent.getNorek_Regent());
                 return new Response(HttpStatus.OK.value(), "Success", regent);
             } else {
                 return new Response(HttpStatus.NOT_FOUND.value(), "Regent not found", null);

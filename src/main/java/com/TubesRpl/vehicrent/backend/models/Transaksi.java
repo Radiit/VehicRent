@@ -1,8 +1,5 @@
 package com.TubesRpl.vehicrent.backend.models;
 
-import java.sql.Date;
-import java.time.LocalDateTime;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -18,7 +15,7 @@ public class Transaksi {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int idTransaksi;
+    private int ID_Transaksi;
 
     @ManyToOne
     @JoinColumn(name = "ID_Regent")
@@ -29,107 +26,42 @@ public class Transaksi {
     private Client client;
 
     @ManyToOne
-    @JoinColumn(name = "idKendaraan")
+    @JoinColumn(name = "ID_Kendaraan")
     private Kendaraan kendaraan;
 
     @Column
-    private String orderName;
+    private int Waktu_Pemesanan;
 
     @Column
-    private String phoneNumber;
+    private double Hargatotal_Pemesanan;
 
     @Column
-    private String pickUpAddress;
+    private String Status_Pemesanan;
 
     @Column
-    private String dropOffAddress;
+    private String virtualAccountNumber;
 
-    @Column
-    private String destination;
-
-    @Column
-    private Date rentDateStart;
-
-    @Column
-    private Date rentDateEnd;
-
-    @Column
-    private LocalDateTime dateTransaksi;
-
-    @Column
-    private long lamaSewa;
-
-    @Column
-    private int hargaTotal;
-
-    @Column
-    private String status;
-
-    @Column
-    private boolean hidden;
+    public Transaksi(int iD_Transaksi, Regent regent, Client client, Kendaraan kendaraan, int waktu_Pemesanan,
+            double hargatotal_Pemesanan, String status_Pemesanan, String virtualAccountNumber) {
+        ID_Transaksi = iD_Transaksi;
+        this.regent = regent;
+        this.client = client;
+        this.kendaraan = kendaraan;
+        Waktu_Pemesanan = waktu_Pemesanan;
+        Hargatotal_Pemesanan = hargatotal_Pemesanan;
+        Status_Pemesanan = status_Pemesanan;
+        this.virtualAccountNumber = virtualAccountNumber;
+    }
 
     public Transaksi() {
     }
 
-    public Transaksi(int ID_Transaksi, Regent regent, Client client, Kendaraan kendaraan, String orderName,
-            String phoneNumber, String pickUpAddress, String dropOffAddString, String destination, Date rentDateStart,
-            Date rentDateEnd, LocalDateTime dateTransaksi, int rentTotalDay, int hargaTotal, String status, boolean hidden) {
-        this.idTransaksi = ID_Transaksi;
-        this.regent = regent;
-        this.client = client;
-        this.kendaraan = kendaraan;
-        this.orderName = orderName;
-        this.phoneNumber = phoneNumber;
-        this.pickUpAddress = pickUpAddress;
-        this.dropOffAddress = dropOffAddString;
-        this.destination = destination;
-        this.rentDateStart = rentDateStart;
-        this.rentDateEnd = rentDateEnd;
-        this.dateTransaksi = dateTransaksi;
-        this.lamaSewa = rentTotalDay;
-        this.hargaTotal = hargaTotal;
-        this.status = status;
-        this.hidden = hidden;
+    public int getID_Transaksi() {
+        return ID_Transaksi;
     }
 
-    public String getStatus() {
-        return status;
-    }
-
-    public boolean isHidden() {
-        return hidden;
-    }
-
-    public void setHidden(boolean hidden){
-        this.hidden = hidden;
-    }
-
-    public void setStatus(String status){
-        this.status = status;
-    }
-
-    public long getLamaSewa() {
-        return lamaSewa;
-    }
-
-    public void setLamaSewa(long rentTotalDay) {
-        this.lamaSewa = rentTotalDay;
-    }
-
-    public int getHargaTotal() {
-        return hargaTotal;
-    }
-
-    public void setHargaTotal(int hargaTotal) {
-        this.hargaTotal = hargaTotal;
-    }
-
-    public int getIdTransaksi() {
-        return idTransaksi;
-    }
-
-    public void setIdTransaksi(int ID_Transaksi) {
-        this.idTransaksi = ID_Transaksi;
+    public void setID_Transaksi(int iD_Transaksi) {
+        ID_Transaksi = iD_Transaksi;
     }
 
     public Regent getRegent() {
@@ -156,67 +88,38 @@ public class Transaksi {
         this.kendaraan = kendaraan;
     }
 
-    public String getOrderName() {
-        return orderName;
+    public int getWaktu_Pemesanan() {
+        return Waktu_Pemesanan;
     }
 
-    public void setOrderName(String orderName) {
-        this.orderName = orderName;
+    public void setWaktu_Pemesanan(int waktu_Pemesanan) {
+        Waktu_Pemesanan = waktu_Pemesanan;
     }
 
-    public String getPhoneNumber() {
-        return phoneNumber;
+    public double getHargatotal_Pemesanan() {
+        return Hargatotal_Pemesanan;
     }
 
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
+    public void setHargatotal_Pemesanan(double hargatotal_Pemesanan) {
+        Hargatotal_Pemesanan = hargatotal_Pemesanan;
     }
 
-    public String getPickUpAddress() {
-        return pickUpAddress;
+    public String getStatus_Pemesanan() {
+        return Status_Pemesanan;
     }
 
-    public void setPickUpAddress(String pickUpAddress) {
-        this.pickUpAddress = pickUpAddress;
+    public void setStatus_Pemesanan(String status_Pemesanan) {
+        Status_Pemesanan = status_Pemesanan;
     }
 
-    public String getDropOffAddress() {
-        return dropOffAddress;
+    public String getVirtualAccountNumber() {
+        return virtualAccountNumber;
     }
 
-    public void setDropOffAddress(String dropOffAddString) {
-        this.dropOffAddress = dropOffAddString;
+    public void setVirtualAccountNumber(String virtualAccountNumber) {
+        this.virtualAccountNumber = virtualAccountNumber;
     }
 
-    public String getDestination() {
-        return destination;
-    }
-
-    public void setDestination(String destination) {
-        this.destination = destination;
-    }
-
-    public Date getRentDateStart() {
-        return rentDateStart;
-    }
-
-    public void setRentDateStart(Date rentDateStart) {
-        this.rentDateStart = rentDateStart;
-    }
-
-    public Date getRentDateEnd() {
-        return rentDateEnd;
-    }
-
-    public void setRentDateEnd(Date rentDateEnd) {
-        this.rentDateEnd = rentDateEnd;
-    }
-
-    public LocalDateTime getDateTransaksi() {
-        return dateTransaksi;
-    }
-
-    public void setDateTransaksi(LocalDateTime dateTransaksi) {
-        this.dateTransaksi = dateTransaksi;
-    }
+    
+    
 }
