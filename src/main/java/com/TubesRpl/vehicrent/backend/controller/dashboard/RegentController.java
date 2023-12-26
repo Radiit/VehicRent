@@ -12,14 +12,14 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import com.TubesRpl.vehicrent.backend.payloads.requests.RegentRequest;
 import com.TubesRpl.vehicrent.backend.payloads.response.Response;
-import com.TubesRpl.vehicrent.backend.services.RoleServices;
+import com.TubesRpl.vehicrent.backend.services.BaseServices;
 
 
 @Controller
 @RequestMapping("dashboard/regent")
 public class RegentController {
     @Autowired
-    private RoleServices<RegentRequest> regentServices;
+    private BaseServices<RegentRequest> regentServices;
 
     @RequestMapping("/display")
     public ResponseEntity<?> index() {
