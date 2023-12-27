@@ -551,7 +551,7 @@
                 <span class="d-inline"
                   >Sudah mempunyai akun?
                   <a
-                    href="${pageContext.request.contextPath}/index"
+                    href="${pageContext.request.contextPath}/login"
                     class="signup d-inline text-decoration-none"
                     >Masuk</a
                   ></span

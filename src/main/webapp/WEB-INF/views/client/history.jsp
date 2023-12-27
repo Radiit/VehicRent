@@ -23,7 +23,7 @@
         <a href="#"><img src="${pageContext.request.contextPath}/resources/img/logo.svg" alt="Logo"></a>
         <div>
           <ul id="navbar">
-            <li><a href="${pageContext.request.contextPath}/home">Home</a></li>
+            <li><a href="${pageContext.request.contextPath}/">Home</a></li>
             <li><a href="${pageContext.request.contextPath}/shop">Vehicle List</a></li>
             <li><a class="active" href="${pageContext.request.contextPath}/history">Rental History</a></li>
             <li><a href="language.html"><i class="fas fa-globe" style="color: #000000;"></i></a></li>
@@ -34,8 +34,7 @@
             <li id="lg-bag"><a th:href="@{/cart}"><i class="fa-solid fa-cart-shopping" style="color: #000000;"></i></a>
             </li>
             <li><a th:href="@{/notif}"><i class="fa-regular fa-envelope" style="color: #000000;"></i></a></li>
-            <li><a th:href="@{/profile}"><i class="fa-regular fa-user" style="color: #000000;"></i></a></li>
-            <a href="#" id="close"><i class="fa-solid fa-xmark" style="color: #000000;"></i></a>
+            <li><a href="/logout">Logout</a></li>
           </ul>
         </div>
         <div id="mobile">
@@ -84,15 +83,16 @@
                           </c:when>
                           <c:when test="${transaksi.status eq 'Done'}">
                             <h5 class="card-text"><strong>Status: <span style="color: green;">Done</span></strong></h5>
-                            <a href="${pageContext.request.contextPath}/something"><button>Rate</button></a>
+                            <!-- <a href="${pageContext.request.contextPath}/"><button>Rate</button></a> -->
+                            <a href="${pageContext.request.contextPath}/receipt/${transaksi.idTransaksi}"><button>Detail</button></a>
                           </c:when>
                           <c:when test="${transaksi.status eq 'OnGoing'}">
                             <h5 class="card-text"><strong>Status: <span style="color: green;">On Going</span></strong></h5>
-                            <a href="${pageContext.request.contextPath}/something"><button>Done</button></a>
+                            <a href="${pageContext.request.contextPath}/"><button>Done</button></a>
                           </c:when>
                           <c:when test="${transaksi.status eq 'Canceled'}">
                             <h5 class="card-text"><strong>Status: <span style="color: red;">Canceled</span></strong></h5>
-                            <a href="${pageContext.request.contextPath}/something"><button>Rent Again</button></a>
+                            <a href="${pageContext.request.contextPath}/"><button>Rent Again</button></a>
                           </c:when>
                           <c:otherwise>
                             <h5 class="card-text"><strong>Status: <span style="color: #FFA500;">Another

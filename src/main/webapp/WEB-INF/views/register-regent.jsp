@@ -538,8 +538,8 @@
                     .then(response => {
                         if (response.ok) {
                             // Redirect ke halaman selanjutnya jika berhasil
-                            sessionStorage.setItem('userData', JSON.stringify(response.data));
-                            window.location.href = '${pageContext.request.contextPath}/register-status';
+                            // sessionStorage.setItem('userData', JSON.stringify(response.data));
+                            window.location.href = '${pageContext.request.contextPath}/login';
                         } else {
                             // Tangani jika terjadi kesalahan
                             console.log(response);

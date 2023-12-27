@@ -577,7 +577,7 @@
                 .then(response => {
                     if (response.ok) {
                         // Redirect ke halaman selanjutnya jika berhasil
-                        window.location.href = '${pageContext.request.contextPath}/register-status';
+                        window.location.href = '${pageContext.request.contextPath}/login';
                     } else {
                         // Tangani jika terjadi kesalahan
                         console.log(response);

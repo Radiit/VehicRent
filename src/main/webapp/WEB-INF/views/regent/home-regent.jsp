@@ -21,7 +21,7 @@
             <ul id="navbar">
                 <li><a class="active" href="${pageContext.request.contextPath}/regent">Home</a></li>
                 <li><a href="${pageContext.request.contextPath}/list-regent">Vehicle List</a></li>
-                <li><a href="${pageContext.request.contextPath}/history-regent">Rental History</a></li>
+                <!-- <li><a href="${pageContext.request.contextPath}/history-regent">Rental History</a></li> -->
                 <li><a href="${pageContext.request.contextPath}/register-vehicle">Register Vehicle</a></li>
                 <li><a href="language.html"><i class="fas fa-globe" style="color: #000000;"></i></a></li>
                 <li>
@@ -30,7 +30,7 @@
                 <li id="lg-bag"><a href="cart.html"><i class="fa-solid fa-cart-shopping" style="color: #000000;"></i></a></li>
                 <li><a href="notif.html"><i class="fa-regular fa-envelope" style="color: #000000;"></i></a></li>
                 <li><a href="profile.html"><i class="fa-regular fa-user" style="color: #000000;"></i></a><li>
-                <li><a href="#" onclick="toggleLogOut()"><button>Logout</button></a></li>
+                <li><a href="/logout">Logout</a></li>
                 <a href="#" id="close"><i class="fa-solid fa-xmark" style="color: #000000;"></i></a>
             </ul>
         </div>
@@ -50,7 +50,7 @@
             <br>Competitive fees and promotional support for your products.
             <br>Maximize sales and partner with us for success.<br>
             <strong>YOU WILL BE COMPLETELY SATISFIED.</strong></p>
-            <a href="register.html"><button><b>Add Now</button></a>
+            <a href="/register-vehicle"><button><b>Add Now</button></a>
         </section>
 
         <section id="feature" class="seksi-p1">

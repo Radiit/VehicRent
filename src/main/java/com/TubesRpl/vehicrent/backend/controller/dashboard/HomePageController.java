@@ -9,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.TubesRpl.repository.KendaraanRepository;
 import com.TubesRpl.repository.TransaksiRepository;
@@ -191,4 +192,27 @@ public class HomePageController {
     public String productRegent(Model model, HttpSession session) {
         return "regent/history-regent";
     }
+
+    @RequestMapping("/receipt")
+    public String receipt(Model model, HttpSession session) {
+        Transaksi transaksi = (Transaksi) session.getAttribute("transaksi");
+
+        if (transaksi == null) {
+            return "redirect:/history";
+        }
+
+        model.addAttribute("transaksi", transaksi);
+
+        return "regent/detailsOrder-regent";
+    }
+
+    @RequestMapping("/receipt/{id}")
+    public String receiptWithId(@PathVariable Integer id, Model model, HttpSession session) {
+        Transaksi transaksi = transaksiRepository.findByHiddenFalseAndIdTransaksi(id).get();
+
+        session.setAttribute("transaksi", transaksi);
+
+        return "redirect:/receipt";
+    }
+
 }
