@@ -19,12 +19,21 @@
                 padding: 8px;
                 margin-bottom: 20px;
             }
+
+            .pritn {
+                width: 600px;
+                height: 48px;
+                flex-shrink: 0;
+                color: #04266a;
+                margin-top: 24px;
+                font: 700 16px/1.2 poppins, sans-serif;
+            }
         </style>
     </head>
 
     <body>
 
-         
+        
 
         <div id="blur">
             <section id="confirmation" class="seksi-p1">
@@ -61,7 +70,7 @@
                                 </div>
                             </div>
                         </div>
-
+                        <a href="#" onclick="print()">Print</a>
             </section>
         </div>
 
