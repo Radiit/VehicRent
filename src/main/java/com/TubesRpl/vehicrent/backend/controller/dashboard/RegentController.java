@@ -88,8 +88,10 @@ public class RegentController {
             String fotoDiriFilename = "fotoDiri-" + UUID.randomUUID().toString() +
                     fotoDiriExtension;
 
-            Path ktpOutDir = Paths.get("/home/abd/Test/VehicRent/uploads/ktp");
-            Path fotoDiriOutDir = Paths.get("/home/abd/Test/VehicRent/uploads/foto_diri");
+            Path ktpOutDir = Paths
+                    .get("D:\\code\\java\\dari nizam\\VehicRent\\src\\main\\resources\\static\\img\\uploads\\ktp");
+            Path fotoDiriOutDir = Paths.get(
+                    "D:\\code\\java\\dari nizam\\VehicRent\\src\\main\\resources\\static\\img\\uploads\\foto_diri");
 
             if (!Files.exists(ktpOutDir)) {
                 Files.createDirectories(ktpOutDir);

@@ -107,9 +107,9 @@ public class KendaraanController {
             String stnkImageExt = stnkImageOrigFile.substring(stnkImageOrigFile.lastIndexOf("."));
             String stnkImageNewFile = "stnk-" + UUID.randomUUID().toString() + stnkImageExt;
 
-            String rootPath = "/home/abd/Test/radit/VehicRent/src/main";
-            String fotoKendaraanPath = "/resources/static/img/kendaraan/";
-            String stnkImagePath = "/resources/static/img/stnk/";
+            String rootPath = "C:\\Users\\Radit\\Downloads\\vehicrentFix\\VehicRent\\src\\main";
+            String fotoKendaraanPath = "\\resources\\static\\img\\uploads\\kendaraan\\";
+            String stnkImagePath = "\\resources\\static\\img\\uploads\\stnk\\";
 
             Path fotoKendaraanOutDir = Paths.get(rootPath + fotoKendaraanPath);
             Path stnkImageOutDir = Paths.get(rootPath + stnkImagePath);
@@ -125,8 +125,8 @@ public class KendaraanController {
             fotoKendaraan.transferTo(fotoKendaraanOutDir.resolve(fotoKendaraanNewFile).toFile());
             stnkImage.transferTo(stnkImageOutDir.resolve(stnkImageNewFile).toFile());
 
-            Kendaraanbaru.setMainImage("resources/img/kendaraan/" + fotoKendaraanNewFile);
-            Kendaraanbaru.setStnk("resources/img/stnk/" + stnkImageNewFile);
+            Kendaraanbaru.setMainImage("/resources/img/uploads/kendaraan/" + fotoKendaraanNewFile);
+            Kendaraanbaru.setStnk("/resources/img/uploads/stnk/" + stnkImageNewFile);
 
             // return ResponseEntity.status(200).body(Kendaraanbaru);
 
