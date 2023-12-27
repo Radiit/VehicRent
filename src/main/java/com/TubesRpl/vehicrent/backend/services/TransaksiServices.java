@@ -121,11 +121,11 @@ public class TransaksiServices implements BaseServices<TransaksiRequest> {
         try {
             Transaksi transaksi = transaksiRepository.findById(id).orElse(null);
             if (transaksi != null) {
-                Client client = clientRepository.findById(request.getID_Client()).orElse(null);
+                User client = userRepository.findByHiddenFalseAndNik(request.getID_Client()).orElse(null);
                 if (client == null) {
                     return new Response(HttpStatus.NOT_FOUND.value(), "Client not found", request);
                 }
-                Regent regent = regentRepository.findById(request.getID_Regent()).orElse(null);
+                User regent = userRepository.findByHiddenFalseAndNik(request.getID_Regent()).orElse(null);
                 if (regent == null) {
                     return new Response(HttpStatus.NOT_FOUND.value(), "Regent not found", request);
                 }
