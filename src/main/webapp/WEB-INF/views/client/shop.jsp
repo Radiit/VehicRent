@@ -127,7 +127,8 @@
                     const div = document.createElement('div');
                     div.className = 'pro';
                     div.onclick = function() {
-                        window.location.href = `${pageContext.request.contextPath}/product/${vehicle.idKendaraan}`;
+                        window.location.href = "/product/" + vehicle.idKendaraan;
+                        console.log("/product/" + vehicle.idKendaraan);
                     };
 
                     const img = document.createElement('img');

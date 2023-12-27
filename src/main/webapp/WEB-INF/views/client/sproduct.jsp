@@ -296,7 +296,6 @@ pageEncoding="UTF-8"%>
 
             console.log("kendaraan: ${kendaraan}");
 
-
             // Munculin form order
             function toggleOrderForm() {
                 var blur = document.getElementById('blur');
@@ -331,7 +330,7 @@ pageEncoding="UTF-8"%>
                 var rentDateEnd = dateRange.split(" to ")[1];
                 var data = {
                     "ID_Kendaraan": parseInt("${kendaraan.idKendaraan}"), // ID kendaraan yang dipilih
-                    "ID_Regent": 200, // ID regent yang dipilih
+                    "ID_Regent": parseInt("${kendaraan.regent.idRegent}"), // ID regent yang dipilih
                     "orderName": orderName,
                     "phoneNumber": phoneNumber,
                     "pickUpAddress": pickUpAddress,

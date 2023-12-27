@@ -63,17 +63,15 @@ public class TransaksiServices implements BaseServices<TransaksiRequest> {
         Transaksi transaksi = new Transaksi();
 
         try {
-            // Client client =
-            // clientRepository.findByHiddenFalseAndIdClient(request.getID_Client()).orElse(null);
-            User client = userRepository.findByHiddenFalseAndNik(request.getID_Client()).orElse(null);
+            Client client = clientRepository.findByHiddenFalseAndIdClient(request.getID_Client()).orElse(null);
+            // User client = userRepository.findById(request.getID_Client()).orElse(null);
 
             if (client == null) {
                 return new Response(HttpStatus.NOT_FOUND.value(), "Client not found", request);
             }
 
-            // Regent regent =
-            // regentRepository.findByHiddenFalseAndIdRegent(request.getID_Regent()).orElse(null);
-            User regent = userRepository.findByHiddenFalseAndNik(request.getID_Regent()).orElse(null);
+            Regent regent = regentRepository.findByHiddenFalseAndIdRegent(request.getID_Regent()).orElse(null);
+            // User regent = userRepository.findById(request.getID_Regent()).orElse(null);
 
             if (regent == null) {
                 return new Response(HttpStatus.NOT_FOUND.value(), "Regent not found", request);

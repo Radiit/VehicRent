@@ -25,7 +25,6 @@ public class Kendaraan {
     private int idKendaraan;
 
     @ManyToOne
-    @JsonIgnore
     @JoinColumn(name = "ID_Regent")
     private Regent regent;
 

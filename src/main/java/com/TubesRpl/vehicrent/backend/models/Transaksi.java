@@ -21,12 +21,12 @@ public class Transaksi {
     private int idTransaksi;
 
     @ManyToOne
-    // @JoinColumn(name = "ID_Regent")
-    private User regent;
+    @JoinColumn(name = "ID_Regent")
+    private Regent regent;
 
     @ManyToOne
-    // @JoinColumn(name = "ID_Client")
-    private User client;
+    @JoinColumn(name = "ID_Client")
+    private Client client;
 
     @ManyToOne
     @JoinColumn(name = "idKendaraan")
@@ -71,7 +71,7 @@ public class Transaksi {
     public Transaksi() {
     }
 
-    public Transaksi(int ID_Transaksi, User regent, User client, Kendaraan kendaraan, String orderName,
+    public Transaksi(int ID_Transaksi, Regent regent, Client client, Kendaraan kendaraan, String orderName,
             String phoneNumber, String pickUpAddress, String dropOffAddString, String destination, Date rentDateStart,
             Date rentDateEnd, LocalDateTime dateTransaksi, int rentTotalDay, int hargaTotal, String status,
             boolean hidden) {
@@ -133,19 +133,19 @@ public class Transaksi {
         this.idTransaksi = ID_Transaksi;
     }
 
-    public User getRegent() {
+    public Regent getRegent() {
         return regent;
     }
 
-    public void setRegent(User regent) {
+    public void setRegent(Regent regent) {
         this.regent = regent;
     }
 
-    public User getClient() {
+    public Client getClient() {
         return client;
     }
 
-    public void setClient(User client) {
+    public void setClient(Client client) {
         this.client = client;
     }
 
