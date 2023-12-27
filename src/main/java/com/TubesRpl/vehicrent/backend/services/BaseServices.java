@@ -15,4 +15,5 @@ public interface BaseServices<TypeModel> {
     Response DisplayAllData();
 
     Response DisplayByID(Integer id);
+
 }

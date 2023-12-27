@@ -16,6 +16,6 @@ public interface RegentRepository extends JpaRepository<Regent, Integer> {
 
     Optional<Regent> findByHiddenFalseAndIdRegent(Integer idRegent);
 
-    @Query(value = "SELECT * FROM user WHERE role_user = \"Regent\" AND hidden = false AND nik = ?1", nativeQuery = true)
+    @Query(value = "SELECT * FROM regent WHERE hidden = false AND nik = ?1", nativeQuery = true)
     Optional<Regent> findByHiddenFalseAndNikClient(Integer nikClient);
 }

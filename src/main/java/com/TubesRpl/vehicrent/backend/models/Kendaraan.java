@@ -29,6 +29,9 @@ public class Kendaraan {
     @JoinColumn(name = "ID_Regent")
     private Regent regent;
 
+    // @JoinColumn(name = "id")
+    // private Rental rental;
+
     @OneToMany(mappedBy = "kendaraan", cascade = CascadeType.ALL)
     private List<ImageKendaraan> imageKendaraan;
 

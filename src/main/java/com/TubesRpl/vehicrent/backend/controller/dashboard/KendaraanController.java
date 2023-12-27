@@ -15,11 +15,22 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestPart;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.util.UUID;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 import com.TubesRpl.vehicrent.backend.payloads.requests.KendaraanRequest;
 import com.TubesRpl.vehicrent.backend.payloads.response.Response;
 import com.TubesRpl.vehicrent.backend.services.BaseServices;
 import com.TubesRpl.vehicrent.backend.services.KendaraanServices;
+import com.TubesRpl.vehicrent.backend.models.Regent;
+import com.TubesRpl.vehicrent.backend.models.User;
+
+import jakarta.servlet.http.HttpSession;
 
 @Controller
 @RequestMapping("dashboard/kendaraan")
@@ -41,14 +52,100 @@ public class KendaraanController {
         return ResponseEntity.status(kendaraanByID.getStatus()).body(kendaraanByID);
     }
 
-    @PostMapping("/createkendaraan")
-    public ResponseEntity<?> CreateKendaraan(@RequestBody KendaraanRequest Kendaraanbaru, Model model) {
-        Response response = display.Create(Kendaraanbaru);
-        if (response.getStatus() == HttpStatus.OK.value()) {
-            return ResponseEntity.status(HttpStatus.OK).body(response.getData());
-        } else {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
+    @GetMapping("/display/regent/{id}")
+    public ResponseEntity<?> indexByRegentID(@PathVariable Integer id) {
+        Response kendaraanByID = kendaraanServices.DisplayByRegentID(id);
+        return ResponseEntity.status(kendaraanByID.getStatus()).body(kendaraanByID);
+    }
+
+    @PostMapping("/create")
+    // public ResponseEntity<?> CreateKendaraan(@RequestPart String jenisKendaraan,
+    // Model model,
+    // HttpSession session) {
+    public ResponseEntity<?> CreateKendaraan(
+            @RequestPart("jenisKendaraan") String jenisKendaraan,
+            @RequestPart("merk") String merk,
+            @RequestPart("hargaSewa") String hargaSewa,
+            @RequestPart("model") String modelKendaraan,
+            @RequestPart("platNomor") String platNomor,
+            @RequestPart("warna") String warna,
+            @RequestPart("tahunKendaraan") String tahunKendaraan,
+            @RequestPart("nomorMesin") String nomorMesin,
+            @RequestPart("transmisi") String transmisi,
+            @RequestPart("kondisiKendaraan") String kondisiKendaraan,
+            @RequestPart("fotoKendaraan") MultipartFile fotoKendaraan,
+            @RequestPart("stnkImage") MultipartFile stnkImage,
+            Model model,
+            HttpSession session) {
+
+        Regent user = (Regent) session.getAttribute("regent");
+
+        if (user == null) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Unauthorized");
         }
+
+        KendaraanRequest Kendaraanbaru = new KendaraanRequest();
+
+        Kendaraanbaru.setIdRegent(user.getIdRegent());
+        Kendaraanbaru.setJenisKendaraan(jenisKendaraan);
+        Kendaraanbaru.setHargaSewa(Integer.parseInt(hargaSewa));
+        Kendaraanbaru.setMerkKendaraan(merk);
+        Kendaraanbaru.setModel(modelKendaraan);
+        Kendaraanbaru.setNomorPlat(platNomor);
+        Kendaraanbaru.setWarna(warna);
+        Kendaraanbaru.setTahun(Integer.parseInt(tahunKendaraan));
+        Kendaraanbaru.setNomorMesin(nomorMesin);
+        Kendaraanbaru.setTransmisi(transmisi);
+        Kendaraanbaru.setKondisiKendaraan(kondisiKendaraan);
+
+        try {
+            String fotoKendaraanOrigFile = fotoKendaraan.getOriginalFilename();
+            String fotoKendaraanExt = fotoKendaraanOrigFile.substring(fotoKendaraanOrigFile.lastIndexOf("."));
+            String fotoKendaraanNewFile = "vehicle-" + UUID.randomUUID().toString() + fotoKendaraanExt;
+
+            String stnkImageOrigFile = stnkImage.getOriginalFilename();
+            String stnkImageExt = stnkImageOrigFile.substring(stnkImageOrigFile.lastIndexOf("."));
+            String stnkImageNewFile = "stnk-" + UUID.randomUUID().toString() + stnkImageExt;
+
+            String rootPath = "/home/abd/Test/radit/VehicRent/src/main";
+            String fotoKendaraanPath = "/resources/static/img/kendaraan/";
+            String stnkImagePath = "/resources/static/img/stnk/";
+
+            Path fotoKendaraanOutDir = Paths.get(rootPath + fotoKendaraanPath);
+            Path stnkImageOutDir = Paths.get(rootPath + stnkImagePath);
+
+            if (!Files.exists(fotoKendaraanOutDir)) {
+                Files.createDirectories(fotoKendaraanOutDir);
+            }
+
+            if (!Files.exists(stnkImageOutDir)) {
+                Files.createDirectories(stnkImageOutDir);
+            }
+
+            fotoKendaraan.transferTo(fotoKendaraanOutDir.resolve(fotoKendaraanNewFile).toFile());
+            stnkImage.transferTo(stnkImageOutDir.resolve(stnkImageNewFile).toFile());
+
+            Kendaraanbaru.setMainImage("resources/img/kendaraan/" + fotoKendaraanNewFile);
+            Kendaraanbaru.setStnk("resources/img/stnk/" + stnkImageNewFile);
+
+            // return ResponseEntity.status(200).body(Kendaraanbaru);
+
+            Response response = display.Create(Kendaraanbaru);
+            if (response.getStatus() == HttpStatus.OK.value()) {
+                return ResponseEntity.status(HttpStatus.OK).body(response);
+            } else {
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
+            }
+
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+        }
+        // Response response = display.Create(Kendaraanbaru);
+        // if (response.getStatus() == HttpStatus.OK.value()) {
+        // return ResponseEntity.status(HttpStatus.OK).body(response.getData());
+        // } else {
+        // return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
+        // }
     }
 
     @PutMapping("/updatekendaraan/{id}")

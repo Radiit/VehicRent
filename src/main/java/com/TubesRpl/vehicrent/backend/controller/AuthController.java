@@ -1,5 +1,7 @@
 package com.TubesRpl.vehicrent.backend.controller;
 
+import org.eclipse.tags.shaded.org.apache.regexp.RE;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -8,7 +10,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.TubesRpl.repository.ClientRepository;
+import com.TubesRpl.repository.RegentRepository;
 import com.TubesRpl.repository.UserRepository;
+import com.TubesRpl.vehicrent.backend.models.Client;
+import com.TubesRpl.vehicrent.backend.models.Regent;
 import com.TubesRpl.vehicrent.backend.models.User;
 
 import jakarta.servlet.http.HttpSession;
@@ -21,6 +27,12 @@ public class AuthController {
     public AuthController(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
+
+    @Autowired
+    private RegentRepository regentRepository;
+
+    @Autowired
+    private ClientRepository clientRepository;
 
     @RequestMapping("/login")
     public String showLoginPage(Model model, HttpSession session) {
@@ -44,7 +56,22 @@ public class AuthController {
 
         if (user != null && user.getPassword().equals(Password)) {
             session.setAttribute("user", user);
+            session.setAttribute("role", user.getRole_user());
+
+            if (user.getRole_user().equals("Regent")) {
+                Regent regent = (Regent) regentRepository.findByHiddenFalseAndNikClient(user.getNIK_User()).get();
+                session.setAttribute("regent", regent);
+
+                return "redirect:/regent";
+
+            } else if (user.getRole_user().equals("Client")) {
+                Client client = (Client) clientRepository.findByHiddenFalseAndNikClient(user.getNIK_User()).get();
+                session.setAttribute("client", client);
+                return "redirect:/";
+            }
+
             return "redirect:/home";
+
         } else {
             model.addAttribute("error", "Invalid credentials");
             return "login"; // Kembali ke halaman login

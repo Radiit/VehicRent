@@ -5,26 +5,57 @@ import java.util.List;
 import io.micrometer.common.lang.Nullable;
 
 public class KendaraanRequest {
-    
+    @Nullable
     private int idRegent;
+
+    @Nullable
+    private int idRental;
 
     @Nullable
     private List<ImageKendaraanRequest> imageKendaraan;
 
+    @Nullable
     private String jenisKendaraan;
+
+    @Nullable
     private String merkKendaraan;
+
+    @Nullable
     private String model;
+
+    @Nullable
     private String nomorPlat;
+
+    @Nullable
     private String warna;
+
+    @Nullable
     private int tahun;
+
+    @Nullable
     private String nomorMesin;
+
+    @Nullable
     private String transmisi;
+
+    @Nullable
     private int hargaSewa;
+
+    @Nullable
     private String kondisiKendaraan;
+
+    @Nullable
     private String stnk;
 
-    public KendaraanRequest(int idRegent, List<ImageKendaraanRequest> imageKendaraan, String jenisKendaraan, String merkKendaraan, String model, String nomorPlat, String warna, int tahun, String nomorMesin, String transmisi, int hargaSewa, String kondisiKendaraan, String stnk) {
+    @Nullable
+    private String mainImage;
+
+    public KendaraanRequest(int idRegent, int idRental, List<ImageKendaraanRequest> imageKendaraan,
+            String jenisKendaraan,
+            String merkKendaraan, String model, String nomorPlat, String warna, int tahun, String nomorMesin,
+            String transmisi, int hargaSewa, String kondisiKendaraan, String stnk, String mainImage) {
         this.idRegent = idRegent;
+        this.idRental = idRental;
         this.imageKendaraan = imageKendaraan;
         this.jenisKendaraan = jenisKendaraan;
         this.merkKendaraan = merkKendaraan;
@@ -37,9 +68,26 @@ public class KendaraanRequest {
         this.hargaSewa = hargaSewa;
         this.kondisiKendaraan = kondisiKendaraan;
         this.stnk = stnk;
+        this.mainImage = mainImage;
     }
 
     public KendaraanRequest() {
+    }
+
+    public int getIdRental() {
+        return idRental;
+    }
+
+    public void setIdRental(int idRental) {
+        this.idRental = idRental;
+    }
+
+    public String getMainImage() {
+        return mainImage;
+    }
+
+    public void setMainImage(@Nullable String mainImage) {
+        this.mainImage = mainImage;
     }
 
     // Setter and Getter methods

@@ -19,7 +19,7 @@
         <a href="#"><img src="${pageContext.request.contextPath}resources/img/logo.svg" class="logo"></a>
         <div>
             <ul id="navbar">
-                <li><a class="active" href="${pageContext.request.contextPath}/home-regent">Home</a></li>
+                <li><a class="active" href="${pageContext.request.contextPath}/regent">Home</a></li>
                 <li><a href="${pageContext.request.contextPath}/list-regent">Vehicle List</a></li>
                 <li><a href="${pageContext.request.contextPath}/history-regent">Rental History</a></li>
                 <li><a href="${pageContext.request.contextPath}/register-vehicle">Register Vehicle</a></li>

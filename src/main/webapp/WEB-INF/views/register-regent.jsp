@@ -528,7 +528,7 @@
                 // sessionStorage.setItem('userData', JSON.stringify(userData));
 
                 // Kirim data jika diperlukan
-                fetch('/dashboard/user/create', {
+                fetch('/dashboard/regent/create', {
                     method: 'POST',
                     headers: {
                         // 'Content-Type': 'multipart/form-data'

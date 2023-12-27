@@ -75,20 +75,23 @@ public class KendaraanServices implements BaseServices<KendaraanRequest> {
             kendaraan.setStnk(request.getStnk());
             kendaraan.setTotalOrdered(0);
             kendaraan.setTotalRating(0);
+            kendaraan.setMainImage(request.getMainImage());
 
-            List<ImageKendaraan> listImageKendaraan = new ArrayList<>();
-            for (ImageKendaraanRequest imageKendaraanRequest : request.getImageKendaraan()) {
-                ImageKendaraan imageKendaraan = new ImageKendaraan();
-                imageKendaraan.setImage(imageKendaraanRequest.getImage());
-                imageKendaraan.setKendaraan(kendaraan);
-                listImageKendaraan.add(imageKendaraan);
-            }
-            kendaraan.setImageKendaraan(listImageKendaraan);
+            // List<ImageKendaraan> listImageKendaraan = new ArrayList<>();
+            // for (ImageKendaraanRequest imageKendaraanRequest :
+            // request.getImageKendaraan()) {
+            // ImageKendaraan imageKendaraan = new ImageKendaraan();
+            // imageKendaraan.setImage(imageKendaraanRequest.getImage());
+            // imageKendaraan.setKendaraan(kendaraan);
+            // listImageKendaraan.add(imageKendaraan);
+            // }
+            // kendaraan.setImageKendaraan(listImageKendaraan);
 
-            List<Rating> listRating = new ArrayList<>();
-            kendaraan.setRating(listRating);
-            kendaraan.setValid("Pending");
-            kendaraan.setHidden(false);
+            // List<Rating> listRating = new ArrayList<>();
+            // kendaraan.setRating(listRating);
+            // kendaraan.setValid("Pending");
+            // kendaraan.setHidden(false);
+
             kendaraanRepository.save(kendaraan);
 
             return new Response(HttpStatus.OK.value(), "Success", kendaraan);
@@ -114,6 +117,7 @@ public class KendaraanServices implements BaseServices<KendaraanRequest> {
                 kendaraanTarget.setHargaSewa(request.getHargaSewa());
                 kendaraanTarget.setKondisiKendaraan(request.getKondisiKendaraan());
                 kendaraanTarget.setStnk(request.getStnk());
+                kendaraanTarget.setMainImage(request.getMainImage());
 
                 List<ImageKendaraan> listImageKendaraan = new ArrayList<>();
                 for (ImageKendaraanRequest imageKendaraanRequest : request.getImageKendaraan()) {
@@ -170,6 +174,19 @@ public class KendaraanServices implements BaseServices<KendaraanRequest> {
     public Response DisplayByJenis(String jenis) {
         try {
             List<Kendaraan> kendaraan = kendaraanRepository.findByHiddenFalseAndJenisKendaraan(jenis);
+            if (kendaraan != null) {
+                return new Response(HttpStatus.OK.value(), "Success", kendaraan);
+            } else {
+                return new Response(HttpStatus.NOT_FOUND.value(), "Kendaraan not found", null);
+            }
+        } catch (Exception e) {
+            return new Response(HttpStatus.BAD_REQUEST.value(), "Failed", null);
+        }
+    }
+
+    public Response DisplayByRegentID(Integer id) {
+        try {
+            List<Kendaraan> kendaraan = kendaraanRepository.findAllByHiddenFalseAndIdRegent(id);
             if (kendaraan != null) {
                 return new Response(HttpStatus.OK.value(), "Success", kendaraan);
             } else {

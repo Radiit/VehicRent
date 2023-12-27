@@ -16,7 +16,7 @@ public interface ClientRepository extends JpaRepository<Client, Integer> {
 
     Optional<Client> findByHiddenFalseAndIdClient(Integer idClient);
 
-    @Query(value = "SELECT * FROM user WHERE role_user = \"Client\" AND hidden = false AND nik = ?1", nativeQuery = true)
+    @Query(value = "SELECT * FROM client WHERE hidden = false AND nik = ?1", nativeQuery = true)
     Optional<Client> findByHiddenFalseAndNikClient(Integer nikClient);
 
 }

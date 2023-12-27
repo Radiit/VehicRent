@@ -13,8 +13,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.TubesRpl.repository.KendaraanRepository;
 import com.TubesRpl.repository.TransaksiRepository;
 import com.TubesRpl.vehicrent.backend.models.Kendaraan;
+import com.TubesRpl.vehicrent.backend.models.Regent;
 import com.TubesRpl.vehicrent.backend.models.Transaksi;
 import com.TubesRpl.vehicrent.backend.models.User;
+import com.mysql.cj.log.Log;
+
+import ch.qos.logback.classic.Logger;
 
 import org.springframework.web.bind.annotation.PathVariable;
 import jakarta.servlet.http.HttpSession;
@@ -153,5 +157,38 @@ public class HomePageController {
         } catch (Exception e) {
             return "error-page";
         }
+    }
+
+    // regent
+    @RequestMapping("/regent")
+    public String homeRegent(Model model, HttpSession session) {
+        return "regent/home-regent";
+    }
+
+    @RequestMapping("/list-regent")
+    public String regentHistory(Model model, HttpSession session) {
+        Regent regent = (Regent) session.getAttribute("regent");
+
+        if (regent == null) {
+            return "redirect:/login";
+        }
+
+        // List<Kendaraan> kendaraan =
+        // kendaraanRepository.findAllByHiddenFalseAndIdRegent(regent.getIdRegent());
+        // model.addAttribute("listKendaraan", kendaraan);
+
+        model.addAttribute("idRegent", regent.getIdRegent());
+
+        return "regent/list-regent";
+    }
+
+    @RequestMapping("/register-vehicle")
+    public String registerVehicle(Model model, HttpSession session) {
+        return "regent/register-vehicle";
+    }
+
+    @RequestMapping("/history-regent")
+    public String productRegent(Model model, HttpSession session) {
+        return "regent/history-regent";
     }
 }

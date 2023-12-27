@@ -290,8 +290,7 @@ pageEncoding="UTF-8"%>
             
             selectedJenisKendaraan.innerHTML = "${kendaraan.jenisKendaraan}";
             SelectedMainImage.src = "${kendaraan.mainImage}";
-            selectedRental.innerHTML = "${kendaraan.kondisiKendaraan}";
-            // selectedRental.innerHTML = "${kendaraan.regent.namaRegent}";
+            selectedRental.innerHTML = "${kendaraan.kondisiKendaraan}"; 
             selectedJenisKendaraan.innerHTML = "${kendaraan.jenisKendaraan}";
             selectedHargaSewa.innerHTML = "Rp ${kendaraan.hargaSewa}";
 
