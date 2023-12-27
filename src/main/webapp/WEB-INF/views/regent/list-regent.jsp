@@ -18,9 +18,9 @@
         <a href="#"><img src="${pageContext.request.contextPath}resources/img/logo.svg" class="logo"></a>
         <div>
             <ul id="navbar">
-                <li><a href="${pageContext.request.contextPath}/home-regent">Home</a></li>
+                <li><a href="${pageContext.request.contextPath}/regent">Home</a></li>
                 <li><a class="active" href="${pageContext.request.contextPath}/list-regent">Vehicle List</a></li>
-                <li><a href="${pageContext.request.contextPath}/history-regent">Rental History</a></li>
+                <!-- <li><a href="${pageContext.request.contextPath}/history-regent">Rental History</a></li> -->
                 <li><a href="${pageContext.request.contextPath}/register-vehicle">Register Vehicle</a></li>
                 <li><a href="language.html"><i class="fas fa-globe" style="color: #000000;"></i></a></li>
                 <li>
@@ -29,7 +29,7 @@
                 <li id="lg-bag"><a href="cart.html"><i class="fa-solid fa-cart-shopping" style="color: #000000;"></i></a></li>
                 <li><a href="notif.html"><i class="fa-regular fa-envelope" style="color: #000000;"></i></a></li>
                 <li><a href="profile.html"><i class="fa-regular fa-user" style="color: #000000;"></i></a></li>
-                <li><a href="#" onclick="toggleLogOut()"><button>Logout</button></a></li>
+                <li><a href="/logout">Logout</a></li>
                 <a href="#" id="close"><i class="fa-solid fa-xmark" style="color: #000000;"></i></a>
             </ul>
         </div>

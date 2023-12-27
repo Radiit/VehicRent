@@ -38,7 +38,7 @@ public class AuthController {
     public String showLoginPage(Model model, HttpSession session) {
         try {
             if (session.getAttribute("user") != null) {
-                return "redirect:/home";
+                return "redirect:/";
             } else {
                 return "/login";
             }
@@ -70,7 +70,7 @@ public class AuthController {
                 return "redirect:/";
             }
 
-            return "redirect:/home";
+            return "redirect:/";
 
         } else {
             model.addAttribute("error", "Invalid credentials");

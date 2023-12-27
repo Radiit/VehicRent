@@ -1,5 +1,9 @@
 package com.TubesRpl.vehicrent.backend.controller.dashboard;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,10 +17,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestPart;
 
+import com.TubesRpl.repository.TransaksiRepository;
+import com.TubesRpl.vehicrent.backend.models.Client;
+import com.TubesRpl.vehicrent.backend.models.Transaksi;
 import com.TubesRpl.vehicrent.backend.models.User;
 import com.TubesRpl.vehicrent.backend.payloads.requests.TransaksiRequest;
 import com.TubesRpl.vehicrent.backend.payloads.response.Response;
 import com.TubesRpl.vehicrent.backend.services.BaseServices;
+// import com.TubesRpl.vehicrent.backend.services.PdfGenerateServices;
 import com.TubesRpl.vehicrent.backend.services.TransaksiServices;
 
 import jakarta.servlet.http.HttpSession;
@@ -26,6 +34,12 @@ import jakarta.servlet.http.HttpSession;
 public class TransaksiController {
     @Autowired
     private TransaksiServices transaksiServices;
+
+    @Autowired
+    private TransaksiRepository transaksiRepository;
+
+    // @Autowired
+    // private PdfGenerateServices pdfGenerateServices;
 
     @RequestMapping("/display")
     public ResponseEntity<?> index() {
@@ -44,13 +58,13 @@ public class TransaksiController {
             @RequestBody TransaksiRequest transaksibaru,
             HttpSession session) {
 
-        User userSession = (User) session.getAttribute("user");
+        Client userSession = (Client) session.getAttribute("client");
 
         if (userSession == null) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("You are not logged in!");
         }
 
-        transaksibaru.setID_Client(userSession.getNIK_User());
+        transaksibaru.setID_Client(userSession.getIdClient());
 
         Response response = transaksiServices.Create(transaksibaru);
 
@@ -83,5 +97,25 @@ public class TransaksiController {
     public ResponseEntity<?> UpdateStatus(@PathVariable Integer id, @RequestPart("status") String status) {
         Response response = transaksiServices.UpdateStatus(id, status);
         return ResponseEntity.status(200).body(response);
+    }
+
+    @PostMapping("/generate/{id}")
+    public ResponseEntity<?> GeneratePdf(@PathVariable Integer id) {
+        Transaksi transaksi = transaksiRepository.findById(id).orElse(null);
+
+        if (transaksi == null) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Transaksi not found!");
+        }
+
+        Map<String, Object> data = new HashMap<>();
+
+        data.put("transaksi", (Transaksi) transaksi);
+
+        String fileName = "receipt-" + UUID.randomUUID().toString() + ".pdf";
+        // pdfGenerateServices.generatePdfFile("receipt", data, fileName);
+
+        Response response = new Response(HttpStatus.OK.value(), "Success generate pdf!", fileName);
+
+        return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 }
