@@ -121,26 +121,6 @@ public class HomePageController {
         }
     }
 
-    @RequestMapping("/history")
-    public String history(Model model, HttpSession session) {
-        try {
-            if (session.getAttribute("user") != null) {
-                User user = (User) session.getAttribute("user");
-                if (user.getRole_user().equals("Regent") || user.getRole_user().equals("Client")) {
-                    List<Transaksi> transaksi = transaksiRepository.findAllByHiddenFalse();
-                    model.addAttribute("listTransaksi", transaksi);
-                    return "client/history";
-                } else if (user.getRole_user().equals("Staff")) {
-                    return "redirect:/dashboard/staff";
-                }
-            }
-
-            return "error-page";
-        } catch (Exception e) {
-            return "error-page";
-        }
-    }
-
     @RequestMapping("/konfirmasi")
     public String konfirmasi(Model model, HttpSession session) {
         try {
@@ -187,8 +167,44 @@ public class HomePageController {
         return "regent/register-vehicle";
     }
 
+    @RequestMapping("/history")
+    public String history(Model model, HttpSession session) {
+        try {
+            if (session.getAttribute("user") != null) {
+                User user = (User) session.getAttribute("user");
+                if (user.getRole_user().equals("Regent") || user.getRole_user().equals("Client")) {
+                    List<Transaksi> transaksi = transaksiRepository.findAllByHiddenFalse();
+                    model.addAttribute("listTransaksi", transaksi);
+                    return "client/history";
+                } else if (user.getRole_user().equals("Staff")) {
+                    return "redirect:/dashboard/staff";
+                }
+            }
+
+            return "error-page";
+        } catch (Exception e) {
+            return "error-page";
+        }
+    }
+
     @RequestMapping("/history-regent")
     public String productRegent(Model model, HttpSession session) {
-        return "regent/history-regent";
+        try {
+            if (session.getAttribute("user") != null) {
+                User user = (User) session.getAttribute("user");
+                if (user.getRole_user().equals("Regent") || user.getRole_user().equals("Client")) {
+                    Regent regent = (Regent) session.getAttribute("regent");
+                    List<Transaksi> transaksi = transaksiRepository.findAllByHiddenFalseAndRegent(regent);
+                    model.addAttribute("listTransaksi", transaksi);
+                    return "regent/history-regent";
+                } else if (user.getRole_user().equals("Staff")) {
+                    return "redirect:/dashboard/staff";
+                }
+            }
+
+            return "error-page";
+        } catch (Exception e) {
+            return "error-page";
+        }
     }
 }
