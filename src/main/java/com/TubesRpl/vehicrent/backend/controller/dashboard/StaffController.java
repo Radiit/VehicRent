@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -16,14 +17,19 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.TubesRpl.repository.ClientRepository;
 import com.TubesRpl.repository.KendaraanRepository;
+import com.TubesRpl.repository.RegentRepository;
 import com.TubesRpl.repository.UserRepository;
+import com.TubesRpl.vehicrent.backend.models.Client;
 import com.TubesRpl.vehicrent.backend.models.Kendaraan;
 import com.TubesRpl.vehicrent.backend.models.Regent;
 import com.TubesRpl.vehicrent.backend.models.Transaksi;
 import com.TubesRpl.vehicrent.backend.models.User;
 import com.TubesRpl.vehicrent.backend.payloads.requests.StaffRequest;
 import com.TubesRpl.vehicrent.backend.payloads.response.Response;
+import com.TubesRpl.vehicrent.backend.services.ClientServices;
+import com.TubesRpl.vehicrent.backend.services.KendaraanServices;
 import com.TubesRpl.vehicrent.backend.services.StaffServices;
 
 import jakarta.servlet.http.HttpSession;
@@ -34,12 +40,18 @@ public class StaffController {
 
     @Autowired
     private StaffServices staffServices;
-
     @Autowired
     private KendaraanRepository kendaraanRepository;
-
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private ClientRepository clientRepository;
+    @Autowired
+    private RegentRepository regentRepository;
+    @Autowired
+    private KendaraanServices kendaraanServices;
+    @Autowired
+    private ClientServices clientServices;
 
     @RequestMapping("/display")
     public ResponseEntity<?> index() {
@@ -151,4 +163,39 @@ public class StaffController {
             return "error-page";
         }
     }
+
+    @RequestMapping("/validasiKendaraan}")
+    public String validKendaraan(@RequestParam Boolean status, Integer id, HttpSession session, Model model) {
+        try {
+            staffServices.validasiKendaraan(id, status);
+            return "redirect:/dashboard/staff/validasiKendaraan";
+        } catch (Exception e) {
+            return "error-page";
+        }
+    }
+
+    @RequestMapping("/validasiClient")
+    public String validClient(@RequestParam Boolean status, Integer nik, HttpSession session, Model model) {
+        try {
+            staffServices.validasiUser(nik, status);
+            Client client = clientRepository.findByHiddenFalseAndNikClient(nik).get();
+            staffServices.validasiClient(client.getIdClient(), status);
+            return "redirect:/dashboard/staff/validasiUser";
+        } catch (Exception e) {
+            return "error-page";
+        }
+    }
+
+    @RequestMapping("/validasiRegent")
+    public String validRegent(@RequestParam Boolean status, Integer nik, HttpSession session, Model model) {
+        try {
+            staffServices.validasiUser(nik, status);
+            Regent regent = regentRepository.findByHiddenFalseAndNikClient(nik).get();
+            staffServices.validasiRegent(regent.getIdRegent(), status);
+            return "redirect:/dashboard/staff/validasiUser";
+        } catch (Exception e) {
+            return "error-page";
+        }
+    }
+
 }
