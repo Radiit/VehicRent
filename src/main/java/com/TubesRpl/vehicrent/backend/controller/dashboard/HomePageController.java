@@ -43,7 +43,7 @@ public class HomePageController {
                 if (user.getRole_user().equals("Regent") || user.getRole_user().equals("Client")) {
                     return "client/home";
                 } else if (user.getRole_user().equals("Staff")) {
-                    return "redirect:/dashboard/staff";
+                    return "redirect:/dashboard/staff/validasiKendaraan";
                 }
             }
 
@@ -63,7 +63,7 @@ public class HomePageController {
                 } else if(user.getRole_user().equals("Client")){
                     return "client/home";
                 } else if (user.getRole_user().equals("Staff")) {
-                    return "redirect:/dashboard/staff";
+                    return "redirect:/dashboard/staff/validasiKendaraan";
                 }
             } else if (session.getAttribute("user") == null) {
                 return "redirect:/login";
@@ -84,7 +84,7 @@ public class HomePageController {
                         user.getRole_user().equals("Client")) {
                     return "client/shop";
                 } else if (user.getRole_user().equals("Staff")) {
-                    return "redirect:/dashboard/staff";
+                    return "redirect:/dashboard/staff/validasiKendaraan";
                 }
             }
             return "redirect:/login";
@@ -132,7 +132,7 @@ public class HomePageController {
                 if (user.getRole_user().equals("Regent") || user.getRole_user().equals("Client")) {
                     return "client/konfirmasi";
                 } else if (user.getRole_user().equals("Staff")) {
-                    return "redirect:/dashboard/staff";
+                    return "redirect:/dashboard/staff/validasiKendaraan";
                 }
             }
 
@@ -180,7 +180,7 @@ public class HomePageController {
                     model.addAttribute("listTransaksi", transaksi);
                     return "client/history";
                 } else if (user.getRole_user().equals("Staff")) {
-                    return "redirect:/dashboard/staff";
+                    return "redirect:/dashboard/staff/validasiKendaraan";
                 }
             }
 
@@ -201,7 +201,7 @@ public class HomePageController {
                     model.addAttribute("listTransaksi", transaksi);
                     return "regent/history-regent";
                 } else if (user.getRole_user().equals("Staff")) {
-                    return "redirect:/dashboard/staff";
+                    return "redirect:/dashboard/staff/validasiKendaraan";
                 }
             }
 

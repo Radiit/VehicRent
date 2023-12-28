@@ -76,6 +76,7 @@ public class KendaraanServices implements BaseServices<KendaraanRequest> {
             kendaraan.setTotalOrdered(0);
             kendaraan.setTotalRating(0);
             kendaraan.setMainImage(request.getMainImage());
+            kendaraan.setValid("Pending");
 
             // List<ImageKendaraan> listImageKendaraan = new ArrayList<>();
             // for (ImageKendaraanRequest imageKendaraanRequest :
