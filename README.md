@@ -37,6 +37,8 @@ Make sure to have the following software installed in your local environment bef
 
     After the installation is complete, create a MySQL schema named tubesrpl or simply follow the JDBC URL:
 
+    - *application.properties*
+
     ```properties
     spring.datasource.url=jdbc:mysql://localhost:3306/tubesrpl
     ```
