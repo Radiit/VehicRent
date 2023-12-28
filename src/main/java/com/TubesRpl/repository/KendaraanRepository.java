@@ -48,4 +48,6 @@ public interface KendaraanRepository extends JpaRepository<Kendaraan, Integer> {
     // 'Valid' ORDER BY k.totalOrdered DESC")
     @Query("SELECT k FROM Kendaraan k WHERE k.hidden = false ORDER BY k.totalOrdered DESC")
     List<Kendaraan> findAllSortedByTotalOrderedAndValid();
+
+    List<Kendaraan> findAllByValid(String valid);
 }
