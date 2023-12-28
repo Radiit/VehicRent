@@ -31,6 +31,7 @@ import com.TubesRpl.vehicrent.backend.services.KendaraanServices;
 import com.TubesRpl.vehicrent.backend.models.Regent;
 import com.TubesRpl.vehicrent.backend.models.User;
 
+import jakarta.servlet.ServletContext;
 import jakarta.servlet.http.HttpSession;
 
 @Controller
@@ -38,10 +39,14 @@ import jakarta.servlet.http.HttpSession;
 public class KendaraanController {
     @Autowired
     private BaseServices<KendaraanRequest> display;
+
     @Autowired
     private KendaraanServices kendaraanServices;
     @Value("${upload.directory}")
     private String uploadDir;
+
+    @Autowired
+    ServletContext context;
 
     @RequestMapping("/display")
     public ResponseEntity<?> index() {
@@ -110,9 +115,10 @@ public class KendaraanController {
             String stnkImageExt = stnkImageOrigFile.substring(stnkImageOrigFile.lastIndexOf("."));
             String stnkImageNewFile = "stnk-" + UUID.randomUUID().toString() + stnkImageExt;
 
+            String absolutePath = context.getRealPath("/");
 
-            Path fotoKendaraanOutDir = Paths.get(uploadDir + "/kendaraan");
-            Path stnkImageOutDir = Paths.get(uploadDir + "/stnk");
+            Path fotoKendaraanOutDir = Paths.get(absolutePath + "/../resources/static/public" + "/kendaraan");
+            Path stnkImageOutDir = Paths.get(absolutePath + "/../resources/static/public" + "/stnk");
 
             if (!Files.exists(fotoKendaraanOutDir)) {
                 Files.createDirectories(fotoKendaraanOutDir);
@@ -125,8 +131,8 @@ public class KendaraanController {
             fotoKendaraan.transferTo(fotoKendaraanOutDir.resolve(fotoKendaraanNewFile).toFile());
             stnkImage.transferTo(stnkImageOutDir.resolve(stnkImageNewFile).toFile());
 
-            Kendaraanbaru.setMainImage("/resources/img/uploads/kendaraan/" + fotoKendaraanNewFile);
-            Kendaraanbaru.setStnk("/resources/img/uploads/stnk/" + stnkImageNewFile);
+            Kendaraanbaru.setMainImage("/resources/public/kendaraan/" + fotoKendaraanNewFile);
+            Kendaraanbaru.setStnk("/resources/public/stnk/" + stnkImageNewFile);
 
             // return ResponseEntity.status(200).body(Kendaraanbaru);
 

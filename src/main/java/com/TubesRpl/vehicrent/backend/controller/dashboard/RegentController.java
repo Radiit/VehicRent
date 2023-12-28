@@ -28,6 +28,7 @@ import com.TubesRpl.vehicrent.backend.services.BaseServices;
 import com.TubesRpl.vehicrent.backend.services.UserServices;
 
 import ch.qos.logback.core.model.Model;
+import jakarta.servlet.ServletContext;
 import jakarta.servlet.http.HttpSession;
 
 @Controller
@@ -41,6 +42,9 @@ public class RegentController {
 
     @Autowired
     private UserServices userServices;
+
+    @Autowired
+    ServletContext context;
 
     @RequestMapping("/display")
     public ResponseEntity<?> index() {
@@ -88,10 +92,10 @@ public class RegentController {
             String fotoDiriFilename = "fotoDiri-" + UUID.randomUUID().toString() +
                     fotoDiriExtension;
 
-            Path ktpOutDir = Paths
-                    .get("D:\\code\\java\\dari nizam\\VehicRent\\src\\main\\resources\\static\\img\\uploads\\ktp");
-            Path fotoDiriOutDir = Paths.get(
-                    "D:\\code\\java\\dari nizam\\VehicRent\\src\\main\\resources\\static\\img\\uploads\\foto_diri");
+            String absolutePath = context.getRealPath("/");
+
+            Path ktpOutDir = Paths.get(absolutePath + "/../resources/static/public" + "/ktp");
+            Path fotoDiriOutDir = Paths.get(absolutePath + "/../resources/static/public" + "/foto_diri");
 
             if (!Files.exists(ktpOutDir)) {
                 Files.createDirectories(ktpOutDir);
@@ -104,6 +108,11 @@ public class RegentController {
             ktpRaw.transferTo(ktpOutDir.resolve(ktpFilename).toFile());
             fotoDiriRaw.transferTo(fotoDiriOutDir.resolve(fotoDiriFilename).toFile());
 
+            System.out.println("UPLOAD");
+            System.out.println(absolutePath);
+            System.out.println(fotoDiriOutDir.resolve(fotoDiriFilename).toFile());
+            System.out.println(ktpOutDir.resolve(ktpFilename));
+
             Response response = userServices.Create(new UserRequest(
                     Integer.parseInt(nik),
                     role_user,
@@ -115,8 +124,8 @@ public class RegentController {
                     email,
                     password,
                     alamat,
-                    ktpOutDir.resolve(ktpFilename).toString(),
-                    fotoDiriOutDir.resolve(fotoDiriFilename).toString()));
+                    "/resources/public/ktp/" + ktpFilename,
+                    "/resources/public/foto_diri/" + fotoDiriFilename));
 
             if (response.getStatus() != HttpStatus.OK.value()) {
                 return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);

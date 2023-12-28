@@ -54,7 +54,7 @@ public class AuthController {
 
         User user = userRepository.findByEmail(Email_User);
 
-        if (user != null && user.getPassword().equals(Password)) {
+        if (user != null && user.getPassword().equals(Password)) { // && user.getValid().equals("Valid")
             session.setAttribute("user", user);
             session.setAttribute("role", user.getRole_user());
 
