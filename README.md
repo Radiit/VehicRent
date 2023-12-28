@@ -17,7 +17,7 @@ Vehic Rent is a web-based online vehicle rental service that can be accessed any
 ### Installation Steps
 Pastikan untuk memiliki perangkat lunak berikut terpasang di lingkungan lokal Anda sebelum memulai:
 
-- **Java** (versi 17)
+- Java (versi 17)
 1. **Clone the Repository**
 
     ```bash
@@ -30,7 +30,16 @@ Pastikan untuk memiliki perangkat lunak berikut terpasang di lingkungan lokal An
     cd your-project
     ```
 
-3. **Run the Application**
+3. **Creating a schema**
+
+    After the installation is complete, create a mysql schema named tubesrpl. Or simply follow the jdbc url
+
+- *application.properties*
+```application.properties
+spring.datasource.url=jdbc:mysql://localhost:3306/tubesrpl
+```
+
+4. **Run the Application**
 
     Once the installation is complete, run the application using the command:
 
@@ -38,7 +47,7 @@ Pastikan untuk memiliki perangkat lunak berikut terpasang di lingkungan lokal An
     ./mvnw spring-boot:run
     ```
 
-6. **Access the Application**
+5. **Access the Application**
 
     Open a browser and access the application via the URL:
 
