@@ -95,6 +95,8 @@ public class StaffController {
         }
     }
 
+    // Sesuaikan aja mapping sama return jspnya
+    // PAKAI INI BUAT MAPPING
     @RequestMapping("/validasiKendaraan")
     public String validateKendaraan(Model model, HttpSession session) {
         try {
@@ -115,16 +117,17 @@ public class StaffController {
         }
     }
 
-    //PAKAI INI BUAT MAPPING
+    // Sesuaikan aja mapping sama return jspnya
+    // PAKAI INI BUAT MAPPING
     @RequestMapping("/validasiUser")
     public String validateUser(Model model, HttpSession session) {
         try {
             if (session.getAttribute("user") != null) {
                 User user = (User) session.getAttribute("user");
                 if (user.getRole_user().equals("Staff")) {
-                    List<User> listClient = userRepository.findAllByRoleAndValidAndNotHidden("Client","Pending");
-                    List<User> listRegent = userRepository.findAllByRoleAndValidAndNotHidden("Regent","Pending");
-                    //loop to get all client nik
+                    List<User> listClient = userRepository.findAllByRoleAndValidAndNotHidden("Client", "Pending");
+                    List<User> listRegent = userRepository.findAllByRoleAndValidAndNotHidden("Regent", "Pending");
+                    // loop to get all client nik
                     List<Integer> listClientNik = new ArrayList<>();
                     for (User user2 : listClient) {
                         listClientNik.add(user2.getNIK_User());
@@ -134,7 +137,7 @@ public class StaffController {
                         listRegentNik.add(user2.getNIK_User());
                     }
                     model.addAttribute("nikRegent", listRegentNik);
-                    model.addAttribute("nikClient",listClientNik);
+                    model.addAttribute("nikClient", listClientNik);
                     model.addAttribute("listRegent", listRegent);
                     model.addAttribute("listClient", listClient);
                     return "staff/validasi-kendaraan";

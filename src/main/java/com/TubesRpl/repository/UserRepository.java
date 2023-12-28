@@ -20,7 +20,7 @@ public interface UserRepository extends JpaRepository<User, Integer> {
 
     Optional<User> findByHiddenFalseAndNik(Integer Nik);
 
-    // Custom query to fetch users based on role_user, valid status, and hidden status
+    // Custom query to fetch users based on role_user, valid status, dan hidden status
     @Query("SELECT u FROM User u WHERE u.role_user = :role AND u.valid = :status AND u.hidden = false")
     List<User> findAllByRoleAndValidAndNotHidden(
         @Param("role") String role,
