@@ -33,10 +33,14 @@ import com.TubesRpl.vehicrent.backend.services.RatingServices;
 import com.TubesRpl.repository.UserRepository;
 
 import ch.qos.logback.core.model.Model;
+import jakarta.servlet.ServletContext;
 
 @Controller
 @RequestMapping("dashboard/client")
 public class ClientController {
+
+    @Autowired
+    ServletContext context;
 
     @Autowired
     private ClientServices clientServices;
@@ -100,9 +104,11 @@ public class ClientController {
             String simFilename = "sim-" + UUID.randomUUID().toString() +
                     simExtension;
 
-            Path ktpOutDir = Paths.get("/home/abd/Test/VehicRent/uploads/ktp");
-            Path fotoDiriOutDir = Paths.get("/home/abd/Test/VehicRent/uploads/foto_diri");
-            Path simOutDir = Paths.get("/home/abd/Test/VehicRent/uploads/sim");
+            String absolutePath = context.getRealPath("/");
+
+            Path ktpOutDir = Paths.get(absolutePath + "/../resources/static/public" + "/ktp");
+            Path fotoDiriOutDir = Paths.get(absolutePath + "/../resources/static/public" + "/foto_diri");
+            Path simOutDir = Paths.get(absolutePath + "/../resources/static/public" + "/sim");
 
             if (!Files.exists(ktpOutDir)) {
                 Files.createDirectories(ktpOutDir);
@@ -131,8 +137,8 @@ public class ClientController {
                     email,
                     password,
                     alamat,
-                    ktpOutDir.resolve(ktpFilename).toString(),
-                    fotoDiriOutDir.resolve(fotoDiriFilename).toString()));
+                    "/resources/public/ktp/" + ktpFilename,
+                    "/resources/public/foto_diri/" + fotoDiriFilename));
 
             if (response.getStatus() != HttpStatus.OK.value()) {
                 return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
@@ -140,7 +146,7 @@ public class ClientController {
 
             Response clientResponse = clientServices.Create(new ClientRequest(
                     Integer.parseInt(nik),
-                    simOutDir.resolve(simFilename).toString(),
+                    "/resources/public/sim/" + simFilename,
                     null));
 
             if (clientResponse.getStatus() != HttpStatus.OK.value()) {
