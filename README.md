@@ -15,7 +15,7 @@ Vehic Rent is a web-based online vehicle rental service that can be accessed any
 ![Class Diagram](classDiagram_vehicrent.jpg)
 
 ### Installation Steps
-Pastikan untuk memiliki perangkat lunak berikut terpasang di lingkungan lokal Anda sebelum memulai:
+Make sure to have the following software installed in your local environment before starting:
 
 - Java (versi 17)
 1. **Clone the Repository**
