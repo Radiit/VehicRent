@@ -1,5 +1,6 @@
 package com.TubesRpl.vehicrent.backend.controller.dashboard;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.TubesRpl.repository.KendaraanRepository;
+import com.TubesRpl.repository.UserRepository;
 import com.TubesRpl.vehicrent.backend.models.Kendaraan;
 import com.TubesRpl.vehicrent.backend.models.Regent;
 import com.TubesRpl.vehicrent.backend.models.Transaksi;
@@ -35,6 +37,9 @@ public class StaffController {
 
     @Autowired
     private KendaraanRepository kendaraanRepository;
+
+    @Autowired
+    private UserRepository userRepository;
 
     @RequestMapping("/display")
     public ResponseEntity<?> index() {
@@ -99,7 +104,7 @@ public class StaffController {
                     List<Kendaraan> listKendaraan = kendaraanRepository.findAllByHiddenFalseAndValid("Pending");
                     model.addAttribute("listKendaraan", listKendaraan);
                     return "staff/validasi-kendaraan";
-                }else {
+                } else {
                     return "redirect:/login";
                 }
             } else {
@@ -110,31 +115,37 @@ public class StaffController {
         }
     }
 
-    @PostMapping("/validasiClient")
-    public ResponseEntity<Response> validateClient(
-            @RequestParam("id") Integer id,
-            @RequestParam("valid") boolean valid) {
-        Response response = staffServices.validasiClient(id, valid);
-        if (response.getStatus() == HttpStatus.OK.value()) {
-            return ResponseEntity.ok(response);
-        } else if (response.getStatus() == HttpStatus.NOT_FOUND.value()) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
-        } else {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
-        }
-    }
-
-    @PostMapping("/validasiRegent")
-    public ResponseEntity<Response> validateRegent(
-            @RequestParam("id") Integer id,
-            @RequestParam("valid") boolean valid) {
-        Response response = staffServices.validasiRegent(id, valid);
-        if (response.getStatus() == HttpStatus.OK.value()) {
-            return ResponseEntity.ok(response);
-        } else if (response.getStatus() == HttpStatus.NOT_FOUND.value()) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
-        } else {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
+    //PAKAI INI BUAT MAPPING
+    @RequestMapping("/validasiUser")
+    public String validateUser(Model model, HttpSession session) {
+        try {
+            if (session.getAttribute("user") != null) {
+                User user = (User) session.getAttribute("user");
+                if (user.getRole_user().equals("Staff")) {
+                    List<User> listClient = userRepository.findAllByRoleAndValidAndNotHidden("Client","Pending");
+                    List<User> listRegent = userRepository.findAllByRoleAndValidAndNotHidden("Regent","Pending");
+                    //loop to get all client nik
+                    List<Integer> listClientNik = new ArrayList<>();
+                    for (User user2 : listClient) {
+                        listClientNik.add(user2.getNIK_User());
+                    }
+                    List<Integer> listRegentNik = new ArrayList<>();
+                    for (User user2 : listRegent) {
+                        listRegentNik.add(user2.getNIK_User());
+                    }
+                    model.addAttribute("nikRegent", listRegentNik);
+                    model.addAttribute("nikClient",listClientNik);
+                    model.addAttribute("listRegent", listRegent);
+                    model.addAttribute("listClient", listClient);
+                    return "staff/validasi-kendaraan";
+                } else {
+                    return "redirect:/login";
+                }
+            } else {
+                return "redirect:/login";
+            }
+        } catch (Exception e) {
+            return "error-page";
         }
     }
 }
