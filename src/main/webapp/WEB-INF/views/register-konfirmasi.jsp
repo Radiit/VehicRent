@@ -445,7 +445,7 @@ pageEncoding="UTF-8"%>
                   Rentalkan Kendaraan anda dengan aman dan nyaman
                 </p>
                 <img
-                  src="img/img_kendaraan.png"
+                  src="${pageContext.request.contextPath}/resources/img/img_kendaraan.png"
                   class="card-img-center"
                   alt="Rental Agent"
                   style="margin-bottom: 80px"
@@ -478,7 +478,7 @@ pageEncoding="UTF-8"%>
                   perlindungan dari Vehic Rent
                 </p>
                 <img
-                  src="img/img_motor.png"
+                  src="${pageContext.request.contextPath}/resources/img/img_motor.png"
                   class="card-img-center"
                   alt="Client"
                 />
