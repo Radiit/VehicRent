@@ -6,6 +6,7 @@ import java.nio.file.Paths;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -49,6 +50,9 @@ public class ClientController {
 
     @Autowired
     private RatingServices ratingServices;
+
+    @Value("${upload.directory}")
+    private String uploadDir;
 
     @RequestMapping("/display")
     public ResponseEntity<?> index() {
@@ -100,12 +104,9 @@ public class ClientController {
             String simFilename = "sim-" + UUID.randomUUID().toString() +
                     simExtension;
 
-            Path ktpOutDir = Paths
-                    .get("D:\\code\\java\\dari nizam\\VehicRent\\src\\main\\resources\\static\\img\\uploads\\ktp");
-            Path fotoDiriOutDir = Paths.get(
-                    "D:\\code\\java\\dari nizam\\VehicRent\\src\\main\\resources\\static\\img\\uploads\\foto_diri");
-            Path simOutDir = Paths.get(
-                    "D:\\\\code\\\\java\\\\dari nizam\\\\VehicRent\\\\src\\\\main\\\\resources\\\\static\\\\img\\\\uploads\\\\sim");
+            Path ktpOutDir = Paths.get(uploadDir+"/ktp");
+            Path fotoDiriOutDir = Paths.get(uploadDir+"/fotoDiri");
+            Path simOutDir = Paths.get(uploadDir+"/sim");
 
             if (!Files.exists(ktpOutDir)) {
                 Files.createDirectories(ktpOutDir);

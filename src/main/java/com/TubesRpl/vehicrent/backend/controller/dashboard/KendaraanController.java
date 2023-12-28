@@ -1,6 +1,7 @@
 package com.TubesRpl.vehicrent.backend.controller.dashboard;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 // import org.springframework.context.annotation.Conditional;
 // import org.springframework.data.repository.query.Param;
 import org.springframework.http.HttpStatus;
@@ -39,6 +40,8 @@ public class KendaraanController {
     private BaseServices<KendaraanRequest> display;
     @Autowired
     private KendaraanServices kendaraanServices;
+    @Value("${upload.directory}")
+    private String uploadDir;
 
     @RequestMapping("/display")
     public ResponseEntity<?> index() {
@@ -107,12 +110,9 @@ public class KendaraanController {
             String stnkImageExt = stnkImageOrigFile.substring(stnkImageOrigFile.lastIndexOf("."));
             String stnkImageNewFile = "stnk-" + UUID.randomUUID().toString() + stnkImageExt;
 
-            String rootPath = "C:\\Users\\Radit\\Downloads\\vehicrentFix\\VehicRent\\src\\main";
-            String fotoKendaraanPath = "\\resources\\static\\img\\uploads\\kendaraan\\";
-            String stnkImagePath = "\\resources\\static\\img\\uploads\\stnk\\";
 
-            Path fotoKendaraanOutDir = Paths.get(rootPath + fotoKendaraanPath);
-            Path stnkImageOutDir = Paths.get(rootPath + stnkImagePath);
+            Path fotoKendaraanOutDir = Paths.get(uploadDir + "/kendaraan");
+            Path stnkImageOutDir = Paths.get(uploadDir + "/stnk");
 
             if (!Files.exists(fotoKendaraanOutDir)) {
                 Files.createDirectories(fotoKendaraanOutDir);

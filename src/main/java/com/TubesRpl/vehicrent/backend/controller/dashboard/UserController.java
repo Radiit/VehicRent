@@ -2,6 +2,7 @@ package com.TubesRpl.vehicrent.backend.controller.dashboard;
 
 import com.TubesRpl.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -24,7 +25,6 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.UUID;
 
-
 @Controller
 @RequestMapping("dashboard/user")
 public class UserController {
@@ -33,6 +33,9 @@ public class UserController {
 
     @Autowired
     private BaseServices<UserRequest> display;
+
+    @Value("${upload.directory}")
+    private String uploadDir;
 
     @RequestMapping("/display")
     public ResponseEntity<?> index() {
@@ -80,11 +83,9 @@ public class UserController {
             String ktpFilename = "ktp-" + UUID.randomUUID().toString() + ktpExtension;
             String fotoDiriFilename = "fotoDiri-" + UUID.randomUUID().toString() +
                     fotoDiriExtension;
-                    
-            Path ktpOutDir = Paths
-                    .get("D:\\code\\java\\dari nizam\\VehicRent\\src\\main\\resources\\static\\img\\uploads\\ktp");
-            Path fotoDiriOutDir = Paths.get(
-                    "D:\\code\\java\\dari nizam\\VehicRent\\src\\main\\resources\\static\\img\\uploads\\foto_diri");
+
+            Path ktpOutDir = Paths.get(uploadDir+"/ktp");
+            Path fotoDiriOutDir = Paths.get(uploadDir+"/fotoDiri");
 
             if (!Files.exists(ktpOutDir)) {
                 Files.createDirectories(ktpOutDir);
