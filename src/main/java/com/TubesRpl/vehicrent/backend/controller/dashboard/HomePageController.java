@@ -58,7 +58,9 @@ public class HomePageController {
         try {
             if (session.getAttribute("user") != null) {
                 User user = (User) session.getAttribute("user");
-                if (user.getRole_user().equals("Regent") || user.getRole_user().equals("Client")) {
+                if (user.getRole_user().equals("Regent")) {
+                    return "regent/home-regent";
+                } else if(user.getRole_user().equals("Client")){
                     return "client/home";
                 } else if (user.getRole_user().equals("Staff")) {
                     return "redirect:/dashboard/staff";
