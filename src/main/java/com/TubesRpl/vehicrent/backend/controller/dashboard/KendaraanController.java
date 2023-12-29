@@ -25,9 +25,16 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 
 import com.TubesRpl.vehicrent.backend.payloads.requests.KendaraanRequest;
+import com.TubesRpl.vehicrent.backend.payloads.requests.RatingRequest;
 import com.TubesRpl.vehicrent.backend.payloads.response.Response;
 import com.TubesRpl.vehicrent.backend.services.BaseServices;
 import com.TubesRpl.vehicrent.backend.services.KendaraanServices;
+import com.TubesRpl.vehicrent.backend.services.RatingServices;
+import com.TubesRpl.repository.ClientRepository;
+import com.TubesRpl.repository.KendaraanRepository;
+import com.TubesRpl.vehicrent.backend.models.Client;
+import com.TubesRpl.vehicrent.backend.models.Kendaraan;
+import com.TubesRpl.vehicrent.backend.models.Rating;
 import com.TubesRpl.vehicrent.backend.models.Regent;
 import com.TubesRpl.vehicrent.backend.models.User;
 
@@ -47,6 +54,15 @@ public class KendaraanController {
 
     @Autowired
     ServletContext context;
+
+    @Autowired
+    private ClientRepository clientRepository;
+
+    @Autowired
+    private KendaraanRepository kendaraanRepository;
+
+    @Autowired
+    private RatingServices ratingServices;
 
     @RequestMapping("/display")
     public ResponseEntity<?> index() {
@@ -182,5 +198,48 @@ public class KendaraanController {
     public ResponseEntity<?> displayByJenis(@PathVariable String jenis) {
         Response kendaraanByJenis = kendaraanServices.DisplayByJenis(jenis);
         return ResponseEntity.status(200).body(kendaraanByJenis);
+    }
+
+    @PostMapping("/rate")
+    public String giveRating(@RequestParam Integer idKendaraan,
+            @RequestParam Integer rating, @RequestParam String comment, Model model, HttpSession session) {
+        try {
+            User user = (User) session.getAttribute("user");
+            Client client = clientRepository.findByHiddenFalseAndNikClient(user.getNIK_User()).get();
+            RatingRequest ratingNew = new RatingRequest();
+            ratingNew.setIdKendaraan(idKendaraan);
+            ratingNew.setIdClient(client.getIdClient());
+            ratingNew.setRating(rating);
+            ratingNew.setKomentar(comment);
+            ratingServices.giveRating(ratingNew);
+            return "redirect:/home/history";
+        } catch (Exception e) {
+            return "error-page";
+        }
+
+    }
+
+    @PutMapping("/rate/edit/{id}")
+    public String updateRating(@PathVariable Integer id, @RequestParam int newRating, @RequestParam String komentar,
+            Model model, HttpSession session) {
+        try {
+            RatingRequest rating = new RatingRequest();
+            rating.setKomentar(komentar);
+            rating.setRating(newRating);
+            ratingServices.updateRating(id, rating);
+            return "redirect:/home/history";
+        } catch (Exception e) {
+            return "error-page";
+        }
+    }
+
+    @PutMapping("/rate/delete/{id}")
+    public String deleteRating(@PathVariable Integer id, Model model, HttpSession session) {
+        try {
+            ratingServices.deleteRating(id);
+            return "redirect:/home/history";
+        } catch (Exception e) {
+            return "error-page";
+        }
     }
 }

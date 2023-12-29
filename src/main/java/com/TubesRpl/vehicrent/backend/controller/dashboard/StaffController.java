@@ -93,20 +93,6 @@ public class StaffController {
         }
     }
 
-    @PostMapping("/validasiUser")
-    public ResponseEntity<Response> validateUser(
-            @RequestParam("id") Integer id,
-            @RequestParam("valid") boolean valid) {
-        Response response = staffServices.validasiUser(id, valid);
-        if (response.getStatus() == HttpStatus.OK.value()) {
-            return ResponseEntity.ok(response);
-        } else if (response.getStatus() == HttpStatus.NOT_FOUND.value()) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
-        } else {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
-        }
-    }
-
     // Sesuaikan aja mapping sama return jspnya
     // PAKAI INI BUAT MAPPING
     @RequestMapping("/validasiKendaraan")
@@ -164,8 +150,8 @@ public class StaffController {
         }
     }
 
-    @RequestMapping("/validasiKendaraan}")
-    public String validKendaraan(@RequestParam Boolean status, Integer id, HttpSession session, Model model) {
+    @RequestMapping("/validasiKendaraan/{id}")
+    public String validKendaraan(@RequestParam Boolean status, @PathVariable Integer id, HttpSession session, Model model) {
         try {
             staffServices.validasiKendaraan(id, status);
             return "redirect:/dashboard/staff/validasiKendaraan";
@@ -174,8 +160,8 @@ public class StaffController {
         }
     }
 
-    @RequestMapping("/validasiClient")
-    public String validClient(@RequestParam Boolean status, Integer nik, HttpSession session, Model model) {
+    @RequestMapping("/validasiClient/{nik}")
+    public String validClient(@RequestParam Boolean status, @PathVariable Integer nik, HttpSession session, Model model) {
         try {
             staffServices.validasiUser(nik, status);
             Client client = clientRepository.findByHiddenFalseAndNikClient(nik).get();
@@ -186,8 +172,8 @@ public class StaffController {
         }
     }
 
-    @RequestMapping("/validasiRegent")
-    public String validRegent(@RequestParam Boolean status, Integer nik, HttpSession session, Model model) {
+    @RequestMapping("/validasiRegent/{nik}")
+    public String validRegent(@RequestParam Boolean status, @PathVariable Integer nik, HttpSession session, Model model) {
         try {
             staffServices.validasiUser(nik, status);
             Regent regent = regentRepository.findByHiddenFalseAndNikClient(nik).get();
