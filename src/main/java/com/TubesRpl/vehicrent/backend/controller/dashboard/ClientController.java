@@ -181,29 +181,4 @@ public class ClientController {
         }
     }
 
-    // ini contoh pemakaian rating, silahkan disesuakan lagi dengan kebutuhan
-    @PostMapping("/rate")
-    public ResponseEntity<Response> giveRating(@RequestBody RatingRequest ratingRequest) {
-        Response response = ratingServices.giveRating(ratingRequest);
-        return ResponseEntity.status(response.getStatus()).body(response);
-    }
-
-    @PutMapping("/rate/edit/{id}")
-    public ResponseEntity<Response> updateRating(@PathVariable Integer id, @RequestBody RatingRequest ratingRequest) {
-        Response response = ratingServices.updateRating(id, ratingRequest);
-        return ResponseEntity.status(response.getStatus()).body(response);
-    }
-
-    @RequestMapping("/rate/{id}")
-    public ResponseEntity<?> displayRating(@PathVariable Integer id) {
-        Response response = ratingServices.displayRatingById(id);
-        return ResponseEntity.status(200).body(response);
-    }
-
-    @DeleteMapping("/rate/delete/{id}")
-    public ResponseEntity<?> deleteRating(@PathVariable Integer id) {
-        Response response = ratingServices.deleteRating(id);
-        return ResponseEntity.status(200).body(response);
-    }
-
 }
