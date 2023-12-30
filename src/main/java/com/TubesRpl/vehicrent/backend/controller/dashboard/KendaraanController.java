@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.List;
 import java.util.UUID;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -170,34 +171,56 @@ public class KendaraanController {
         // }
     }
 
-    @PutMapping("/updatekendaraan/{id}")
-    public ResponseEntity<?> UpdateKendaraan(@RequestBody KendaraanRequest Kendaraanbaru, @PathVariable Integer id) {
-        Response response = display.Update(id, Kendaraanbaru);
-        return ResponseEntity.status(200).body(response);
-    }
-
-    @DeleteMapping("/delete/{id}")
-    public ResponseEntity<?> DeleteKendaraan(@PathVariable Integer id) {
-        Response response = display.Delete(id);
-        if (response.getStatus() == HttpStatus.OK.value()) {
-            return ResponseEntity.ok(response);
-        } else if (response.getStatus() == HttpStatus.NOT_FOUND.value()) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
-        } else {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
+    @PostMapping("/updatekendaraan/{id}")
+    public String UpdateKendaraan(@RequestBody KendaraanRequest Kendaraanbaru, @PathVariable Integer id, Model model,
+            HttpSession session) {
+        try {
+            Regent regent = (Regent) session.getAttribute("regent");
+            Kendaraan kendaraan = kendaraanRepository.findByHiddenFalseAndIdKendaraan(id).orElse(null);
+            if (kendaraan.getRegent() == regent) {
+                kendaraanServices.Update(id, Kendaraanbaru);
+            }
+            return "redirect:/list-regent";
+        } catch (Exception e) {
+            return "error-page";
         }
     }
 
-    @GetMapping("/search")
-    public ResponseEntity<?> SearchKendaraan(@RequestParam("keyword") String keyword) {
-        Response response = kendaraanServices.search(keyword);
-        return ResponseEntity.status(200).body(response);
+    @RequestMapping("/delete/{id}")
+    public String DeleteKendaraan(@PathVariable Integer id, Model model, HttpSession session) {
+        try {
+            Regent regent = (Regent) session.getAttribute("regent");
+            Kendaraan kendaraan = kendaraanRepository.findByHiddenFalseAndIdKendaraan(id).orElse(null);
+            if (kendaraan.getRegent() == regent) {
+                kendaraanServices.Delete(id);
+            }
+            return "redirect:/list-regent";
+        } catch (Exception e) {
+            return "error-page";
+        }
+
+    }
+
+    @RequestMapping("/search")
+    public String SearchKendaraan(@RequestParam("keyword") String keyword, Model model, HttpSession session) {
+        try {
+            List<Kendaraan> listSearchKendaraan = kendaraanRepository.searchByKeyword(keyword);
+            model.addAttribute("listSearchKendaraan", listSearchKendaraan);
+            return "search";
+        } catch (Exception e) {
+            return "error-page";
+        }
     }
 
     @RequestMapping("/displayByJenis/{jenis}")
-    public ResponseEntity<?> displayByJenis(@PathVariable String jenis) {
-        Response kendaraanByJenis = kendaraanServices.DisplayByJenis(jenis);
-        return ResponseEntity.status(200).body(kendaraanByJenis);
+    public String displayByJenis(@PathVariable String jenis, Model model, HttpSession session) {
+        try {
+            List<Kendaraan> listKendaraan = kendaraanRepository.findByHiddenFalseAndJenisKendaraan(jenis);
+            model.addAttribute("listKendaraan", listKendaraan);
+            return "search";
+        } catch (Exception e) {
+            return "error-page";
+        }
     }
 
     @PostMapping("/rate")
@@ -219,7 +242,7 @@ public class KendaraanController {
 
     }
 
-    @PutMapping("/rate/edit/{id}")
+    @PostMapping("/rate/edit/{id}")
     public String updateRating(@PathVariable Integer id, @RequestParam int newRating, @RequestParam String komentar,
             Model model, HttpSession session) {
         try {
@@ -233,7 +256,7 @@ public class KendaraanController {
         }
     }
 
-    @PutMapping("/rate/delete/{id}")
+    @RequestMapping("/rate/delete/{id}")
     public String deleteRating(@PathVariable Integer id, Model model, HttpSession session) {
         try {
             ratingServices.deleteRating(id);
