@@ -65,8 +65,6 @@ Make sure to have the following software installed in your local environment bef
 
 6. **Login**
    use this account to login
-   
-# Login Accounts
 
 | Role       | Email                | Password |
 | ----------- | -------------------- | -------- |
