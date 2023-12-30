@@ -11,7 +11,7 @@ import jakarta.persistence.Table;
 @Table(name = "User")
 public class User {
     @Id
-    @Column(length = 16)
+    @Column
     private Integer nik;
 
     @Column
