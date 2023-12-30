@@ -19,7 +19,9 @@ Vehic Rent is a web-based online vehicle rental service that can be accessed any
 
 Make sure to have the following software installed in your local environment before starting:
 
-- Java (version 17)
+- Java (version 17) : **https://github.com/adoptium/temurin17-binaries/releases/download/jdk-17.0.9+9.1/OpenJDK17U-jdk_x64_windows_hotspot_17.0.9_9.msi**
+- Setup ENV JAVA_HOME ![image](java_home.png)
+
 
 1. **Clone the Repository**
 
@@ -43,6 +45,8 @@ Make sure to have the following software installed in your local environment bef
     spring.datasource.url=jdbc:mysql://localhost:3306/tubesrpl
     ```
 
+    after that import sql using the **tubesrpl.sql** file
+
 4. **Run the Application**
 
     Once the installation is complete, run the application using the command:
@@ -58,3 +62,14 @@ Make sure to have the following software installed in your local environment bef
     ```http
     http://localhost:8081
     ```
+
+6. **Login**
+   use this account to login
+   
+# Login Accounts
+
+| Role       | Email                | Password |
+| ----------- | -------------------- | -------- |
+| Regent (Rental Agent) | regent@dummy.com | password123 |
+| Client     | client@dummy.com   | password123 |
+
