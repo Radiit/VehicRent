@@ -13,7 +13,6 @@ import com.TubesRpl.repository.UserRepository;
 import com.TubesRpl.vehicrent.backend.models.Client;
 import com.TubesRpl.vehicrent.backend.models.Kendaraan;
 import com.TubesRpl.vehicrent.backend.models.Rating;
-import com.TubesRpl.vehicrent.backend.models.Rekomendasi;
 import com.TubesRpl.vehicrent.backend.models.User;
 import com.TubesRpl.vehicrent.backend.payloads.requests.ClientRequest;
 import com.TubesRpl.vehicrent.backend.payloads.response.Response;
@@ -24,8 +23,6 @@ public class ClientServices implements BaseServices<ClientRequest> {
     private ClientRepository clientRepository;
     @Autowired
     private UserRepository userrepository;
-    @Autowired
-    private BaseServices<Rekomendasi> rekomendasiServices;
     @Autowired
     private RatingRepository ratingRepository;
     @Autowired
@@ -51,11 +48,6 @@ public class ClientServices implements BaseServices<ClientRequest> {
             Client client = new Client();
             client.setUser(user);
             client.setSim(request.getSim());
-
-            Rekomendasi rekomendasi = new Rekomendasi();
-            rekomendasiServices.Create(rekomendasi);
-
-            client.setRekomendasi(rekomendasi);
             client.setHidden(false);
             client.setValid("Pending");
             clientRepository.save(client);

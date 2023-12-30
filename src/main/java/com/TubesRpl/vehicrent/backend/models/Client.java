@@ -30,15 +30,10 @@ public class Client {
     @Column
     private String valid;
 
-    @ManyToOne
-    @JoinColumn(name = "ID_Rekomendasi", referencedColumnName = "ID_Rekomendasi")
-    private Rekomendasi rekomendasi;
-
-    public Client(Integer ID_Client, User user, String noSIM, Rekomendasi rekomendasi, boolean hidden, String valid) {
+    public Client(Integer ID_Client, User user, String noSIM, boolean hidden, String valid) {
         this.idClient = ID_Client;
         this.user = user;
         sim = noSIM;
-        this.rekomendasi = rekomendasi;
         this.hidden = hidden;
         this.valid = valid;
     }
@@ -76,14 +71,6 @@ public class Client {
 
     public void setUser(User user) {
         this.user = user;
-    }
-
-    public Rekomendasi getRekomendasi() {
-        return rekomendasi;
-    }
-
-    public void setRekomendasi(Rekomendasi rekomendasi) {
-        this.rekomendasi = rekomendasi;
     }
 
     public String getSim() {
