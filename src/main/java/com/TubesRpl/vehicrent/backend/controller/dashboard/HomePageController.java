@@ -17,9 +17,9 @@ import com.TubesRpl.vehicrent.backend.models.Kendaraan;
 import com.TubesRpl.vehicrent.backend.models.Regent;
 import com.TubesRpl.vehicrent.backend.models.Transaksi;
 import com.TubesRpl.vehicrent.backend.models.User;
-import com.mysql.cj.log.Log;
 
-import ch.qos.logback.classic.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import org.springframework.web.bind.annotation.PathVariable;
 import jakarta.servlet.http.HttpSession;
