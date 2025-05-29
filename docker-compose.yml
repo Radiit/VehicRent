@@ -1,0 +1,38 @@
+version: '3.8'
+
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: vehicrent-mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: VehicRent123!
+      MYSQL_DATABASE: vehicrent
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql-data:/var/lib/mysql
+      - ./tubesrpl.sql:/docker-entrypoint-initdb.d/init.sql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-p$$MYSQL_ROOT_PASSWORD"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+
+  app:
+    build: .
+    container_name: vehicrent-app
+    ports:
+      - "5590:5590"
+    depends_on:
+      mysql:
+        condition: service_healthy
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/vehicrent?createDatabaseIfNotExist=true&useSSL=false&allowPublicKeyRetrieval=true
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: VehicRent123!
+    volumes:
+      - ./src/main/resources/static/img/uploads:/app/src/main/resources/static/img/uploads
+      - ./pdf:/app/pdf
+
+volumes:
+  mysql-data: 
