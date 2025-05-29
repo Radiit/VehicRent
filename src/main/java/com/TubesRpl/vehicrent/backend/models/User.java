@@ -8,50 +8,50 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "User")
+@Table(name = "users")
 public class User {
     @Id
-    @Column
+    @Column(name = "nik")
     private Integer nik;
 
-    @Column
+    @Column(name = "role_user")
     private String role_user;
 
-    @Column
+    @Column(name = "nama_depan")
     private String nama_depan;
 
-    @Column
+    @Column(name = "nama_belakang")
     private String nama_belakang;
 
-    @Column
+    @Column(name = "no_telepon")
     private String noTelepon;
 
-    @Column
+    @Column(name = "kontak_darurat")
     private String kontakDarurat;
 
-    @Column
+    @Column(name = "umur")
     private Integer umur;
 
-    @Column
+    @Column(name = "email")
     private String email;
 
-    @Column
+    @Column(name = "password")
     @JsonIgnore
     private String password;
 
-    @Column
+    @Column(name = "alamat")
     private String alamat;
 
-    @Column
+    @Column(name = "ktp")
     private String ktp;
 
-    @Column
+    @Column(name = "foto_diri")
     private String fotoDiri;
 
-    @Column
+    @Column(name = "hidden")
     private Boolean hidden;
 
-    @Column
+    @Column(name = "valid")
     private String valid;
 
     public User(Integer nik, String role_user, String nama_depan, String nama_belakang, String noTelepon,
